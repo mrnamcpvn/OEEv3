@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+   <app-trend-search (dataTrend)="dataTrend($event)" [dataChart]="dataChart" [labels]="labels"></app-trend-search>
+
+    <!-- show screen overlay -->
+    <ngx-spinner bdOpacity="0.9" bdColor="rgba(255, 255, 255, 0.46)" size="large" color="rgba(255,255,255,0)"
+      type="ball-8bits" [fullScreen]="false">
+    </ngx-spinner>
+  </div>
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-md-12">
+        <ng-container *ngFor="let item of arrayNull">
+          <app-trend-chart [data]="dataChart" [labels]="labels"></app-trend-chart>
+        </ng-container>
+
+        <!-- Loading chart -->
+        <ngx-spinner bdOpacity="0.9" bdColor="#fff" size="medium" color="#dc8e00" type="pacman" [fullScreen]="false">
+        </ngx-spinner>
+        <!-- End Loading chart -->
+      </div>
+    </div>
+    <div class="row" *ngIf="isShowTable">
+      <div class="col-md-12">
+        <table class="table table-bordered mt-5">
+          <thead>
+            <tr class="text-center">
+              <th scope="col">#</th>
+              <th *ngFor="let item of labels" scope="col">{{ item }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of dataChart" class="text-center">
+              <td scope="row">{{ data.label }}</td>
+              <ng-container *ngFor="let item of data.data">
+                <td>{{ item }} %</td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

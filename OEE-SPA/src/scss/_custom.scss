@@ -1,0 +1,96 @@
+// Here you can add other styles
+a,
+a:hover {
+  color: #000000;
+}
+
+google-chart {
+  width: inherit !important;
+}
+
+.select2 {
+  width: 100% !important;
+}
+
+input,
+.select2-selection {
+  border-color: #afafaf !important;
+}
+
+.combo-time > div label,
+ng-select2 .select2-selection,
+input[a2e-datetimepicker] {
+  border-radius: 0 !important;
+}
+
+.combo-time ng-select2 .select2-selection {
+  border-top: none !important;
+}
+
+.combo-time .select2-selection__rendered {
+  text-align: center;
+}
+
+.select2-container--bootstrap4 .select2-selection--single {
+  line-height: normal !important;
+  padding: 5px 12px !important;
+}
+
+#chart_wrap {
+  border: 1px solid gray;
+  position: relative;
+  padding-bottom: 100%;
+  height: 0;
+  overflow: hidden;
+}
+#chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.custom-radio input:hover,
+.custom-radio label:hover {
+  cursor: pointer;
+}
+
+// Chart Gauge
+.chartGauge {
+  height: 260px;
+}
+.chartGauge svg {
+  height: 260px;
+}
+
+.sevenSeg {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.sevenSeg .sevSeg {
+  border-radius: 5px;
+  box-shadow: 2px 2px #888888;
+  padding: 0.5em;
+  background: #000;
+}
+
+
+// set backgroud header
+.app-header {
+  // background-color: #20a8d8 !important;
+  //   border-bottom: 1px solid #20a8d8 !important;
+  //   color: #ffff;
+    font-size: 20px;
+}
+
+.label-chart-dashboard {
+  font-size: 3.5em;
+}
+
+.frames-chart-dashboard {
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 3px #b7b7b7;
+}

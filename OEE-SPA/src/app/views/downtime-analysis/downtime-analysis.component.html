@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="form-group col">
+        <h5><span class="badge badge-warning">Factory</span></h5>
+        <ng-select2 [data]="factories" [options]="optionsSelect2" [(ngModel)]="factory"
+          (ngModelChange)="changeFactory($event)">
+        </ng-select2>
+      </div>
+      <div class="form-group col">
+        <h5><span class="badge badge-warning">Building</span></h5>
+        <ng-select2 [data]="buildings" [(ngModel)]="building" [options]="optionsSelect2" [placeholder]="'Building'"
+          (valueChanged)="changeBuilding($event)"></ng-select2>
+      </div>
+      <div class="form-group col">
+        <h5><span class="badge badge-warning">Machine</span></h5>
+        <ng-select2 [data]="machines" [options]="optionsSelect2" [(ngModel)]="machine" [placeholder]="'Machine'"
+          (ngModelChange)="changeMachine($event)">
+        </ng-select2>
+      </div>
+      <div class="form-group col">
+        <h5><span class="badge badge-warning">Shift</span></h5>
+        <ng-select2 [data]="shifts" [options]="optionsSelect2" [placeholder]="'Shift'"></ng-select2>
+      </div>
+      <div class="form-group col">
+        <h5><span class="badge badge-warning">Date</span></h5>
+        <input class="form-control" type="text" name="dateTime" a2e-datetimepicker [options]="optionDatetimes"
+          placeholder="Date" (blur)="updateDate($event)" />
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <ng-container *ngFor="let item of dataChart">
+        <div class="col-md-6 col-sm-12">
+          <app-analysis-chart [title]='item.title' [data]='item.data' [labels]='item.labels'></app-analysis-chart>
+        </div>
+      </ng-container>
+      <!-- <div class="col-md-6 col-sm-12">
+        <div #barChart1></div>
+      </div> -->
+    </div>
+  </div>
+</div>

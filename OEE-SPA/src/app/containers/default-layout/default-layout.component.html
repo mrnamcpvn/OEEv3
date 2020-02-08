@@ -1,0 +1,29 @@
+<app-header [navbarBrandRouterLink]="['/trend']" [fixed]="true" [navbarBrandText]="{
+    icon: '<image src=assets/img/brand/Logo.png width=42 height=28></image>',
+    text: '<image src=assets/img/brand/Logo.png width=42 height=28></image> SHW'
+  }" [sidebarToggler]="'xl'" [mobileAsideMenuToggler]="false" [asideMenuToggler]="false">
+
+  <span class="ml-2">OEE SYSTEM</span>
+  <div class="ml-auto"></div>
+</app-header>
+<div class="app-body">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'xl'" [minimized]="sidebarMinimized"
+    (minimizedChange)="toggleMinimize($event)">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <!-- breaking change 'cui-breadcrumb' -->
+    <cui-breadcrumb> </cui-breadcrumb>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- /.container-fluid -->
+  </main>
+</div>
+<app-footer>
+  <span>OEE SYSTEM &copy; 2020</span>
+  <span class="ml-auto">Version 1.0</span>
+</app-footer>

@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">
+    <app-dashboard-search (dataDashboard)="dataDashboard($event)" [dataChart]="dataChart"></app-dashboard-search>
+
+    <!-- show screen overlay -->
+    <ngx-spinner bdOpacity="0.9" bdColor="rgba(255, 255, 255, 0.46)" size="large" color="rgba(255,255,255,0)"
+      type="ball-8bits" [fullScreen]="false">
+    </ngx-spinner>
+  </div>
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <ng-container *ngFor="let item of dataChart">
+            <div class="col-md-6">
+              <app-dashboard-chart [name]="item.name" [data]="item.value" [color-on]="item.colorOn"
+                [color-off]="item.colorOff">
+              </app-dashboard-chart>
+            </div>
+          </ng-container>
+        </div>
+        <!-- Loading chart -->
+        <ngx-spinner bdOpacity="0.9" bdColor="#fff" size="medium" color="#dc8e00" type="pacman" [fullScreen]="false">
+        </ngx-spinner>
+        <!-- End Loading chart -->
+      </div>
+    </div>
+  </div>
+</div>
