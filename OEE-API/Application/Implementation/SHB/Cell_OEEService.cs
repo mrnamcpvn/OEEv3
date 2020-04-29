@@ -13,6 +13,7 @@ namespace OEE_API.Application.Implementation.SHB
 {
     public class Cell_OEEService : ICell_OEEService
     {
+        // OEE mới sử dụng chung một db với SHW_SHB
         private readonly IRepositorySHB<Cell_OEE, int> _repositorySHB;
         private readonly IRepositorySHW_SHD<DbSHW_SHD.ShiftTime, string> _repositoryShiftTime;
         public Cell_OEEService(IRepositorySHB<Cell_OEE, int> repositorySHB, IRepositorySHW_SHD<DbSHW_SHD.ShiftTime, string> repositoryShiftTime)
@@ -71,7 +72,7 @@ namespace OEE_API.Application.Implementation.SHB
             return data;
         }
 
-        public async Task<int?> GetAvailability(List<Cell_OEE> data, string factory, string building, string machine, string time, string shift)
+        public async Task<int?> GetAvailability(List<OeeReport_test> data, string factory, string building, string machine, string time, string shift)
         {
             // Lấy ra khoảng thời gian nghỉ theo từng nhà máy 
             var shift1 = await _repositoryShiftTime.FindAll(x => x.factory_id == "SPC" && x.shift_id == "1").FirstOrDefaultAsync();
@@ -81,8 +82,8 @@ namespace OEE_API.Application.Implementation.SHB
             DateTime today = Convert.ToDateTime(time);
             DateTime tomorrow = today.AddDays(1);
 
-            Cell_OEE modelShiftDay = null;
-            Cell_OEE modelShiftNight = null;
+            OeeReport_test modelShiftDay = null;
+            OeeReport_test modelShiftNight = null;
 
             // Tính theo thời gian làm việc ca ngày
             if (shift1 != null && (shift == "1" || shift == "0"))
@@ -132,7 +133,7 @@ namespace OEE_API.Application.Implementation.SHB
             }
         }
 
-        public async Task<int> GetAvailabilityByRangerDate(List<Cell_OEE> data, string factory, string building, string machine, string shift, string date, string dateTo)
+        public async Task<int> GetAvailabilityByRangerDate(List<OeeReport_test> data, string factory, string building, string machine, string shift, string date, string dateTo)
         {
             DateTime timeFrom = Convert.ToDateTime(date);
             DateTime timeTo = Convert.ToDateTime(dateTo);

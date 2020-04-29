@@ -1,10 +1,19 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Select2OptionData } from 'ng-select2';
+import { BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Options } from 'select2';
 import { CommonService } from '../../_core/_services/common.service';
 import { formatDate } from '@angular/common';
 import { DowntimeReasonsService } from '../../../app/_core/_services/downtime-reasons.service';
 import { ActionTime } from '../../../app/_core/_models/action-time';
+import { map } from 'highcharts';
+//import { parse } from 'path';
+import {parseISO} from 'date-fns';
+import { ChartReason } from '../../_core/_models/chart-reason';
+import { Pagination } from '../../_core/_models/pagination';
+
+
 declare var google: any;
 @Component({
   selector: 'app-downtime-reasons',
@@ -13,13 +22,26 @@ declare var google: any;
 export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
   @ViewChild('trendChart', { static: true }) trendChart: ElementRef;
 
+  addForm: FormGroup;
   factory: string = 'ALL';
   building: string = 'ALL';
   machine: string = 'ALL';
   shift: string = '0';
-  date: Date = new Date();
-  dataActionTime: Array<ActionTime> = [];
+  reason_1: string = '0';
+  reason_2: string  = '0';
+  reason_note: string = '';
+pagination: Pagination = {
+  currentPage: 1,
+  pageSize: 10,
+  totalCount: 0,
+  totalPage: 0,
+};
 
+modalRef: BsModalRef;
+  date: Date = new Date();
+  dataActionTime: Array<ChartReason> = [];
+  dataReason: Array<string[]> = [];
+  modal:  ChartReason;
   factories: Array<Select2OptionData> = [
     {
       id: 'ALL',
@@ -61,7 +83,8 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
   ];
 
   public machines: Array<Select2OptionData>;
-
+  public reason1s: Array<Select2OptionData>;
+  public reason2s:  Array<Select2OptionData>;
   public optionsSelect2: Options = {
     theme: 'bootstrap4',
   };
@@ -84,12 +107,25 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
     sideBySide: true
   };
 
-  constructor(private commonService: CommonService, private downtimeReasonsService: DowntimeReasonsService) { }
+  constructor( private modalService: BsModalService,
+    private fb: FormBuilder,
+    private commonService: CommonService,
+              private downtimeReasonsService: DowntimeReasonsService
+             ) { }
 
   ngOnInit() {
     this.loadChart();
+   this.loadReason1(this.reason_1, false);
+   this.addForm = this.fb.group({
+     reason_1: [],
+     reason_2: [],
+     reason_note: []
+   })
   }
-
+  openModal(template: TemplateRef<any>, item: ChartReason) {
+    this.modalRef = this.modalService.show(template);
+    this.modal = item;
+  }
   changeFactory(value: any) {
     this.building = 'ALL';
     // tslint:disable-next-line: triple-equals
@@ -132,7 +168,14 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
   changeShift(event: any) {
     this.loadChart();
   }
-
+  changeReason(event: any) {
+    debugger
+    this.loadReason1(this.reason_1, true);
+  }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadChart();
+  }
   updateDate(event: any) {
     // tslint:disable-next-line: triple-equals
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
@@ -167,19 +210,48 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
       console.log(error);
     });
   }
+  loadReason1(value, changed) {
+    this.downtimeReasonsService.getDowntimeReasonDetail(value).subscribe(res => {
+      if (changed === false) { this.reason1s = res.map(item => {
+        return { id: item, text: item };
+      });
+    } else if (changed === true) { this.reason2s = res.map(item => {
+      return { id: item, text: item };
+    });
+   }
+    }, error => {
+      console.log(error);
+    });
+  }
 
   loadChart() {
     // tslint:disable-next-line: max-line-length
-    // console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
-    // this.downtimeReasonsService.getDowntimeReasons(this.factory, this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'))
-    //   .subscribe(res => {
-    //     this.dataActionTime = res;
-    //     console.log(res);
-    //   }, (error: any) => {
-    //     console.log(error);
-    //   });
+    console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
+    this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building, this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
+    .subscribe(res => {
+        this.dataActionTime = res.result;
+        this.pagination = res.pagination;
+        this.drawChart(res.resultC);
+        console.log(res);
+      }, (error: any) => {
+
+        console.log(error);
+      });
   }
 
+  reasonSave() {
+    this.modal.reason_1 = this.addForm.value.reason_1;
+    this.modal.reason_2 = this.addForm.value.reason_2;
+    this.modal.reason_note = this.addForm.value.reason_note;
+  //  this.modal.building_id = this.addForm.value.building_id;
+    this.downtimeReasonsService.addDowntimeReason(this.modal)
+    .subscribe(res => {
+        console.log(res);
+      }, (error: any) => {
+
+        console.log(error);
+      });
+  }
   ngAfterViewInit() {
     google.charts.load('current', { packages: ['timeline'] });
     google.charts.setOnLoadCallback(this.drawChart);
@@ -189,30 +261,12 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
     google.charts.load('current', { packages: ['timeline'] });
     google.charts.setOnLoadCallback(this.drawChart);
   }
-
-  drawChart = () => {
-
-    const data = google.visualization.arrayToDataTable([
-      ['RUN', new Date(0, 0, 0, 7, 0, 0), new Date(0, 0, 0, 7, 20, 0)],
-      ['RUN', new Date(0, 0, 0, 7, 25, 0), new Date(0, 0, 0, 7, 40, 0)],
-      ['RUN', new Date(0, 0, 0, 7, 45, 0), new Date(0, 0, 0, 8, 0, 0)],
-      ['RUN', new Date(0, 0, 0, 9, 0, 0), new Date(0, 0, 0, 9, 30, 0)],
-      ['RUN', new Date(0, 0, 0, 13, 0, 0), new Date(0, 0, 0, 14, 30, 0)],
-      ['RUN', new Date(0, 0, 0, 15, 0, 0), new Date(0, 0, 0, 16, 0, 0)],
-
-      ['IDLE', new Date(0, 0, 0, 7, 0, 0), new Date(0, 0, 0, 9, 20, 0)],
-      ['IDLE', new Date(0, 0, 0, 10, 0, 0), new Date(0, 0, 0, 12, 10, 0)],
-      ['IDLE', new Date(0, 0, 0, 13, 0, 0), new Date(0, 0, 0, 13, 5, 0)],
-      ['IDLE', new Date(0, 0, 0, 13, 30, 0), new Date(0, 0, 0, 14, 0, 0)],
-      ['IDLE', new Date(0, 0, 0, 14, 30, 0), new Date(0, 0, 0, 16, 0, 0)],
-
-      ['IN', new Date(0, 0, 0, 8, 0, 0), new Date(0, 0, 0, 8, 20, 0)],
-      ['IN', new Date(0, 0, 0, 9, 0, 0), new Date(0, 0, 0, 10, 8, 0)],
-      ['IN', new Date(0, 0, 0, 11, 0, 0), new Date(0, 0, 0, 12, 0, 0)],
-      ['IN', new Date(0, 0, 0, 12, 26, 0), new Date(0, 0, 0, 13, 0, 0)],
-      ['IN', new Date(0, 0, 0, 13, 5, 0), new Date(0, 0, 0, 13, 30, 0)],
-      ['IN', new Date(0, 0, 0, 14, 10, 0), new Date(0, 0, 0, 16, 0, 0)],
-    ]);
+  drawChart = (result) => {
+    const arrayA = result.map(function(item) {
+        return [item['title'].toString(),
+                parseISO(item['start_time']) , parseISO(item['end_time'])];
+    });
+    const data = google.visualization.arrayToDataTable(arrayA);
 
     const options = {
       colors: ['#00a71c', '#e88b00', '#0354b9'],
@@ -226,7 +280,7 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
     };
 
     const chart = new google.visualization.Timeline(this.trendChart.nativeElement);
-    chart.draw(data, options);
+     chart.draw(data, options);
   }
 
 }

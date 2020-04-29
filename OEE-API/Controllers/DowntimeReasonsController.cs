@@ -1,5 +1,8 @@
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OEE_API.Application.Interfaces;
+using OEE_API.Application.ViewModels;
 
 namespace OEE_API.Controllers
 {
@@ -11,11 +14,45 @@ namespace OEE_API.Controllers
             _downtimeReasonsService = downtimeReasonsService;
         }
 
-        [HttpGet]
-        public IActionResult GetDowntimeReasons(string factory, string machine, string shift, string date)
+        [HttpGet("getDowntimeReasons")]
+        public async Task<IActionResult> GetDowntimeReasons(string factory, string building, string machine, string shift, string date, int page)
         {
-            var data = _downtimeReasonsService.GetDuration(factory, machine, shift, date);
-            return Ok(data);
+            try
+            {
+                var data = await _downtimeReasonsService.GetDuration(factory, building, machine, shift, date, page);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+        [HttpGet("getDowntimeReasonDetail")]
+        public async Task<IActionResult> GetDowntimeReasonDetail(string reason_1)
+        {
+            try
+            {
+                var data = await _downtimeReasonsService.GetDowntimeReasonDetail(reason_1);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost("addDowntimeReason")]
+        public async Task<IActionResult> addDowntimeReason(ChartReason chartReason)
+        {
+            try
+            {
+                var data = await _downtimeReasonsService.AddDowntimeReason(chartReason);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

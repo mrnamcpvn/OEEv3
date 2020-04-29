@@ -8,6 +8,7 @@ namespace OEE_API.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile() {
             CreateMap<Cell_OEE, BuildingViewModel>();
+            CreateMap<ActionTime, ChartReason>();
         }
     }
 }

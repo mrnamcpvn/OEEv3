@@ -1,6 +1,4 @@
 using ServiceSHW_SHD = OEE_API.Application.Interfaces.SHW_SHD;
-using ServiceSHB = OEE_API.Application.Interfaces.SHB;
-using ServiceSYF = OEE_API.Application.Interfaces.SYF;
 using OEE_API.Utilities;
 using OEE_API.Application.ViewModels;
 using System;
@@ -12,18 +10,12 @@ namespace OEE_API.Application.Implementation
 {
     public class TrendService : ITrendService
     {
-        ServiceSHW_SHD.ICell_OEEService _Cell_OEEServiceSHW_SHD;
-        ServiceSHB.ICell_OEEService _Cell_OEEServiceSHB;
-        ServiceSYF.ICell_OEEService _Cell_OEEServiceSYF;
-
+        ServiceSHW_SHD.ICell_OEEService _Cell_OEEService;
         public TrendService(
-           ServiceSHW_SHD.ICell_OEEService Cell_OEEServiceSHW_SHD,
-           ServiceSHB.ICell_OEEService Cell_OEEServiceSHB,
-           ServiceSYF.ICell_OEEService Cell_OEEServiceSYF)
+           ServiceSHW_SHD.ICell_OEEService Cell_OEEService
+        )
         {
-            _Cell_OEEServiceSHW_SHD = Cell_OEEServiceSHW_SHD;
-            _Cell_OEEServiceSHB = Cell_OEEServiceSHB;
-            _Cell_OEEServiceSYF = Cell_OEEServiceSYF;
+            _Cell_OEEService = Cell_OEEService;
         }
 
         // Function take out availability by week of all factory (List by day of the week) 
@@ -46,9 +38,9 @@ namespace OEE_API.Application.Implementation
 
             if (factory == "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate(dateStart, dateEnd);
-                var dataSHB = await _Cell_OEEServiceSHB.GetAllCellOEEByDate(dateStart, dateEnd);
-                var dataSYF = await _Cell_OEEServiceSYF.GetAllCellOEEByDate(dateStart, dateEnd);
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByDate("",dateStart, dateEnd);
+                var dataSHB = await _Cell_OEEService.GetAllCellOEEByDate("SHB",dateStart, dateEnd);
+                var dataSYF = await _Cell_OEEService.GetAllCellOEEByDate("SHY",dateStart, dateEnd);
 
                 // Duyệt qua từng factory 
                 foreach (var itemFactory in listFactory)
@@ -62,7 +54,7 @@ namespace OEE_API.Application.Implementation
                         // Duyệt qua danh sách từng ngày 
                         foreach (var itemDate in rangerDate)
                         {
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -77,7 +69,7 @@ namespace OEE_API.Application.Implementation
                         // Duyệt qua danh sách từng ngày 
                         foreach (var itemDate in rangerDate)
                         {
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -92,7 +84,7 @@ namespace OEE_API.Application.Implementation
                         // Duyệt qua danh sách từng ngày 
                         foreach (var itemDate in rangerDate)
                         {
-                            int availability = await _Cell_OEEServiceSHB.GetAvailabilityByRangerDate(dataSHB, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHB, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -107,7 +99,7 @@ namespace OEE_API.Application.Implementation
                         // Duyệt qua danh sách từng ngày 
                         foreach (var itemDate in rangerDate)
                         {
-                            int availability = await _Cell_OEEServiceSYF.GetAvailabilityByRangerDate(dataSYF, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSYF, itemFactory, null, null, shift, itemDate.ToString(), itemDate.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -124,13 +116,13 @@ namespace OEE_API.Application.Implementation
                 // Nếu factory khác All và building bằng All 
                 // SHW , SHD avaibalibity được tính theo từng building 
                 // SY2, SHB avaibalibity được tính theo từng machine
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate(dateStart, dateEnd);
-                var dataSHB = await _Cell_OEEServiceSHB.GetAllCellOEEByDate(dateStart, dateEnd);
-                var dataSYF = await _Cell_OEEServiceSYF.GetAllCellOEEByDate(dateStart, dateEnd);
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByDate("",dateStart, dateEnd);
+                var dataSHB = await _Cell_OEEService.GetAllCellOEEByDate("SHB",dateStart, dateEnd);
+                var dataSYF = await _Cell_OEEService.GetAllCellOEEByDate("SHY",dateStart, dateEnd);
 
                 if (factory != "SHB" && factory != "SY2")
                 {
-                    var buildings = await _Cell_OEEServiceSHW_SHD.GetListBuildingByFactoryId(factory);
+                    var buildings = await _Cell_OEEService.GetListBuildingByFactoryId(factory);
                     foreach (var itemBuilding in buildings)
                     {
                         List<int> dataChild = new List<int>();
@@ -139,7 +131,7 @@ namespace OEE_API.Application.Implementation
                         {
                             foreach (var itemDate in rangerDate)
                             {
-                                int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, itemBuilding, null, shift, itemDate.ToString(), itemDate.ToString());
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, factory, itemBuilding, null, shift, itemDate.ToString(), itemDate.ToString());
 
                                 dataChild.Add(availability);
                             }
@@ -152,7 +144,7 @@ namespace OEE_API.Application.Implementation
                 }
                 else if (factory == "SHB")
                 {
-                    var machines = await _Cell_OEEServiceSHB.GetListMachineByFactoryId(factory);
+                    var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory);
                     foreach (var item in machines)
                     {
                         List<int> dataChild = new List<int>();
@@ -161,7 +153,7 @@ namespace OEE_API.Application.Implementation
                         {
                             foreach (var itemDate in rangerDate)
                             {
-                                int availability = await _Cell_OEEServiceSHB.GetAvailabilityByRangerDate(dataSHB, factory, "SHB", item, shift, itemDate.ToString(), itemDate.ToString());
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHB, factory, "SHB", item, shift, itemDate.ToString(), itemDate.ToString());
 
                                 dataChild.Add(availability);
                             }
@@ -174,7 +166,7 @@ namespace OEE_API.Application.Implementation
                 }
                 else if (factory == "SY2")
                 {
-                    var machines = await _Cell_OEEServiceSYF.GetListMachineByFactoryId(factory);
+                    var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory);
                     foreach (var item in machines)
                     {
                         List<int> dataChild = new List<int>();
@@ -183,7 +175,7 @@ namespace OEE_API.Application.Implementation
                         {
                             foreach (var itemDate in rangerDate)
                             {
-                                int availability = await _Cell_OEEServiceSYF.GetAvailabilityByRangerDate(dataSYF, factory, "SY2", item, shift, itemDate.ToString(), itemDate.ToString());
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSYF, factory, "SY2", item, shift, itemDate.ToString(), itemDate.ToString());
 
                                 dataChild.Add(availability);
                             }
@@ -198,9 +190,9 @@ namespace OEE_API.Application.Implementation
             if (factory != "ALL" && building != "ALL")
             {
                 // Nếu factory và building khác ALL , chỉ tính availability SHD, SHW
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate(dateStart, dateEnd);
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByDate(factory,dateStart, dateEnd);
 
-                var machines = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory, building);
                 foreach (var itemMachine in machines)
                 {
                     List<int> dataChild = new List<int>();
@@ -210,8 +202,7 @@ namespace OEE_API.Application.Implementation
                     {
                         foreach (var itemDate in rangerDate)
                         {
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, itemMachine, shift, itemDate.ToString(), itemDate.ToString());
-
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, itemMachine, shift, itemDate.ToString(), itemDate.ToString());
                             dataChild.Add(availability);
                         }
 
@@ -240,9 +231,9 @@ namespace OEE_API.Application.Implementation
 
             if (factory == "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByMonth(numberMonth);
-                var dataSHB = await _Cell_OEEServiceSHB.GetAllCellOEEByMonth(numberMonth);
-                var dataSYF = await _Cell_OEEServiceSYF.GetAllCellOEEByMonth(numberMonth);
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByMonth("",numberMonth);
+                var dataSHB = await _Cell_OEEService.GetAllCellOEEByMonth("SHB",numberMonth);
+                var dataSYF = await _Cell_OEEService.GetAllCellOEEByMonth("SHY",numberMonth);
 
                 foreach (var itemMachine in listMachine)
                 {
@@ -255,26 +246,26 @@ namespace OEE_API.Application.Implementation
                         var dateTo = week.weekFinish.Value.ToString("MM-dd-yyyy");
                         if (itemMachine == "SHW")
                         {
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, itemMachine, null, null, shift, date, dateTo);
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, itemMachine, null, null, shift, date, dateTo);
                             dataChild.Add(availability);
                         }
                         //SHD
                         if (itemMachine == "SHD")
                         {
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, itemMachine, null, null, shift, date, dateTo);
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, itemMachine, null, null, shift, date, dateTo);
                             dataChild.Add(availability);
                         }
 
                         //Add SHB
                         if (itemMachine == "SHB")
                         {
-                            int availability = await _Cell_OEEServiceSHB.GetAvailabilityByRangerDate(dataSHB, itemMachine, null, null, shift, date, dateTo);
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHB, itemMachine, null, null, shift, date, dateTo);
                             dataChild.Add(availability);
                         }
                         //Add SY2
                         if (itemMachine == "SY2")
                         {
-                            int availability = await _Cell_OEEServiceSYF.GetAvailabilityByRangerDate(dataSYF, itemMachine, null, null, shift, date, dateTo);
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSYF, itemMachine, null, null, shift, date, dateTo);
                             dataChild.Add(availability);
                         }
                     }
@@ -287,13 +278,13 @@ namespace OEE_API.Application.Implementation
             }
             if (factory != "ALL" && building == "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByMonth(numberMonth);
-                var dataSHB = await _Cell_OEEServiceSHB.GetAllCellOEEByMonth(numberMonth);
-                var dataSYF = await _Cell_OEEServiceSYF.GetAllCellOEEByMonth(numberMonth);
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByMonth(factory,numberMonth);
+                var dataSHB = await _Cell_OEEService.GetAllCellOEEByMonth(factory,numberMonth);
+                var dataSYF = await _Cell_OEEService.GetAllCellOEEByMonth(factory,numberMonth);
 
                 if (factory != "SHB" && factory != "SY2")
                 {
-                    var buildings = await _Cell_OEEServiceSHW_SHD.GetListBuildingByFactoryId(factory);
+                    var buildings = await _Cell_OEEService.GetListBuildingByFactoryId(factory);
                     foreach (var itemBuilding in buildings)
                     {
                         List<int> dataChild = new List<int>();
@@ -304,7 +295,7 @@ namespace OEE_API.Application.Implementation
                             {
                                 var date = week.weekStart.Value.ToString("MM-dd-yyyy");
                                 var dateTo = week.weekFinish.Value.ToString("MM-dd-yyyy");
-                                int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, itemBuilding, null, shift, date, dateTo);
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, factory, itemBuilding, null, shift, date, dateTo);
                                 dataChild.Add(availability);
                             }
                             chartTrendModel.name = itemBuilding + " Building";
@@ -315,7 +306,7 @@ namespace OEE_API.Application.Implementation
                 }
                 else if (factory == "SHB")
                 {
-                    var machines = await _Cell_OEEServiceSHB.GetListMachineByFactoryId(factory);
+                    var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory);
                     foreach (var item in machines)
                     {
                         List<int> dataChild = new List<int>();
@@ -326,7 +317,7 @@ namespace OEE_API.Application.Implementation
                             {
                                 var date = week.weekStart.Value.ToString("MM-dd-yyyy");
                                 var dateTo = week.weekFinish.Value.ToString("MM-dd-yyyy");
-                                int availability = await _Cell_OEEServiceSHB.GetAvailabilityByRangerDate(dataSHB, factory, null, item, shift, date, dateTo);
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHB, factory, null, item, shift, date, dateTo);
                                 dataChild.Add(availability);
                             }
 
@@ -338,7 +329,7 @@ namespace OEE_API.Application.Implementation
                 }
                 else if (factory == "SYF")
                 {
-                    var machines = await _Cell_OEEServiceSYF.GetListMachineByFactoryId(factory);
+                    var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory);
                     foreach (var item in machines)
                     {
                         List<int> dataChild = new List<int>();
@@ -349,7 +340,7 @@ namespace OEE_API.Application.Implementation
                             {
                                 var date = it.weekStart.Value.ToString("MM-dd-yyyy");
                                 var dateTo = it.weekFinish.Value.ToString("MM-dd-yyyy");
-                                int availability = await _Cell_OEEServiceSYF.GetAvailabilityByRangerDate(dataSYF, factory, null, item, shift, date, dateTo);
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSYF, factory, null, item, shift, date, dateTo);
                                 dataChild.Add(availability);
                             }
 
@@ -362,9 +353,9 @@ namespace OEE_API.Application.Implementation
             }
             if (factory != "ALL" && building != "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByMonth(numberMonth);
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByMonth(factory,numberMonth);
 
-                var machines = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory, building);
                 foreach (var item in machines)
                 {
                     List<int> dataChild = new List<int>();
@@ -376,7 +367,7 @@ namespace OEE_API.Application.Implementation
                         {
                             var date = week.weekStart.Value.ToString("MM-dd-yyyy");
                             var dateTo = week.weekFinish.Value.ToString("MM-dd-yyyy");
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, item, shift, date, dateTo);
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, item, shift, date, dateTo);
                             dataChild.Add(availability);
                         }
 
@@ -402,9 +393,9 @@ namespace OEE_API.Application.Implementation
 
             if (factory == "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByYear();
-                var dataSHB = await _Cell_OEEServiceSHB.GetAllCellOEEByYear();
-                var dataSYF = await _Cell_OEEServiceSYF.GetAllCellOEEByYear();
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByYear();
+                var dataSHB = await _Cell_OEEService.GetAllCellOEEByYear();
+                var dataSYF = await _Cell_OEEService.GetAllCellOEEByYear();
 
                 foreach (var machine in listMachine)
                 {
@@ -418,7 +409,7 @@ namespace OEE_API.Application.Implementation
                             var firstDay = new DateTime(DateTime.Now.Year, item.NumberMonth, 1);
                             var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -435,7 +426,7 @@ namespace OEE_API.Application.Implementation
                             var firstDay = new DateTime(DateTime.Now.Year, item.NumberMonth, 1);
                             var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -453,7 +444,7 @@ namespace OEE_API.Application.Implementation
                             var firstDay = new DateTime(DateTime.Now.Year, item.NumberMonth, 1);
                             var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                            int availability = await _Cell_OEEServiceSHB.GetAvailabilityByRangerDate(dataSHB, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHB, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -471,7 +462,7 @@ namespace OEE_API.Application.Implementation
                             var firstDay = new DateTime(DateTime.Now.Year, item.NumberMonth, 1);
                             var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                            int availability = await _Cell_OEEServiceSYF.GetAvailabilityByRangerDate(dataSYF, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSYF, machine, null, null, shift, firstDay.ToString(), lastDay.ToString());
 
                             dataChild.Add(availability);
                         }
@@ -484,13 +475,13 @@ namespace OEE_API.Application.Implementation
             }
             if (factory != "ALL" && building == "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByYear();
-                var dataSHB = await _Cell_OEEServiceSHB.GetAllCellOEEByYear();
-                var dataSYF = await _Cell_OEEServiceSYF.GetAllCellOEEByYear();
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByYear();
+                var dataSHB = await _Cell_OEEService.GetAllCellOEEByYear();
+                var dataSYF = await _Cell_OEEService.GetAllCellOEEByYear();
 
                 if (factory != "SHB" && factory != "SY2")
                 {
-                    var listBuildings = await _Cell_OEEServiceSHW_SHD.GetListBuildingByFactoryId(factory);
+                    var listBuildings = await _Cell_OEEService.GetListBuildingByFactoryId(factory);
                     foreach (var item in listBuildings)
                     {
                         List<int> dataChild = new List<int>();
@@ -502,7 +493,7 @@ namespace OEE_API.Application.Implementation
                                 var firstDay = new DateTime(DateTime.Now.Year, itemMonth.NumberMonth, 1);
                                 var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                                int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, item, null, shift, firstDay.ToString(), lastDay.ToString());
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, factory, item, null, shift, firstDay.ToString(), lastDay.ToString());
 
                                 dataChild.Add(availability);
                             }
@@ -514,7 +505,7 @@ namespace OEE_API.Application.Implementation
                 }
                 else if (factory == "SHB")
                 {
-                    var machines = await _Cell_OEEServiceSHB.GetListMachineByFactoryId(factory);
+                    var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory);
                     foreach (var item in machines)
                     {
                         List<int> dataChild = new List<int>();
@@ -526,7 +517,7 @@ namespace OEE_API.Application.Implementation
                                 var firstDay = new DateTime(DateTime.Now.Year, itemMonth.NumberMonth, 1);
                                 var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                                int availability = await _Cell_OEEServiceSHB.GetAvailabilityByRangerDate(dataSHB, factory, null, item, shift, firstDay.ToString(), lastDay.ToString());
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHB, factory, null, item, shift, firstDay.ToString(), lastDay.ToString());
 
                                 dataChild.Add(availability);
                             }
@@ -538,7 +529,7 @@ namespace OEE_API.Application.Implementation
                 }
                 else if (factory == "SY2")
                 {
-                    var machines = await _Cell_OEEServiceSYF.GetListMachineByFactoryId(factory);
+                    var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory);
                     foreach (var item in machines)
                     {
                         List<int> dataChild = new List<int>();
@@ -550,7 +541,7 @@ namespace OEE_API.Application.Implementation
                                 var firstDay = new DateTime(DateTime.Now.Year, itemMonth.NumberMonth, 1);
                                 var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                                int availability = await _Cell_OEEServiceSYF.GetAvailabilityByRangerDate(dataSYF, factory, null, item, shift, firstDay.ToString(), lastDay.ToString());
+                                int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSYF, factory, null, item, shift, firstDay.ToString(), lastDay.ToString());
 
                                 dataChild.Add(availability);
                             }
@@ -563,9 +554,9 @@ namespace OEE_API.Application.Implementation
             }
             if (factory != "ALL" && building != "ALL")
             {
-                var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByYear();
+                var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByYear();
 
-                var machines = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                var machines = await _Cell_OEEService.GetListMachineByFactoryId(factory, building);
                 foreach (var item in machines)
                 {
                     List<int> dataChild = new List<int>();
@@ -578,7 +569,7 @@ namespace OEE_API.Application.Implementation
                             var firstDay = new DateTime(DateTime.Now.Year, itemMonth.NumberMonth, 1);
                             var lastDay = firstDay.AddMonths(1).AddDays(-1);
 
-                            int availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, item, shift, firstDay.ToString(), lastDay.ToString());
+                            int availability = await _Cell_OEEService.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, item, shift, firstDay.ToString(), lastDay.ToString());
 
                             dataChild.Add(availability);
                         }

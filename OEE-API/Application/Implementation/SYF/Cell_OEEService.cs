@@ -13,10 +13,11 @@ namespace OEE_API.Application.Implementation.SYF
 {
     public class Cell_OEEService : ICell_OEEService
     {
-        private readonly IRepositorySYF<Cell_OEE, int> _repositorySYF;
+        //OEE mới sử dụng chung một db với SHW_SHD
+                private readonly IRepositorySYF<OeeReport_test, int> _repositorySYF;
         private readonly IRepositorySHW_SHD<DbSHW_SHD.ShiftTime, string> _repositoryShiftTime;
         public Cell_OEEService(
-         IRepositorySYF<Cell_OEE, int> repositorySYF,
+         IRepositorySYF<OeeReport_test, int> repositorySYF,
          IRepositorySHW_SHD<DbSHW_SHD.ShiftTime, string> repositoryShiftTime)
         {
             _repositorySYF = repositorySYF;
@@ -24,7 +25,7 @@ namespace OEE_API.Application.Implementation.SYF
         }
 
 
-        public async Task<List<Cell_OEE>> GetAllCellOEEByDate(DateTime dateFrom, DateTime dateTo)
+        public async Task<List<OeeReport_test>> GetAllCellOEEByDate(DateTime dateFrom, DateTime dateTo)
         {
             var data = await _repositorySYF.FindAll(x =>
                x.Time.Value.Date >= dateFrom.Date &&
@@ -34,7 +35,7 @@ namespace OEE_API.Application.Implementation.SYF
             return data;
         }
 
-        public async Task<List<Cell_OEE>> GetAllCellOEEByMonth(int month)
+        public async Task<List<OeeReport_test>> GetAllCellOEEByMonth(int month)
         {
             var data = await _repositorySYF.FindAll(x =>
              x.Time.Value.Month >= month && x.Time.Value.Month <= (month + 1) && x.Time.Value.Year == DateTime.Now.Year
@@ -43,7 +44,7 @@ namespace OEE_API.Application.Implementation.SYF
             return data;
         }
 
-        public async Task<List<Cell_OEE>> GetAllCellOEEByYear()
+        public async Task<List<OeeReport_test>> GetAllCellOEEByYear()
         {
             var data = await _repositorySYF.FindAll(x => x.Time.Value.Year == DateTime.Now.Year
             ).ToListAsync();
@@ -69,7 +70,7 @@ namespace OEE_API.Application.Implementation.SYF
             return data;
         }
 
-        public async Task<int?> GetAvailability(List<Cell_OEE> data, string factory, string building, string machine, string time, string shift)
+        public async Task<int?> GetAvailability(List<OeeReport_test> data, string factory, string building, string machine, string time, string shift)
         {
             // Lấy ra khoảng thời gian nghỉ theo từng nhà máy 
             var shift1 = await _repositoryShiftTime.FindAll(x => x.factory_id == "SYF" && x.shift_id == "1").FirstOrDefaultAsync();
@@ -79,8 +80,8 @@ namespace OEE_API.Application.Implementation.SYF
             DateTime today = Convert.ToDateTime(time);
             DateTime tomorrow = today.AddDays(1);
 
-            Cell_OEE modelShiftDay = null;
-            Cell_OEE modelShiftNight = null;
+            OeeReport_test modelShiftDay = null;
+            OeeReport_test modelShiftNight = null;
 
             // Tính theo thời gian làm việc ca ngày 
             if (shift1 != null && (shift == "1" || shift == "0"))
@@ -129,7 +130,7 @@ namespace OEE_API.Application.Implementation.SYF
             }
         }
 
-        public async Task<int> GetAvailabilityByRangerDate(List<Cell_OEE> data, string factory, string building, string machine, string shift, string date, string dateTo)
+        public async Task<int> GetAvailabilityByRangerDate(List<OeeReport_test> data, string factory, string building, string machine, string shift, string date, string dateTo)
         {
             DateTime timeFrom = Convert.ToDateTime(date);
             DateTime timeTo = Convert.ToDateTime(dateTo);

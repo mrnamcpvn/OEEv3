@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.autoloadRemove();
     this.spinner.show();
     // tslint:disable-next-line: max-line-length
-    this.availabilityService.getAvailability(this.data.factory, this.data.building, this.data.shift, this.data.fromTime, this.data.toTime).subscribe(res => {
+    this.availabilityService. getAvailability(this.data.factory, this.data.building, this.data.shift, this.data.fromTime, this.data.toTime).subscribe(res => {
       this.dataChart = Object.entries(res).map(([key, value]) => {
         return {
           name: key,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { DowntimeReasonsComponent } from './downtime-reasons.component';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), ModalModule.forRoot()],
   exports: [RouterModule]
 })
 export class DowntimeReasonsRoutingModule {}
