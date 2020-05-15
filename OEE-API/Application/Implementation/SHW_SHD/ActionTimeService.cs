@@ -49,7 +49,15 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             _configureMapper = configureMapper;
             _mapper = mapper;
         }
+        //
+        public async Task<ChartReason> GetDownTimeAnalysis(string factory, string building, string machine, string shift, string date)
+        {
+           var data = await _repositorySHW_SHD.FindAll().ToListAsync();
+           var res = new ChartReason();
 
+           return res;
+    
+        }
         // Lấy ra tất cả building của bảng ActionTime theo factory
         public async Task<List<string>> GetListBuildingActionTime(string factory)
         {
@@ -74,19 +82,21 @@ namespace OEE_API.Application.Implementation.SHW_SHD
 
             return data;
         }
-
         // Lấy ra machine đầu tiên
         public async Task<ActionTime> GetFirstMachineActionTime(string factory, string building, string shift, string machine)
         {
             // factory = factory == "SHW" ? "SHC" : "CB";
             if (machine == null)
             {
-                var data = await _repositorySHW_SHD.FindAll(x => x.factory_id == factory && x.building_id == building).FirstOrDefaultAsync();
+                var data = await _repositorySHW_SHD.FindAll(x => x.factory_id == factory 
+                                                                && (building == "ALL" ? 1 == 1 : x.building_id == building)).FirstOrDefaultAsync();
                 return data;
             }
             else
             {
-                var data = await _repositorySHW_SHD.FindAll(x => x.factory_id == factory && x.building_id == building && x.machine_id == machine).FirstOrDefaultAsync();
+                var data = await _repositorySHW_SHD.FindAll(x => x.factory_id == factory 
+                                                             && (building == "ALL" ? 1 == 1 : x.building_id == building)
+                                                               && (machine == "ALL" ? 1 == 1 : x.machine_id == machine)).FirstOrDefaultAsync();
                 return data;
             }
         }
@@ -95,14 +105,37 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             // factory = factory == "SHW" ? "SHC" : "CB";
             if (reason_1 == "0" || reason_1 == null)
             {
-                return await _repositoryDowntimeReason.FindAll().Select(x => x.reason_1.Trim()).Distinct().ToListAsync();
+                return await _repositoryDowntimeReason.FindAll().Select(x => x.reason_1).Distinct().ToListAsync();
 
             }
             else if (reason_1 != "0" && reason_1 != null)
             {
-                return await _repositoryDowntimeReason.FindAll(x => x.reason_1 == reason_1.Trim()).Select(x => x.reason_2).ToListAsync();
+                return await _repositoryDowntimeReason.FindAll(x => x.reason_1 == reason_1).Select(x => x.reason_2).ToListAsync();
             }
             else return null;
+        }
+         public async Task<ReasonDetail> GetReasons(int item)
+        {
+            try
+            {
+                var data =  await _repositoryDowntimeDetail.FindAll(x=> x.actionTime_id == item).FirstOrDefaultAsync();
+                if(data == null)
+                {
+                    return null;
+                }
+                else {
+                    var res = await _repositoryDowntimeReason.FindAll(x=> x.id == data.reason_id).FirstOrDefaultAsync();
+                    var result = new ReasonDetail();
+                    result.reason_1 = res.reason_1;
+                    result.reason_2 = res.reason_2;
+                    result.reason_note = data.notes;
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public async Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1)
         {
@@ -111,12 +144,13 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                 DbFunctions dfunc = null;
                 DateTime day = Convert.ToDateTime(date);
                 factory = factory == "SHW" ? "SHC" : "CB";
-                var firstMachine = this.GetFirstMachineActionTime(factory, building, shift, machine);
-                var abc = firstMachine.Result.machine_id;
+                var firstMachine = await GetFirstMachineActionTime(factory, building, shift, machine);
+                var machineName = firstMachine.machine_id;
+                var listRea = _repositoryDowntimeReason.FindAll();
 
                 var data = _repositorySHW_SHD.FindAll(x =>
-                   x.factory_id == firstMachine.Result.factory_id &&
-                   x.machine_id == firstMachine.Result.machine_id.Trim() &&
+                   x.factory_id == firstMachine.factory_id &&
+                   x.machine_id == firstMachine.machine_id.Trim() &&
                    (shift == "0" ? 1 == 1 : x.shift == shift) &&
                    x.shiftdate == day
                 ).Select(x =>
@@ -135,7 +169,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     }
                 ).OrderByDescending(x => x.title);
                 var dataTable = data.Where(x => x.title == "IDLE");
-                return await PageListUtility<ChartReason>.PageListAsyncChartReason(data, dataTable, page);
+                return await PageListUtility<ChartReason>.PageListAsyncChartReason(data, dataTable,machineName, page);
 
                 // return data.GetEnumerator();
             }
@@ -157,7 +191,6 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                 sourcePeriods.Add(new TimeRange(a.start_time.Value, a.end_time.Value));
             }
             // Get involved time
-
             subPeriod.Add(new TimeRange(a.start_time.Value, a.end_time.Value));
             // Save the whole rest time without maint time
             TimePeriodSubtractor<TimeRange> subtractor = new TimePeriodSubtractor<TimeRange>();
@@ -194,7 +227,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             if (subPeriod.Count == 0)
             {
                 a.remark = "R";
-                a.duration = (Int32)(a.end_time - a.start_time).Value.Minutes;
+                a.duration = (Int32)((TimeSpan)(a.end_time.Value.Subtract(a.start_time.Value))).TotalMinutes;
                 _repositoryDowntimeDetail.Add(a);
             }
             // Subtract Maint Time- Rest time, get the subtracted and save.
@@ -209,7 +242,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     res.start_time = subtracted.Start;
                     res.end_time = subtracted.End;
                     res.duration = subtracted.Duration.Minutes;
-                    res.notes = "R";
+                    res.remark = "R";
                     _repositoryDowntimeDetail.Add(res);
                 }
             }
@@ -218,7 +251,6 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         {
             // List:  Rest, Maint, Shift Time
             // Result: Idle Time - List
-            DateTime moment = new DateTime(2020, 4, 20);
 
             var result = new List<DowntimeDetail>();
             TimePeriodCollection sourcePeriods = new TimePeriodCollection
@@ -248,7 +280,8 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                         res = a;
                         res.start_time = subtracted.Start;
                         res.end_time = subtracted.End;
-                        res.notes = "Abnormal";
+                       // res.notes = "Abnormal";
+                       res.remark = "I";
                         res.duration = subtracted.Duration.Minutes;
                         result.Add(res);
                     }
@@ -259,16 +292,23 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             // Save the whole rest time without maint time
             else
             {
-                a.remark = "Abnormal";
-                a.duration = (Int32)(a.end_time - a.start_time).Value.Minutes;
+                a.remark = "I";
+              //  a.notes = "Abnormal";
+                a.duration = (Int32)((TimeSpan)(a.end_time.Value.Subtract(a.start_time.Value))).TotalMinutes;
                 _repositoryDowntimeDetail.Add(a);
                 //   _repositoryDowntimeDetail.SaveAll();
                 return null;
             }
             // Subtract Maint Time- Rest time-ShiftTime, get the subtracted and save. 
-           
         }
-
+        public  bool isExist(int? id)
+        {
+            if(id != 0)
+            {
+            return  _repositoryDowntimeDetail.FindAll(x=> x.actionTime_id == id).Any(); 
+            }
+            else return false;
+        }
         public async Task<bool> AddDowntimeReason(ChartReason chartReason)
         {
             // var test = _mapper.Map<DowntimeDetail>(chartReason);
@@ -276,21 +316,33 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             var id = await _repositoryDowntimeReason.FindSingle(x => x.reason_1 == chartReason.reason_1 && x.reason_2 == chartReason.reason_2);
             var model = new DowntimeDetail();
             var list = new List<DowntimeDetail>();
+            if(isExist(chartReason.id))
+            {
+                model = await _repositoryDowntimeDetail.FindAll(x=> x.actionTime_id == chartReason.id).FirstOrDefaultAsync();
+                model.reason_id = id.id;
+                model.notes = chartReason.reason_note;
+                 await _repositoryDowntimeDetail.SaveAll();
+                 return true;
+            }
+            else
+            {
             model.machine_id = chartReason.machine_id;
             model.factory_id = chartReason.factory_id;
+            model.building_id = chartReason.building_id;
             model.start_time = chartReason.start_time;
             model.end_time = chartReason.end_time;
             model.notes = chartReason.reason_note;
             model.actionTime_id = chartReason.id;
             model.reason_id = id.id;
+            model.shift_id = chartReason.shift_id;
            // TimeSpan? dur = model.start_time - model.end_time;
-            model.duration = (Int32)((TimeSpan)(a.end_time - a.start_time)).TotalMinutes;
+            // model.duration = (Int32)((TimeSpan)(a.end_time - a.start_time)).TotalMinutes;
+            model.duration = (Int32)((TimeSpan)(a.end_time.Value.Subtract(a.start_time.Value))).TotalMinutes;
             model.shiftdate = chartReason.shift_date;
-
+            
             var factory = a.factory_id == "SHW" ? "SHC" : "CB";
             // Get all periods
             var restTime = await _repositoryRestTime.FindAll(x => (x.building_id == a.machine_id && x.factory_id == a.factory_id)).FirstOrDefaultAsync();
-
             var maintTime = await _repositoryMaintenanceTime.FindAll(x => (x.start_time >= a.start_time &&
                                                                   x.start_time.Value <= a.end_time && x.machine_id == a.machine_id)
                                                                   ||
@@ -306,7 +358,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     var m = model.GetClone();
                     m.start_time = maint.start_time;
                     m.end_time = maint.end_time;
-                    m.duration = ((TimeSpan)(m.end_time.Value - m.start_time.Value)).Minutes;
+                    m.duration = (Int32)((TimeSpan)(m.end_time.Value.Subtract(m.start_time.Value))).TotalMinutes;
                     m.remark = "M";
                     _repositoryDowntimeDetail.Add(m);
                     list.Add(m);
@@ -329,7 +381,6 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     s.start_time = s.shiftdate + shiftTime.start_time;
                     s.end_time = s.shiftdate + shiftTime.end_time;
                 }
-
             }
             else
             {
@@ -356,6 +407,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             catch (Exception ex)
             {
                 throw ex;
+            }
             }
         }
     }

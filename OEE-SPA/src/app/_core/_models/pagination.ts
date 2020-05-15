@@ -8,5 +8,6 @@ export interface Pagination {
 export class PaginationResult<T> {
     result: T;
     resultC: T;
+    machineName: string;
     pagination: Pagination;
 }

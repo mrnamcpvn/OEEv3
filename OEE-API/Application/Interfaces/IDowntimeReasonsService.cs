@@ -15,6 +15,9 @@ namespace OEE_API.Application.Interfaces
           Task<List<string>> GetDowntimeReasonDetail(string reason_1);
           Task<bool> AddDowntimeReason(ChartReason chartReason);
 
+        Task<ReasonDetail> GetReasons(int item);
+          
+
 
     }
 }

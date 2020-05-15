@@ -8,6 +8,7 @@ import { maps, chart } from 'highcharts';
 import {map} from 'rxjs/operators';
 import { ChartReason } from '../_models/chart-reason';
 import { PaginationResult } from '../_models/pagination';
+import { Downtimereason } from '../_models/downtime_reason';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,8 @@ export class DowntimeReasonsService {
     getDowntimeReasons(factory: string, building: string, machine: string, shift: string, date: string, page: number): Observable<PaginationResult<ChartReason[]>> {
       // tslint:disable-next-line: max-line-length
       return this.http.get<PaginationResult<ChartReason[]>>(this.baseUrl + 'DowntimeReasons/getDowntimeReasons?factory=' + factory + '&building=' + building + '&machine=' + machine + '&shift=' + shift + '&date=' + date + '&page=' + page);
+    }
+    getReasons(item: number): Observable<Downtimereason> {
+      return this.http.get<Downtimereason>(this.baseUrl + 'DowntimeReasons/getReasons?item=' + item);
     }
 }

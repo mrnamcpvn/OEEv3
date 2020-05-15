@@ -11,6 +11,8 @@ namespace OEE_API.Models.SHW_SHD
         [StringLength(10)]
         public string factory_id { get; set; }
         [StringLength(10)]
+        public string building_id { get; set; }
+        [StringLength(10)]
         public string machine_id { get; set; }
         [Column(TypeName = "date")]
         public DateTime? shiftdate { get; set; }

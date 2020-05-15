@@ -39,11 +39,12 @@ namespace OEE_API.Application.Implementation
 
         public async Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1)
         {
+            if(factory == "SHD" || factory == "SHW")
+            {
             var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date, page);
-            //  var test = Mapper.Map<ActionTime,ChartReason>(data);
-            //  ['RUN', new DateTime(0, 0, 0, 7, 0, 0), new DateTime(0, 0, 0, 7, 20, 0)],
-
-            return data;
+             return data;
+            }
+            else return null;
         }
 
         public async Task<List<string>> GetDowntimeReasonDetail(string reason_1)
@@ -55,6 +56,12 @@ namespace OEE_API.Application.Implementation
         public async Task<bool> AddDowntimeReason(ChartReason chartReason)
         {
             var data = await _ActionTimeServiceSHW_SHD.AddDowntimeReason(chartReason);
+
+            return data;
+        }
+           public async Task<ReasonDetail> GetReasons(int item)
+        {
+             var data = await _ActionTimeServiceSHW_SHD.GetReasons(item);
 
             return data;
         }

@@ -11,11 +11,13 @@ namespace OEE_API.Utilities
         public PagedResultBase Pagination { get; set; }
         public List<T> Result { get; set; }
         public List<T> ResultC { get; set; }
+        public string machineName {get;set;}
 
-        public PageListUtility(List<T> itemsC, List<T> items, int count, int pageNumber, int pageSize, int skip)
+        public PageListUtility(List<T> itemsC, List<T> items, string machine, int count, int pageNumber, int pageSize, int skip)
         {
             Result = items;
             ResultC = itemsC;
+            machineName = machine;
             Pagination = PagedResultBase.PageList(count, pageNumber, pageSize, skip);
         }
 
@@ -26,22 +28,22 @@ namespace OEE_API.Utilities
         /// <param name="pageNumber">Trang hiện tại</param>
         /// <param name="pageSize">Số lượng dòng trên một trang</param>
         /// <returns> Một đối tượng PageListUtility theo kiểu data truyền vào </returns>
-        public static async Task<PageListUtility<T>> PageListAsync(IQueryable<T> source, int pageNumber, int pageSize = 10)
+        public static async Task<PageListUtility<T>> PageListAsync(IQueryable<T> source, string machineName, int pageNumber, int pageSize = 10)
         {
             var count = await source.CountAsync();
             int skip = (pageNumber - 1) * pageSize;
             var items = await source.Skip(skip).Take(pageSize).ToListAsync();
         var itemsC = await source.ToListAsync();
-            return new PageListUtility<T>(itemsC, items, count, pageNumber, pageSize, skip);
+            return new PageListUtility<T>(itemsC, items, machineName, count, pageNumber, pageSize, skip);
         }
 
-        public static async Task<PageListUtility<T>> PageListAsyncChartReason(IQueryable<T> source, IQueryable<T> sourceT ,int pageNumber, int pageSize = 10)
+        public static async Task<PageListUtility<T>> PageListAsyncChartReason(IQueryable<T> source, IQueryable<T> sourceT, string machineName ,int pageNumber, int pageSize = 10)
         {
             var count = await sourceT.CountAsync();
             int skip = (pageNumber - 1) * pageSize;
             var items = await sourceT.Skip(skip).Take(pageSize).ToListAsync();
          var itemsC = await source.ToListAsync();
-            return new PageListUtility<T>(itemsC, items, count, pageNumber, pageSize, skip);
+            return new PageListUtility<T>(itemsC, items, machineName, count, pageNumber, pageSize, skip);
         }
         public class PagedResultBase
         {

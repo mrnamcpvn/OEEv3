@@ -11,40 +11,30 @@
     <form [formGroup]="addForm" (ngSubmit)="reasonSave()">
       <h5><span class="badge badge-warning">Reason 1</span></h5>
       <div class="form-group row">
-    
-        <ng-select2 style="width:100%; margin: 10px;" [data]="reason1s" [options]="optionsSelect2" formControlName="reason_1" [placeholder]="'Reason 1'"
-        [(ngModel)]="reason_1" (ngModelChange)="changeReason($event)">
+
+        <ng-select2 style="width:100%; margin: 10px;" [data]="reason1s" [options]="optionsSelect2"
+          formControlName="reason_1" [placeholder]="'Reason 1'" [(ngModel)]="reason_1"
+          (ngModelChange)="changeReason($event)">
         </ng-select2>
       </div>
       <h5><span class="badge badge-warning">Reason 2</span></h5>
-        <div class="form-group row" >
-        
-          <ng-select2 style="width:100%; margin: 10px;" [data]="reason2s" [options]="optionsSelect2"  [(ngModel)]="reason_2" formControlName="reason_2" [placeholder]="'Reason 2'">
-          </ng-select2>
-        </div>
-        <h5><span class="badge badge-warning">Reason note</span></h5>
       <div class="form-group row">
-          <textarea style="width:100%; margin: 10px;" class="md-textarea form-control" formControlName="reason_note" rows="3" id="input_text" type="text"
-            length="120" mdbCharCounter mdbInput></textarea>
-      
+
+        <ng-select2 style="width:100%; margin: 10px;" [data]="reason2s" [options]="optionsSelect2"
+          [(ngModel)]="reason_2" formControlName="reason_2" [placeholder]="'Reason 2'">
+        </ng-select2>
+      </div>
+      <h5><span class="badge badge-warning">Reason note</span></h5>
+      <div class="form-group row">
+        <textarea style="width:100%; margin: 10px;" class="md-textarea form-control" formControlName="reason_note"
+        [(ngModel)]="reason_note"  rows="3" id="input_text" type="text" length="120" mdbCharCounter mdbInput></textarea>
+
       </div>
       <button type="button" (click)="reasonSave()" class="btn btn-primary" style="margin: 5px;">
         Save
       </button>
     </form>
-    <table class="table table-bordered mt-5">
-      <thead>
-        <tr class="text-center">
-          <th scope="col">Downtime 1</th>
-          <th scope="col">Downtime 2</th>
-          <th scope="col">Reason Note</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
   </div>
-
 </ng-template>
 <div class="card">
   <div class="card-header">
@@ -79,10 +69,12 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="chart-reasons">
-      <p>REN-CNC-B02 :</p>
-
-      <div #trendChart (window:resize)="onResize($event)"></div>
+    <div class="chart-reasons" [ngClass]="{'show': isShow, 'hidden': !isShow}">
+      <h5><span class="badge badge-warning">{{machineName}}</span></h5>
+        <div #trendChart (window:resize)="onResize($event)"  ></div>
+    </div>
+    <div [ngClass]="{'show': !isShow ,'hidden': isShow}" class="alert alert-warning text-uppercase font-weight-bold text-center m-0" role="alert">
+      No data found !
     </div>
     <div class="detail-reasons">
       <table class="table table-bordered mt-5">
@@ -94,7 +86,6 @@
             <th scope="col">Status</th>
             <th scope="col">Diff Time</th>
             <th scope="col">Actions</th>
-            <th scope="col">Downtime reason 1</th>
           </tr>
         </thead>
         <tbody>
@@ -107,15 +98,7 @@
             <td>
               <button type="button" class="btn btn-primary" (click)="openModal(template, item)">Select</button>
             </td>
-            <td>
-              <select>
-                <option>Downtime 1</option>
-                <option>Downtime 2</option>
-                <option>Reasons Note</option>
-              </select>
-            </td>
           </tr>
-
           <tr *ngIf="dataActionTime.length == 0">
             <td colspan="7">
               <div class="alert alert-warning text-uppercase font-weight-bold text-center m-0" role="alert">

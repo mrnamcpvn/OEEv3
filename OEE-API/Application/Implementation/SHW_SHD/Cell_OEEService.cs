@@ -66,11 +66,20 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         // Lấy ra tất cả Cell_OEE theo tháng
         public async Task<List<OeeReport_test>> GetAllCellOEEByMonth(string factory,int month)
         {
+            if(factory != "")
+            {
             var data = await _repositoryReport.FindAll(x => x.Factory == factory &&
              x.Time.Value.Month >= month && x.Time.Value.Month <= (month + 1) && x.Time.Value.Year == DateTime.Now.Year
             ).ToListAsync();
-
-            return data;
+             return data;
+            }
+            else {
+                var data = await _repositoryReport.FindAll(x => 
+             x.Time.Value.Month >= month && x.Time.Value.Month <= (month + 1) && x.Time.Value.Year == DateTime.Now.Year
+            ).ToListAsync(); 
+             return data;
+            }
+           
         }
 
         // Lấy ra tất cả Cell_OEE theo năm
@@ -120,7 +129,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             {
                 modelShiftDay = data.Where(
                 x => x.Factory == factory &&
-                    (building != null ? x.Building == building : 1 == 1) &&
+                    (building != null ? x.Building.Trim() == building.Trim() : 1 == 1) &&
                     (machine != null ? x.Machine == machine : 1 == 1) &&
                     x.Shiftdate == today &&
                    x.Shift_ID == "1"
@@ -131,7 +140,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             {
                 modelShiftNight = data.Where(
                 x => x.Factory == factory &&
-                    (building != null ? x.Building == building : 1 == 1) &&
+                    (building != null ? x.Building.Trim() == building.Trim() : 1 == 1) &&
                     (machine != null ? x.Machine == machine : 1 == 1) 
                     // ((x.Time.Value.Date == today.Date && x.Time.Value.TimeOfDay >= shift2.start_time)
                     // || (x.Time.Value.Date == tomorrow.Date && x.Time.Value.TimeOfDay < shift2.end_time))

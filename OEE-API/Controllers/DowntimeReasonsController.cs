@@ -21,6 +21,7 @@ namespace OEE_API.Controllers
             {
                 var data = await _downtimeReasonsService.GetDuration(factory, building, machine, shift, date, page);
                 return Ok(data);
+            
             }
             catch (Exception ex)
             {
@@ -41,11 +42,25 @@ namespace OEE_API.Controllers
             }
         }
         [HttpPost("addDowntimeReason")]
-        public async Task<IActionResult> addDowntimeReason(ChartReason chartReason)
+        public async Task<bool> addDowntimeReason(ChartReason chartReason)
         {
             try
             {
                 var data = await _downtimeReasonsService.AddDowntimeReason(chartReason);
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+          [HttpGet("getReasons")]
+        public async Task<IActionResult> getReasons(int item)
+        {
+            try
+            {
+                var data = await _downtimeReasonsService.GetReasons(item);
                 return Ok(data);
             }
             catch (Exception ex)

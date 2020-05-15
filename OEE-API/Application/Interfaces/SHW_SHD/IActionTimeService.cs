@@ -16,5 +16,6 @@ namespace OEE_API.Application.Interfaces.SHW_SHD
         Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1);
         Task<ActionTime> GetFirstMachineActionTime(string factory, string building, string shift, string machine);
         Task<bool> AddDowntimeReason(ChartReason chartReason);
+        Task<ReasonDetail> GetReasons(int item);
     }
 }

@@ -8,10 +8,12 @@ import { formatDate } from '@angular/common';
 import { DowntimeReasonsService } from '../../../app/_core/_services/downtime-reasons.service';
 import { ActionTime } from '../../../app/_core/_models/action-time';
 import { map } from 'highcharts';
-//import { parse } from 'path';
+import Swal from 'sweetalert2';
+
 import {parseISO} from 'date-fns';
 import { ChartReason } from '../../_core/_models/chart-reason';
 import { Pagination } from '../../_core/_models/pagination';
+import * as moment from 'moment';
 
 
 declare var google: any;
@@ -20,12 +22,13 @@ declare var google: any;
   templateUrl: './downtime-reasons.component.html'
 })
 export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
-  @ViewChild('trendChart', { static: true }) trendChart: ElementRef;
+  @ViewChild('trendChart', { static: false  }) trendChart: ElementRef;
 
   addForm: FormGroup;
   factory: string = 'ALL';
   building: string = 'ALL';
   machine: string = 'ALL';
+  machineName: string = '';
   shift: string = '0';
   reason_1: string = '0';
   reason_2: string  = '0';
@@ -40,6 +43,7 @@ pagination: Pagination = {
 modalRef: BsModalRef;
   date: Date = new Date();
   dataActionTime: Array<ChartReason> = [];
+  isShow: boolean;
   dataReason: Array<string[]> = [];
   modal:  ChartReason;
   factories: Array<Select2OptionData> = [
@@ -106,25 +110,42 @@ modalRef: BsModalRef;
     dayViewHeaderFormat: 'DD-MM-YYYY',
     sideBySide: true
   };
-
   constructor( private modalService: BsModalService,
     private fb: FormBuilder,
     private commonService: CommonService,
-              private downtimeReasonsService: DowntimeReasonsService
-             ) { }
+              private downtimeReasonsService: DowntimeReasonsService ) { }
 
   ngOnInit() {
-    this.loadChart();
+    google.charts.load('current', { packages: ['timeline'] });
+ //   this.loadChart();
+ this.isShow = false;
    this.loadReason1(this.reason_1, false);
    this.addForm = this.fb.group({
      reason_1: [],
      reason_2: [],
      reason_note: []
-   })
+   });
   }
   openModal(template: TemplateRef<any>, item: ChartReason) {
+    debugger
+    this.downtimeReasonsService.getReasons(item.id)
+    .subscribe(res => {
+      debugger
+      if(res != null)
+    {
+     this.reason_1 = res.reason_1;
+     this.reason_2 = res.reason_2;
+     this.reason_note = res.reason_note;
+      }
+      else 
+      {
+        this.reason_1 = '';
+        this.reason_2 = '';
+        this.reason_note = '';
+      }
+    });
     this.modalRef = this.modalService.show(template);
-    this.modal = item;
+   this.modal = item;
   }
   changeFactory(value: any) {
     this.building = 'ALL';
@@ -133,15 +154,16 @@ modalRef: BsModalRef;
       // tslint:disable-next-line: triple-equals
       if (value == 'SHW' || value == 'SHD') {
         this.loadBuilding();
+        this.loadChart();
       } else {
         // vì database : SHB không có bảng ActionTime, SY2: không có building
-
         // tslint:disable-next-line: triple-equals
         if (value == 'SY2') {
           this.loadMachine();
         } else {
           this.buildings = [];
         }
+        this.loadChart();
       }
     } else {
       this.loadChart();
@@ -169,7 +191,6 @@ modalRef: BsModalRef;
     this.loadChart();
   }
   changeReason(event: any) {
-    debugger
     this.loadReason1(this.reason_1, true);
   }
   pageChanged(event: any): void {
@@ -178,12 +199,12 @@ modalRef: BsModalRef;
   }
   updateDate(event: any) {
     // tslint:disable-next-line: triple-equals
+    debugger
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.loadChart();
     }
   }
-
   loadBuilding() {
     this.commonService.getBuildingsActionTime(this.factory).subscribe(res => {
       this.buildings = res.map((item, index, array) => {
@@ -198,7 +219,6 @@ modalRef: BsModalRef;
       console.log(error);
     });
   }
-
   loadMachine() {
     this.commonService.getMachinesActionTime(this.factory, this.building).subscribe(res => {
       this.machines = res.map(item => {
@@ -212,6 +232,7 @@ modalRef: BsModalRef;
   }
   loadReason1(value, changed) {
     this.downtimeReasonsService.getDowntimeReasonDetail(value).subscribe(res => {
+      if (res != null)  {
       if (changed === false) { this.reason1s = res.map(item => {
         return { id: item, text: item };
       });
@@ -219,6 +240,7 @@ modalRef: BsModalRef;
       return { id: item, text: item };
     });
    }
+  }
     }, error => {
       console.log(error);
     });
@@ -229,45 +251,79 @@ modalRef: BsModalRef;
     console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
     this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building, this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
     .subscribe(res => {
+      if (res != null) {
+      if (res.result.length > 0) {
         this.dataActionTime = res.result;
         this.pagination = res.pagination;
-        this.drawChart(res.resultC);
-        console.log(res);
+        this.machineName = res.machineName;
+      }
+      if (res.resultC.length > 0) {
+          this.isShow = true;
+        google.charts.setOnLoadCallback(this.drawChart(res.resultC));
+        } else {
+          this.isShow = false;
+        }
+      } else {
+        this.isShow = false;
+        this.dataActionTime = [];
+      }
       }, (error: any) => {
-
         console.log(error);
       });
   }
 
   reasonSave() {
+
     this.modal.reason_1 = this.addForm.value.reason_1;
     this.modal.reason_2 = this.addForm.value.reason_2;
     this.modal.reason_note = this.addForm.value.reason_note;
   //  this.modal.building_id = this.addForm.value.building_id;
     this.downtimeReasonsService.addDowntimeReason(this.modal)
     .subscribe(res => {
-        console.log(res);
+       if (res === true) {
+         this.modalRef.hide();
+         Swal.fire('Saved!', 'Your change has been saved.', 'success');
+       }
       }, (error: any) => {
-
+        Swal.fire('Oops...', 'Something went wrong!', 'error');
         console.log(error);
       });
   }
   ngAfterViewInit() {
     google.charts.load('current', { packages: ['timeline'] });
     google.charts.setOnLoadCallback(this.drawChart);
+
   }
 
   onResize(event: any) {
     google.charts.load('current', { packages: ['timeline'] });
     google.charts.setOnLoadCallback(this.drawChart);
   }
+   extractTime(value: string) {
+    const year =  moment(value).format('YYYY');
+    const month =  moment(value).format('MM');
+    const day =  moment(value).format('DD');
+    const hour =  moment(value).format('HH');
+    const minute =  moment(value).format('mm');
+    const second =  moment(value).format('ss');
+    return new Date(
+    parseInt(year, 10), parseInt(month, 10), parseInt(day, 10),
+    parseInt(hour, 10), parseInt(minute, 10),
+    parseInt(second, 10)
+    );
+  }
   drawChart = (result) => {
-    const arrayA = result.map(function(item) {
-        return [item['title'].toString(),
-                parseISO(item['start_time']) , parseISO(item['end_time'])];
+    if (result != null) {
+    const arrayA = result.map((item: any) => {
+        const start = this.extractTime(item['start_time']);
+        const  end = this.extractTime(item['end_time']);
+          return [
+            item['title'],
+            start,
+            end ];
     });
+    arrayA.unshift( ['title', 'date1', 'date2']);
     const data = google.visualization.arrayToDataTable(arrayA);
-
     const options = {
       colors: ['#00a71c', '#e88b00', '#0354b9'],
       timeline: {
@@ -281,6 +337,7 @@ modalRef: BsModalRef;
 
     const chart = new google.visualization.Timeline(this.trendChart.nativeElement);
      chart.draw(data, options);
+  }
   }
 
 }

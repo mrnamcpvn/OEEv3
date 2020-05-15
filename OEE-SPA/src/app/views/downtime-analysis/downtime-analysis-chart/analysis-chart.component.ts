@@ -44,7 +44,8 @@ export class AnalysisChartComponent implements OnInit, AfterViewInit {
                     xAxes: [{
                         display: true,
                         ticks: {
-                            min: 0
+                            offset: true,
+                            beginAtZero: true
                         }
                     }]
                 }
