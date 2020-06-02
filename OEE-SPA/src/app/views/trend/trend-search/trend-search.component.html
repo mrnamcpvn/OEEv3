@@ -11,6 +11,11 @@
       (ngModelChange)="changeBuilding($event)"></ng-select2>
   </div>
   <div class="form-group col">
+    <h5><span class="badge badge-warning">Machine Type</span></h5>
+    <ng-select2 [data]="machine_types" [(ngModel)]="machine_type" [options]="optionsSelect2" [placeholder]="'Machien Type'"
+      (ngModelChange)="changeMachine_Type($event)"></ng-select2>
+  </div>
+  <div class="form-group col">
     <h5><span class="badge badge-warning">Shift</span></h5>
     <ng-select2 [data]="shifts" [(ngModel)]="shift" [options]="optionsSelect2" [placeholder]="'Shift'"
       (ngModelChange)="changeShift($event)"></ng-select2>

@@ -177,8 +177,6 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             {
                 throw ex;
             }
-
-
         }
         private bool Check_Involved(DowntimeDetail a, DowntimeDetail b)
         {

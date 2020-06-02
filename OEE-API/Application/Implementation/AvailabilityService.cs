@@ -5,6 +5,10 @@ using ServiceSHB = OEE_API.Application.Interfaces.SHB;
 using ServiceSYF = OEE_API.Application.Interfaces.SYF;
 using OEE_API.Application.Interfaces;
 using System;
+using Microsoft.Data.SqlClient;
+using System.Data;
+using OEE_API.Models.SHW_SHD;
+using Microsoft.EntityFrameworkCore;
 
 namespace OEE_API.Application.Implementation
 {
@@ -15,27 +19,42 @@ namespace OEE_API.Application.Implementation
         ServiceSYF.ICell_OEEService _Cell_OEEServiceSYF;
 
         ServiceSHW_SHD.ICell_OEEService _Cell_OEEService;
+        public readonly DBContextSHW_SHD _context;
 
         public AvailabilityService(
             ServiceSHW_SHD.ICell_OEEService Cell_OEEServiceSHW_SHD,
             ServiceSHB.ICell_OEEService Cell_OEEServiceSHB,
             ServiceSYF.ICell_OEEService Cell_OEEServiceSYF,
-            ServiceSHW_SHD.ICell_OEEService Cell_OEEServices)
+            ServiceSHW_SHD.ICell_OEEService Cell_OEEServices
+            ,DBContextSHW_SHD context)
+
+
         {
             _Cell_OEEServiceSHW_SHD = Cell_OEEServiceSHW_SHD;
             _Cell_OEEServiceSHB = Cell_OEEServiceSHB;
             _Cell_OEEServiceSYF = Cell_OEEServiceSYF;
             _Cell_OEEService = Cell_OEEServices;
+            _context = context;
         }
 
         public async Task<Dictionary<string, int>> GetListAvailabilityAsync(string factory, string building, string shift, string date, string dateTo)
         {
+            DateTime now = DateTime.Now;
+            bool isToday = false;
+            // EXEC Store Procedure
+            if(now.Date.CompareTo(Convert.ToDateTime(date).Date) >= 0 && now.Date.CompareTo(Convert.ToDateTime(dateTo).Date) >= 0)
+            {
+                // Call STORE PROCEDURE -- GET Today_Data
+                isToday = true;
+                var return_value =   _context.Row.FromSqlRaw("EXEC [dbo].[SP_get_Today_RealTime_OEE_data]").ToString();
+
+            }
+
             Dictionary<string, int> model = new Dictionary<string, int>();
             // Service lớn gọi tới service con 
             if (factory == "ALL")
             {
                 // var data = await _Cell_OEEService.GetAllCellOEEByDate(Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
-
                 var dataSHW_SHD = await _Cell_OEEService.GetAllCellOEEByDate("", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
                 var dataSHB = await _Cell_OEEService.GetAllCellOEEByDate("SHB", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
                 var dataSYF = await _Cell_OEEService.GetAllCellOEEByDate("SHY", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
@@ -56,6 +75,7 @@ namespace OEE_API.Application.Implementation
             else if (factory != "ALL" && building == "ALL")
             {
                 var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate("", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
+            
                 var dataSHB = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate("SHB", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
                 var dataSYF = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate("SYF", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
 

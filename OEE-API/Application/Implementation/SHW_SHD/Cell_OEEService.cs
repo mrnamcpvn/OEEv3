@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using OEE_API.Application.Interfaces.SHW_SHD;
 using OEE_API.Data.Interfaces;
@@ -16,19 +18,24 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         private readonly IRepositorySHW_SHD<ShiftTime, string> _repositoryShiftTime;
 
         private readonly IRepositorySHW_SHD<OeeReport_test, string> _repositoryReport;
+      private readonly IRepositorySHW_SHD<OeeReport_Today, string> _repositoryToday;
+        private readonly MapperConfiguration _configMapper;
 
         public Cell_OEEService(
             
             IRepositorySHW_SHD<Cell_OEE, int> repositorySHW_SHD,
             IRepositorySHW_SHD<ShiftTime, string> repositoryShiftTime,
-            IRepositorySHW_SHD<OeeReport_test, string> repositoryReport
+            IRepositorySHW_SHD<OeeReport_test, string> repositoryReport,
+            IRepositorySHW_SHD<OeeReport_Today,string> repositoryToday,
+            MapperConfiguration configMapper
             )
 
         {
             _repositorySHW_SHD = repositorySHW_SHD;
             _repositoryShiftTime = repositoryShiftTime;
             _repositoryReport = repositoryReport;
-            
+            _repositoryToday = repositoryToday;
+            _configMapper = configMapper;
         }
 
         // Lấy ra tất cả Cell_OEE  từ ngày bắt đầu đến ngày kết thúc 
@@ -38,20 +45,31 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             //    x.Time.Value.Date >= dateFrom.Date &&
             //     x.Time.Value.Date <= dateTo.Date.AddDays(1)
             // ).ToListAsync();
-
             // return data;
-            var test =  _repositoryReport.FindAll(x=> x.Time != null);
-            var test1 = test.FirstOrDefault().Shiftdate.Value.Date;
-              var data =  _repositoryReport.FindAll(x =>
+            var todata = await  _repositoryToday.FindAll(x =>
                x.Shiftdate >= dateFrom &&
-                x.Shiftdate <= dateTo.AddDays(1));
+                x.Shiftdate <= dateTo.AddDays(1)).ToListAsync();
             if(factory == "")
             {
-             data = data.Where(x=> x.Factory == "SHD" || x.Factory == "SHW");
+             todata = todata.FindAll(x=> x.Factory == "SHD" || x.Factory == "SHW");
             }
-            else data =  data.Where(x=> x.Factory == factory);
+            else todata =  todata.FindAll(x=> x.Factory == factory);
+
+            var data = await _repositoryReport.FindAll(x =>
+               x.Shiftdate >= dateFrom &&
+                x.Shiftdate <= dateTo.AddDays(1)).ToListAsync();
+            if(factory == "")
+            {
+             data = data.FindAll(x=> x.Factory == "SHD" || x.Factory == "SHW");
+            }
+            else data =  data.FindAll(x=> x.Factory == factory);
             
-            return await data.ToListAsync();
+            var result =  todata.AsQueryable().ProjectTo<OeeReport_test>(_configMapper).ToList();
+          //  return await data.ToListAsync();
+          var combined = new List<OeeReport_test>();
+          combined.AddRange(data);
+          combined.AddRange(result);
+          return  combined;
         }
         // public async Task<List<OeeReport_test>> GetAllCellOEEByDate(string factory, DateTime dateFrom, DateTime dateTo)
         // {
@@ -94,7 +112,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         // Lấy ra tất cả building theo factory 
         public async Task<List<string>> GetListBuildingByFactoryId(string factory)
         {
-            var data = await _repositoryReport.FindAll(x => x.Factory == factory).GroupBy(x => x.Building).Select(x => x.Key).ToListAsync();
+            var data = await _repositoryReport.FindAll(x => x.Factory == factory && x.Building != null).GroupBy(x => x.Building).Select(x => x.Key).ToListAsync();
 
             return data;
         }
@@ -111,7 +129,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             return data;
         }
 
-        public async Task<int?> GetAvailability(List<OeeReport_test> data, string factory, string building, string machine, string time, string shift)
+        public async Task<int?> GetAvailability(List<OeeReport_test> data, string factory, string building, string machine, string time, string shift, bool isToday)
         {
             // Lấy ra khoảng thời gian nghỉ theo từng nhà máy 
             var shift1 = await _repositoryShiftTime.FindAll(x => (factory == "SHW" ? x.factory_id == "SHC" : x.factory_id == "CB") && x.building_id == building && x.shift_id == "1").FirstOrDefaultAsync();
@@ -124,6 +142,10 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             OeeReport_test modelShiftDay = null;
             OeeReport_test modelShiftNight = null;
 
+            if(isToday == true)
+            {
+                
+            }
             // Tính theo thời gian làm việc ca ngày 
             if (shift1 != null && (shift == "1" || shift == "0"))
             {
@@ -134,6 +156,8 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     x.Shiftdate == today &&
                    x.Shift_ID == "1"
                 ).OrderByDescending(x => x.id).FirstOrDefault();
+              
+                
             }
             //Tính theo thời gian làm việc theo ca tối 
             if (shift2 != null && (shift == "2" || shift == "0"))
@@ -147,7 +171,6 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     && (x.Shiftdate == today && x.Shift_ID == "2")
                 ).OrderByDescending(x => x.id).FirstOrDefault();
             }
-
             // Nếu thời gian làm việc ca sáng và ca tối có dữ liệu
             if (modelShiftDay != null && modelShiftNight != null)
             {
@@ -155,7 +178,6 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                 double avgCelling = Math.Ceiling(avg);
 
                 return Convert.ToInt32(avgCelling.ToString());
-
             }
             // Nếu chỉ thời gian làm việc ca sáng có dữ liệu 
             else if (modelShiftDay != null && modelShiftNight == null)
@@ -181,7 +203,12 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         {
             DateTime timeFrom = Convert.ToDateTime(date);
             DateTime timeTo = Convert.ToDateTime(dateTo);
-
+            DateTime now = DateTime.Now;
+            var isToday = false;
+            if(timeFrom <= now && now <= timeTo)
+            {
+               isToday = true;
+            }
             var listRangeDay = Util.GetRangerDates(timeFrom, timeTo);
 
             double totalAvailability = 0;
@@ -219,7 +246,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
 
                                 if (itemMachine != null)
                                 {
-                                    var availability = await GetAvailability(data, factory, itemBuilding, itemMachine, itemDate.ToString(), shift);
+                                    var availability = await GetAvailability(data, factory, itemBuilding, itemMachine, itemDate.ToString(), shift, isToday);
                                     if (availability != null)
                                     {
                                         lengthMachine++;
@@ -236,7 +263,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
 
                         foreach (var itemMachine in machines)
                         {
-                            var availability = await GetAvailability(data, factory, building, itemMachine, itemDate.ToString(), shift);
+                            var availability = await GetAvailability(data, factory, building, itemMachine, itemDate.ToString(), shift, isToday);
                             if (availability != null)
                             {
                                 lengthAvailabilityBuilding++;
@@ -246,7 +273,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     }
                     else
                     {
-                        var availability = await GetAvailability(data, factory, building, machine, itemDate.ToString(), shift);
+                        var availability = await GetAvailability(data, factory, building, machine, itemDate.ToString(), shift, isToday);
 
                         if (availability != null)
                         {

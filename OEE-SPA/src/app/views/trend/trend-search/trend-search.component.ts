@@ -19,6 +19,7 @@ export class TrendSearchComponent implements OnInit {
   typeTime = 'week';
   numberTime: string = '1';
   factory: string = 'ALL';
+  machine_type: string = 'ALL';
   building: string = 'ALL';
   shift: string = '0';
   week: string = '1';
@@ -51,6 +52,7 @@ export class TrendSearchComponent implements OnInit {
   ];
 
   buildings: Array<Select2OptionData>;
+  machine_types: Array<Select2OptionData>;
 
   shifts: Array<Select2OptionData> = [
     {
@@ -165,7 +167,9 @@ export class TrendSearchComponent implements OnInit {
   changeBuilding(event: any) {
     this.loadChart();
   }
-
+  changeMachine_Type(event: any){
+    this.loadChart();
+  }
   changeShift(event: any) {
     this.loadChart();
   }
@@ -203,6 +207,16 @@ export class TrendSearchComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  loadMachine_Type() {
+    // this.commonService.getMachine_Type(this.factory).subscribe(res => {
+    //   this.machine_types = res.map(item => {
+    //     return { id: item, text:  item };
+    //   });
+    //   this.machine_types.unshift({ id: 'ALL', text: 'All MACHINE TYPES' });
+    // }, error => {
+    //   console.log(error);
+    // });
   }
 
   loadWeeks() {

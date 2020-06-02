@@ -141,3 +141,8 @@ Error Number:208,State:1,Class:16
 2020-05-15T14:41:35.7517358+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2020-05-15T14:41:35.7519132+07:00  [INF] Hosting environment: "Development" (c3307c92)
 2020-05-15T14:41:35.7519412+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-05-15T16:25:03.1313624+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-05-15T16:25:03.1377446+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-05-15T16:25:03.1378731+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-05-15T16:25:03.1379007+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-05-15T16:29:11.9206177+07:00  [INF] Application is shutting down... (90f52c38)

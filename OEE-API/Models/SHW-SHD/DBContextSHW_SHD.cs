@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 namespace OEE_API.Models.SHW_SHD
 {
@@ -13,32 +15,34 @@ namespace OEE_API.Models.SHW_SHD
         public virtual DbSet<Factory_OEE> Factory_OEE { get; set; }
         public virtual DbSet<MaintenanceTime> MaintenanceTime { get; set; }
         public virtual DbSet<OeeReport_test> OeeReport_test { get; set; }
+        public virtual DbSet<OeeReport_Today> OeeReport_Today { get; set; }
         public virtual DbSet<RestTime> RestTime { get; set; }
         public virtual DbSet<SHW_OEE_History> SHW_OEE_History { get; set; }
         public virtual DbSet<ShiftTime> ShiftTime { get; set; }
+        public virtual DbSet<RowsAffected> Row {get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ActionTime>(entity =>
             {
-                entity.HasKey(x=> x.id);
+                entity.HasKey(x => x.id);
             });
 
             modelBuilder.Entity<Building_OEE>(entity =>
             {
-                entity.HasKey(x=> x.id);
+                entity.HasKey(x => x.id);
 
             });
 
             modelBuilder.Entity<Cell_OEE>(entity =>
             {
-                entity.HasKey(x=> x.id);
+                entity.HasKey(x => x.id);
 
             });
 
             modelBuilder.Entity<DowntimeDetail>(entity =>
             {
-                entity.HasKey(x=> x.id);
+                entity.HasKey(x => x.id);
             });
 
             modelBuilder.Entity<DowntimeReason>(entity =>
@@ -72,7 +76,22 @@ namespace OEE_API.Models.SHW_SHD
                     .IsUnicode(false)
                     .IsFixedLength();
             });
+            modelBuilder.Entity<OeeReport_Today>(entity =>
+                     {
+                         entity.Property(e => e.Building).IsUnicode(false);
 
+                         entity.Property(e => e.Factory).IsUnicode(false);
+
+                         entity.Property(e => e.Machine).IsUnicode(false);
+
+                         entity.Property(e => e.Remark)
+                             .IsUnicode(false)
+                             .IsFixedLength();
+
+                         entity.Property(e => e.Shift_ID)
+                             .IsUnicode(false)
+                             .IsFixedLength();
+                     });
             modelBuilder.Entity<RestTime>(entity =>
             {
                 entity.HasKey(e => new { e.factory_id, e.shift_id, e.building_id });
@@ -93,6 +112,27 @@ namespace OEE_API.Models.SHW_SHD
             {
                 entity.HasKey(e => new { e.factory_id, e.shift_id, e.building_id });
             });
+            modelBuilder.Entity<RowsAffected>().HasNoKey();
+            // [Store Procedure] ------ REGISTER
         }
+        // public   async Task<RowsAffected> SP_get_OEE_Realtime_Today()
+        // {
+        //     try
+        //     {
+        //         var count = new RowsAffected();
+        //         string sqlQuery = "EXEC [dbo].[SP_get_Today_RealTime_OEE_data]";
+        //         count.rows = 0;
+        //         using (this.Database.BeginTransaction())
+        //         {
+        //              count.rows = await this.Database.ExecuteSqlRawAsync(sqlQuery);
+        //         }
+        //         return count;
+        //     }
+        //     catch (System.Exception ex)
+        //     {
+        //         throw ex;
+
+        //     }
+        // }
     }
 }

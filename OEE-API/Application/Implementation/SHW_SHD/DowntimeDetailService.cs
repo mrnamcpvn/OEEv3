@@ -78,13 +78,13 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                                                                    id = z.reason_id,
                                                                    duration = z.duration
                                                                }
-                                                            ).ToListAsync();
+                                                            ).OrderBy(x=> x.duration).ToListAsync();
                 var list = await GetListReason();
                 foreach(var item in list){
                     var num = result.FindAll(x=> x.id  == item.id).Select(x=> x.duration).Sum();
                     item.duration = num == null ? 0 : num;
                 }
-                return list;
+                return list.OrderByDescending(x=> x.duration).ToList();
             }
             catch(Exception ex)
             {

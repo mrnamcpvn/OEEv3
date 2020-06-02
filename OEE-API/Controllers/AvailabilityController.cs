@@ -12,7 +12,7 @@ namespace OEE_API.Controllers
         public AvailabilityController(IAvailabilityService availabilityService)
         {
             _availabilityService = availabilityService;
-        }
+        }   
 
         [HttpGet("GetAvailability")]
         public async Task<IActionResult> GetListAvailabilityAsync(string factory, string building, string shift, string date, string dateTo)

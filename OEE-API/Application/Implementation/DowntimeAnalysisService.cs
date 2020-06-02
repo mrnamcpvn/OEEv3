@@ -47,6 +47,7 @@ namespace OEE_API.Application.Implementation
             if(SHW_SHD_analysis.Count > 0)
             {
               var list = SHW_SHD_analysis.GroupBy( x=> x.reason_1).Select(grp => grp.ToList()).ToList();
+      
               foreach(var item in list)
               {
                 ReasonAnalysis rea_2 = new ReasonAnalysis();
@@ -57,7 +58,7 @@ namespace OEE_API.Application.Implementation
               }
             }
            return new {
-               resA = SHW_SHD_analysis,
+               resA = SHW_SHD_analysis.Take(10),
                resB = result
            };
     
