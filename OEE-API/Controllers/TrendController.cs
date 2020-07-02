@@ -25,26 +25,26 @@ namespace OEE_API.Controllers
         }
 
         [HttpGet("GetAvailabilityOfTrend")]
-        public async Task<IActionResult> GetListAvailabilityAsync(string factory, string building, string shift, string typeTime, string numberTime)
+        public async Task<IActionResult> GetListAvailabilityAsync(string factory, string building, string machine_type, string shift, string typeTime, string numberTime)
         {
             var number = numberTime != string.Empty ? Convert.ToInt32(numberTime) : 1;
 
             // Get availability by week
             if (typeTime == "week")
             {
-                var data = await _trendService.GetTrendByWeek(factory, building, shift, number);
+                var data = await _trendService.GetTrendByWeek(factory, building,machine_type, shift, number);
                 return Ok(data);
             }
             // Get availability by month
             if (typeTime == "month")
             {
-                var data = await _trendService.GetTrendByMonth(factory, building, shift, number);
+                var data = await _trendService.GetTrendByMonth(factory, building, machine_type, shift, number);
                 return Ok(data);
             }
             // Get availability by year
             if (typeTime == "year")
             {
-                var data = await _trendService.GetTrendByYear(factory, building, shift);
+                var data = await _trendService.GetTrendByYear(factory, building, machine_type, shift);
                 return Ok(data);
             }
 

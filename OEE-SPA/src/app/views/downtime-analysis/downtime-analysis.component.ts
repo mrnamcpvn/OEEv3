@@ -5,7 +5,8 @@ import { CommonService } from '../../_core/_services/common.service';
 import { formatDate } from '@angular/common';
 import { DowntimeAnalysisService } from '../../../app/_core/_services/downtime-analysis.service';
 // import { base64 } from 'src/assets/libary/exceljs/dist/exceljs';
-
+import { Pagination } from '../../_core/_models/pagination';
+import { ChartReason } from '../../_core/_models/chart-reason';
 
 @Component({
   selector: 'app-downtime-analysis',
@@ -15,9 +16,16 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
   factory: string = 'ALL';
   building: string = 'ALL';
   machine: string = 'ALL';
+  machine_type: string = 'ALL';
   shift: string = '0';
   date: Date = new Date();
-
+  dataActionTime: Array<ChartReason> = [];
+  pagination: Pagination = {
+    currentPage: 1,
+    pageSize: 10,
+    totalCount: 0,
+    totalPage: 0,
+  };
   dataChart: Array<{ title: string, data: Array<number>, labels: Array<string> }>;
   factories: Array<Select2OptionData> = [
     {
@@ -43,6 +51,7 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
   ];
 
   buildings: Array<Select2OptionData>;
+  machine_types: Array<Select2OptionData>;
 
   public shifts: Array<Select2OptionData> = [
     {
@@ -141,6 +150,7 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
   changeBuilding(value: any) {
     this.building = value;
     this.machine = 'ALL';
+    this.loadMachine_Type();
     // tslint:disable-next-line: triple-equals
     if (value != 'ALL') {
       this.loadMachine();
@@ -150,7 +160,16 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
     this.loadChart();
   }
 
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadChart();
+  }
   changeMachine(value: any) {
+    this.loadChart();
+  }
+  changeMachine_Type(event: any) {
+    debugger
+    this.loadMachine();
     this.loadChart();
   }
 
@@ -167,7 +186,7 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
   }
  loadChart() {
   console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
-  this.downtimeAnalysisService.getDowntimeAnalysis(this.factory, this.building, this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'))
+  this.downtimeAnalysisService.getDowntimeAnalysis(this.factory, this.building, this.machine_type, this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'))
   .subscribe(res => {
     //  this.dataActionTime = res.result;
      // this.pagination = res.pagination;
@@ -178,7 +197,6 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
      const labelsA = res.resB.map(function(item) {
       return (item['duration']);
      });
-
      const arrayB = res.resA.map(function(item) {
       return [item['reason_2'].toString()];
      });
@@ -186,15 +204,14 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
       return item['duration'];
      });
 
-
      this.dataChart = [
        {
-        title: 'Reason 1 Analysis',
+        title: 'Level 1',
        data: labelsA,
        labels: arrayA
        },
        {
-         title: 'Reason 2 Analysis',
+         title: 'Level 2',
          data: labelsB,
          labels: arrayB
        }
@@ -216,9 +233,19 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
       console.log(error);
     });
   }
-
+// Machine_Types
+loadMachine_Type() {
+  this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
+    this.machine_types = res.map(item => {
+      return { id: item, text:  item };
+    });
+    this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
+  }, error => {
+    console.log(error);
+  });
+}
   loadMachine() {
-    this.commonService.getMachine(this.factory, this.building).subscribe(res => {
+    this.commonService.getMachine(this.factory, this.building, this.machine_type).subscribe(res => {
       this.machines = res.map(item => {
         return { id: item, text: 'Machine ' + item };
       });

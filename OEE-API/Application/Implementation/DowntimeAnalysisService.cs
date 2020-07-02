@@ -39,11 +39,11 @@ namespace OEE_API.Application.Implementation
             _configureMapper = configureMapper;
         }
 
-        public async Task<Object> GetDownTimeAnalysis(string factory, string building, string machine, string shift, string date)
+        public async Task<Object> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date)
         {
           //  var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date);
           List<ReasonAnalysis> result = new List<ReasonAnalysis>();
-            var SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysis(factory,building,machine,shift,date);
+            var SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysis(factory,building, machine_type, machine,shift,date);
             if(SHW_SHD_analysis.Count > 0)
             {
               var list = SHW_SHD_analysis.GroupBy( x=> x.reason_1).Select(grp => grp.ToList()).ToList();
@@ -52,7 +52,7 @@ namespace OEE_API.Application.Implementation
               {
                 ReasonAnalysis rea_2 = new ReasonAnalysis();
                 var num = item.Sum(x=> x.duration);
-                rea_2.reason_1 = item[0].reason_1;
+                rea_2.reason_1 = item[0].reason_1.Trim();
                 rea_2.duration = num.Value;
                 result.Add(rea_2);
               }

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AvailabilityService } from '../../_core/_services/availability.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { Router, RouterModule } from '@angular/router';
 export interface DataSearch {
   factory: string;
   building: string;
+  machine_type: string;
   shift: string;
   fromTime: string;
   toTime: string;
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   dataChart: Array<{ name: string, value: number, colorOn: string, colorOff: string }>;
   autoload: any;
   // tslint:disable-next-line: max-line-length
-  constructor(private availabilityService: AvailabilityService, private spinner: NgxSpinnerService) { }
+  constructor(private availabilityService: AvailabilityService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit() {
     this.autoloadStart();
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.autoloadRemove();
     this.spinner.show();
     // tslint:disable-next-line: max-line-length
-    this.availabilityService. getAvailability(this.data.factory, this.data.building, this.data.shift, this.data.fromTime, this.data.toTime).subscribe(res => {
+    this.availabilityService. getAvailability(this.data.factory, this.data.building, this.data.machine_type, this.data.shift, this.data.fromTime, this.data.toTime).subscribe(res => {
       this.dataChart = Object.entries(res).map(([key, value]) => {
         return {
           name: key,

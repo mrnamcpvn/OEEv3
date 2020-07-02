@@ -40,6 +40,12 @@ import { ChartsModule } from 'ng2-charts';
 import { CommonService } from './_core/_services/common.service';
 import { AvailabilityService } from './_core/_services/availability.service';
 import { TrendService } from './_core/_services/trend.service';
+import { AuthService } from './_core/_services/auth.service';
+import { LoginComponent } from './views/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { AuthGuard } from './_guard/auth.guard';
+
 
 @NgModule({
   imports: [
@@ -55,16 +61,22 @@ import { TrendService } from './_core/_services/trend.service';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    NgxSpinnerModule
   ],
   declarations: [
     AppComponent,
-    ...APP_CONTAINERS
+    ...APP_CONTAINERS,
+    LoginComponent
   ],
   providers: [
     CommonService,
     AvailabilityService,
     TrendService,
+    AuthGuard,
+    AuthService,
+
     {
     provide: LocationStrategy,
     useClass: HashLocationStrategy

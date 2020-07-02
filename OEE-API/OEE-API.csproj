@@ -19,5 +19,6 @@
     <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1"/>
     <PackageReference Include="CloneExtensions" Version="1.4.2"/>
     <PackageReference Include="Moment.js" Version="2.25.2"/>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.6.0"/>
   </ItemGroup>
 </Project>

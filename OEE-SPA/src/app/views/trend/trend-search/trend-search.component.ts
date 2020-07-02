@@ -123,7 +123,6 @@ export class TrendSearchComponent implements OnInit {
     this.dataChart.forEach(item => {
       let array = JSON.parse(JSON.stringify(item.data));
       array = array.map(function (x: string) { return (x + '%'); });
-
       // tslint:disable-next-line: triple-equals
       if (this.factory != 'ALL' && this.building == 'ALL') {
         // tslint:disable-next-line: triple-equals
@@ -164,10 +163,11 @@ export class TrendSearchComponent implements OnInit {
     }
   }
 
-  changeBuilding(event: any) {
-    this.loadChart();
+  changeBuilding(value: any) {
+      this.loadMachine_Type();
+      // this.loadChart();
   }
-  changeMachine_Type(event: any){
+  changeMachine_Type(event: any) {
     this.loadChart();
   }
   changeShift(event: any) {
@@ -209,14 +209,14 @@ export class TrendSearchComponent implements OnInit {
     });
   }
   loadMachine_Type() {
-    // this.commonService.getMachine_Type(this.factory).subscribe(res => {
-    //   this.machine_types = res.map(item => {
-    //     return { id: item, text:  item };
-    //   });
-    //   this.machine_types.unshift({ id: 'ALL', text: 'All MACHINE TYPES' });
-    // }, error => {
-    //   console.log(error);
-    // });
+    this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
+      this.machine_types = res.map(item => {
+        return { id: item, text:  item };
+      });
+      this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
+    }, error => {
+      console.log(error);
+    });
   }
 
   loadWeeks() {
@@ -228,18 +228,21 @@ export class TrendSearchComponent implements OnInit {
           weekFinish: item.weekFinish
         };
       });
-
       this.weeks = res.map(item => {
         return {
           id: item.weekNum,
           text: 'Week ' + item.weekNum + ' (' + formatDate(item.weekStart, 'MM/dd', 'en-US') + ' - ' + formatDate(item.weekFinish, 'MM/dd', 'en-US') + ')'
         };
       });
-
-      this.week = this.currentWeek();
     }, error => {
       console.log(error);
     });
+    setTimeout(() => {
+      this.resetTime();
+      this.numberTime = this.currentWeek();
+      this.loadChart();
+    }, 1000);
+
   }
 
   resetTime() {
@@ -261,6 +264,7 @@ export class TrendSearchComponent implements OnInit {
     const data = {
       factory: this.factory,
       building: this.building,
+      machine_type: this.machine_type,
       shift: this.shift,
       typeTime: this.typeTime,
       numberTime: this.numberTime

@@ -15,11 +15,11 @@ namespace OEE_API.Controllers
         }
 
         [HttpGet("getDowntimeAnalysis")]
-        public async Task<IActionResult> GetDowntimeAnalysis(string factory, string building, string machine, string shift, string date)
+        public async Task<IActionResult> GetDowntimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date)
         {
             try
             {
-                var data = await _downtimeAnalysisService.GetDownTimeAnalysis(factory, building, machine, shift, date);
+                var data = await _downtimeAnalysisService.GetDownTimeAnalysis(factory, building, machine_type, machine, shift, date);
                 return Ok(data);
             }
             catch (Exception ex)

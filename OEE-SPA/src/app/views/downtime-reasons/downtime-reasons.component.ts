@@ -29,6 +29,7 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
   building: string = 'ALL';
   machine: string = 'ALL';
   machineName: string = '';
+  machine_type: string = 'ALL';
   shift: string = '0';
   reason_1: string = '0';
   reason_2: string  = '0';
@@ -44,6 +45,7 @@ modalRef: BsModalRef;
   date: Date = new Date();
   dataActionTime: Array<ChartReason> = [];
   isShow: boolean;
+
   dataReason: Array<string[]> = [];
   modal:  ChartReason;
   factories: Array<Select2OptionData> = [
@@ -70,7 +72,7 @@ modalRef: BsModalRef;
   ];
 
   buildings: Array<Select2OptionData>;
-
+  machine_types: Array<Select2OptionData>;
   public shifts: Array<Select2OptionData> = [
     {
       id: '0',
@@ -127,17 +129,15 @@ modalRef: BsModalRef;
    });
   }
   openModal(template: TemplateRef<any>, item: ChartReason) {
-    debugger
     this.downtimeReasonsService.getReasons(item.id)
     .subscribe(res => {
-      debugger
-      if(res != null)
+    if(res != null)
     {
      this.reason_1 = res.reason_1;
      this.reason_2 = res.reason_2;
      this.reason_note = res.reason_note;
-      }
-      else 
+    }
+      else
       {
         this.reason_1 = '';
         this.reason_2 = '';
@@ -173,6 +173,7 @@ modalRef: BsModalRef;
   changeBuilding(value: any) {
     this.building = value;
     this.machine = 'ALL';
+    this.loadMachine_Type();
     // tslint:disable-next-line: triple-equals
     if (value != 'ALL') {
       this.loadMachine();
@@ -180,7 +181,10 @@ modalRef: BsModalRef;
       this.machines = null;
     }
   }
-
+  changeMachine_Type(event: any) {
+    this.loadMachine();
+    this.loadChart();
+  }
   changeMachine(value: any): any {
     this.machine = value;
 
@@ -199,7 +203,6 @@ modalRef: BsModalRef;
   }
   updateDate(event: any) {
     // tslint:disable-next-line: triple-equals
-    debugger
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.loadChart();
@@ -219,13 +222,25 @@ modalRef: BsModalRef;
       console.log(error);
     });
   }
+  // Machine_Types
+loadMachine_Type() {
+  this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
+    this.machine_types = res.map(item => {
+      return { id: item, text:  item };
+    });
+    this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
+  }, error => {
+    console.log(error);
+  });
+}
   loadMachine() {
-    this.commonService.getMachinesActionTime(this.factory, this.building).subscribe(res => {
+    this.commonService.getMachinesActionTime(this.factory, this.building, this.machine_type).subscribe(res => {
       this.machines = res.map(item => {
         return { id: item, text: item };
       });
 
       this.machines.unshift({ id: 'ALL', text: 'All Machine' });
+
     }, error => {
       console.log(error);
     });
@@ -249,7 +264,7 @@ modalRef: BsModalRef;
   loadChart() {
     // tslint:disable-next-line: max-line-length
     console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
-    this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building, this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
+    this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building,  this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
     .subscribe(res => {
       if (res != null) {
       if (res.result.length > 0) {
@@ -283,6 +298,7 @@ modalRef: BsModalRef;
        if (res === true) {
          this.modalRef.hide();
          Swal.fire('Saved!', 'Your change has been saved.', 'success');
+         this.loadChart();
        }
       }, (error: any) => {
         Swal.fire('Oops...', 'Something went wrong!', 'error');

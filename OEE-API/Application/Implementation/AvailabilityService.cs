@@ -37,15 +37,15 @@ namespace OEE_API.Application.Implementation
             _context = context;
         }
 
-        public async Task<Dictionary<string, int>> GetListAvailabilityAsync(string factory, string building, string shift, string date, string dateTo)
+        public async Task<Dictionary<string, int>> GetListAvailabilityAsync(string factory, string building, string machine_type,string shift, string date, string dateTo)
         {
             DateTime now = DateTime.Now;
-            bool isToday = false;
+ 
             // EXEC Store Procedure
             if(now.Date.CompareTo(Convert.ToDateTime(date).Date) >= 0 && now.Date.CompareTo(Convert.ToDateTime(dateTo).Date) >= 0)
             {
                 // Call STORE PROCEDURE -- GET Today_Data
-                isToday = true;
+               // isToday = true;
                 var return_value =   _context.Row.FromSqlRaw("EXEC [dbo].[SP_get_Today_RealTime_OEE_data]").ToString();
 
             }
@@ -60,16 +60,16 @@ namespace OEE_API.Application.Implementation
                 var dataSYF = await _Cell_OEEService.GetAllCellOEEByDate("SHY", Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
 
                 // Add Availability SHW 
-                var availabilitySHW = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, "SHW", null, null, shift, date, dateTo);
+                var availabilitySHW = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, "SHW", null, null, machine_type, shift, date, dateTo);
                 model.Add("SHW", availabilitySHW);
                 //Add Availability SHD
-                var availabilitySHD = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, "SHD", null, null, shift, date, dateTo);
+                var availabilitySHD = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, "SHD", null, null, machine_type, shift, date, dateTo);
                 model.Add("SHD", availabilitySHD);
                 //Add Availability SHB
-                var availabilitySHB = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHB, "SHB", null, null, shift, date, dateTo);
+                var availabilitySHB = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHB, "SHB", null, null, machine_type, shift, date, dateTo);
                 model.Add("SHB", availabilitySHB);
                 //Add Availability SY2
-                var availabilitySY2 = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSYF, "SY2", null, null, shift, date, dateTo);
+                var availabilitySY2 = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSYF, "SY2", null, null,machine_type, shift, date, dateTo);
                 model.Add("SY2", availabilitySY2);
             }
             else if (factory != "ALL" && building == "ALL")
@@ -100,7 +100,7 @@ namespace OEE_API.Application.Implementation
 
                         if (itemBuilding != null)
                         {
-                            int totalAvaibility = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, itemBuilding, null, shift, date, dateTo);
+                            int totalAvaibility = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, itemBuilding, null, machine_type, shift, date, dateTo);
                             model.Add(itemBuilding, totalAvaibility);
                         }
                     }
@@ -112,7 +112,7 @@ namespace OEE_API.Application.Implementation
                     {
                         if (item != null)
                         {
-                            var availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHB, factory, "SHB", item, shift, date, dateTo);
+                            var availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHB, factory, "SHB", item, machine_type, shift, date, dateTo);
                             model.Add(item, availability);
                         }
                     }
@@ -124,7 +124,7 @@ namespace OEE_API.Application.Implementation
                     {
                         if (item != null)
                         {
-                            var availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSYF, factory, "SY2", item, shift, date, dateTo);
+                            var availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSYF, factory, "SY2", item, machine_type, shift, date, dateTo);
                             model.Add(item, availability);
                         }
                     }
@@ -133,13 +133,20 @@ namespace OEE_API.Application.Implementation
             else if (factory != "ALL" && building != "ALL")
             {
                 var dataSHW_SHD = await _Cell_OEEServiceSHW_SHD.GetAllCellOEEByDate(factory, Convert.ToDateTime(date), Convert.ToDateTime(dateTo));
-
-                var machines = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                var machines = new List<string>();
+                //Find Machine Type if existed
+                if(machine_type != "ALL")
+                {
+                     machines = await _Cell_OEEServiceSHW_SHD.GetListMachineType(factory,building, machine_type);
+                }
+                else {
+                      machines = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                }
                 foreach (var item in machines)
                 {
                     if (item != null)
                     {
-                        var availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, item, shift, date, dateTo);
+                        var availability = await _Cell_OEEServiceSHW_SHD.GetAvailabilityByRangerDate(dataSHW_SHD, factory, building, item, machine_type, shift, date, dateTo);
                         model.Add(item, availability);
                     }
                 }

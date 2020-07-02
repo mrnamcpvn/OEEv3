@@ -12,4 +12,5 @@ export class ChartReason {
        reason_2: string;
        reason_note: string;
        shift_id: string;
+       isEdit: false;
 }

@@ -10,7 +10,7 @@ namespace OEE_API.Application.Interfaces.SHW_SHD
 {
     public interface IDownTimeDetailService
     {
-            Task<List<ReasonAnalysis>> GetDownTimeAnalysis(string factory, string building, string machine, string shift, string date);
+            Task<List<ReasonAnalysis>> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date);
 
     }
 }

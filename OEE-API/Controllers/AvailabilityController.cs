@@ -15,9 +15,9 @@ namespace OEE_API.Controllers
         }   
 
         [HttpGet("GetAvailability")]
-        public async Task<IActionResult> GetListAvailabilityAsync(string factory, string building, string shift, string date, string dateTo)
+        public async Task<IActionResult> GetListAvailabilityAsync(string factory, string building, string machine_type, string shift, string date, string dateTo)
         {
-            var data = await _availabilityService.GetListAvailabilityAsync(factory, building, shift, date, dateTo);
+            var data = await _availabilityService.GetListAvailabilityAsync(factory, building, machine_type, shift, date, dateTo);
 
             return Ok(data);
         }

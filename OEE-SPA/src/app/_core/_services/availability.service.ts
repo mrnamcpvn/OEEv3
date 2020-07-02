@@ -15,9 +15,10 @@ export class AvailabilityService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  getAvailability(factory: string, building: string, shift: string, date: string, dateTo: string): Observable<Chart_availability[]> {
+  // tslint:disable-next-line: max-line-length
+  getAvailability(factory: string, building: string, machine_type: string, shift: string, date: string, dateTo: string): Observable<Chart_availability[]> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<Chart_availability[]>(this.baseUrl + 'Availability/GetAvailability?factory=' + factory + '&building=' + building + '&shift=' + shift + '&date=' + date + '&dateTo=' + dateTo);
+    return this.http.get<Chart_availability[]>(this.baseUrl + 'Availability/GetAvailability?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type + '&shift=' + shift + '&date=' + date + '&dateTo=' + dateTo);
   }
 
   exportExcel(dataExport: Array<Array<string>>, labels: Array<string>, factory: string, building: string) {

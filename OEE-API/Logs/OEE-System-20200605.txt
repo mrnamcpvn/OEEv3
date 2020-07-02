@@ -1,9 +1,13 @@
-2020-04-10T10:46:21.8339659+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T10:46:21.8424831+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T10:46:21.8426372+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T10:46:21.8426685+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T10:50:12.0686233+07:00 0HLUT092FUNGB:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: The entity type 'RestTime' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-06-05T10:06:13.4091803+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T10:06:13.4164428+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T10:06:13.4166013+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T10:06:13.4166406+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T11:07:28.8739288+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T11:07:28.8798837+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T11:07:28.8800102+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T11:07:28.8800412+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T11:11:17.1578588+07:00 0HM090PV2N6HU:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The entity type 'MachineInformation' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model, IDiagnosticsLogger`1 logger)
    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
    at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
@@ -39,9 +43,9 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
    at Microsoft.EntityFrameworkCore.DbContext.Set[TEntity]()
    at OEE_API.Data.Repository.RepositorySHW_SHD`2.FindAll(Expression`1 predicate, Expression`1[] includeProperties) in D:\OEEv2\OEEv2\OEE-API\Data\Repository\RepositorySHW_SHD.cs:line 35
-   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAllCellOEEByDate(String factory, DateTime dateFrom, DateTime dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 43
-   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 39
-   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAllCellOEEByDate(String factory, DateTime dateFrom, DateTime dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 49
+   at OEE_API.Application.Implementation.TrendService.GetTrendByWeek(String factory, String building, String shift, Int32 numberWeek) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\TrendService.cs:line 41
+   at OEE_API.Controllers.TrendController.GetListAvailabilityAsync(String factory, String building, String shift, String typeTime, String numberTime) in D:\OEEv2\OEEv2\OEE-API\Controllers\TrendController.cs:line 35
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -61,8 +65,8 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T10:50:21.4535993+07:00 0HLUT092FUNGB:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: The entity type 'RestTime' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-06-05T11:11:41.6371801+07:00 0HM090PV2N6HU:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The entity type 'MachineInformation' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model, IDiagnosticsLogger`1 logger)
    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
    at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
@@ -98,8 +102,9 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
    at Microsoft.EntityFrameworkCore.DbContext.Set[TEntity]()
    at OEE_API.Data.Repository.RepositorySHW_SHD`2.FindAll(Expression`1 predicate, Expression`1[] includeProperties) in D:\OEEv2\OEEv2\OEE-API\Data\Repository\RepositorySHW_SHD.cs:line 35
-   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 37
-   at OEE_API.Controllers.CommonController.GetAllBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 91
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAllCellOEEByDate(String factory, DateTime dateFrom, DateTime dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 49
+   at OEE_API.Application.Implementation.TrendService.GetTrendByWeek(String factory, String building, String shift, Int32 numberWeek) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\TrendService.cs:line 41
+   at OEE_API.Controllers.TrendController.GetListAvailabilityAsync(String factory, String building, String shift, String typeTime, String numberTime) in D:\OEEv2\OEEv2\OEE-API\Controllers\TrendController.cs:line 35
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -119,8 +124,8 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T10:50:26.4550928+07:00 0HLUT092FUNGB:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: The entity type 'RestTime' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
+2020-06-05T11:11:47.4424422+07:00 0HM090PV2N6I0:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The entity type 'MachineInformation' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model, IDiagnosticsLogger`1 logger)
    at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
    at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
@@ -146,8 +151,9 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
    at Microsoft.EntityFrameworkCore.DbContext.Set[TEntity]()
    at OEE_API.Data.Repository.RepositorySHW_SHD`2.FindAll(Expression`1 predicate, Expression`1[] includeProperties) in D:\OEEv2\OEEv2\OEE-API\Data\Repository\RepositorySHW_SHD.cs:line 35
-   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 37
-   at OEE_API.Controllers.CommonController.GetAllBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 91
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAllCellOEEByDate(String factory, DateTime dateFrom, DateTime dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 49
+   at OEE_API.Application.Implementation.TrendService.GetTrendByWeek(String factory, String building, String shift, Int32 numberWeek) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\TrendService.cs:line 41
+   at OEE_API.Controllers.TrendController.GetListAvailabilityAsync(String factory, String building, String shift, String typeTime, String numberTime) in D:\OEEv2\OEEv2\OEE-API\Controllers\TrendController.cs:line 35
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -167,35 +173,18 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T10:50:44.2997664+07:00 0HLUT092FUNGB:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: The entity type 'RestTime' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.SqlServer.Internal.SqlServerModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.Metadata.Conventions.ValidatingConvention.ProcessModelFinalized(IConventionModelBuilder modelBuilder, IConventionContext`1 context)
-   at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.ImmediateConventionScope.OnModelFinalized(IConventionModelBuilder modelBuilder)
-   at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.OnModelFinalized(IConventionModelBuilder modelBuilder)
-   at Microsoft.EntityFrameworkCore.Metadata.Internal.Model.FinalizeModel()
-   at Microsoft.EntityFrameworkCore.ModelBuilder.FinalizeModel()
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder)
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder)
-   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
-   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
-   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_3(IServiceProvider p)
-   at ResolveService(ILEmitResolverBuilderRuntimeContext , ServiceProviderEngineScope )
-   at ResolveService(ILEmitResolverBuilderRuntimeContext , ServiceProviderEngineScope )
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
-   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
-   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
-   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
-   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
-   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
-   at Microsoft.EntityFrameworkCore.DbContext.Set[TEntity]()
-   at OEE_API.Data.Repository.RepositorySHW_SHD`2.FindAll(Expression`1 predicate, Expression`1[] includeProperties) in D:\OEEv2\OEEv2\OEE-API\Data\Repository\RepositorySHW_SHD.cs:line 35
-   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 37
-   at OEE_API.Controllers.CommonController.GetAllBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 91
+2020-06-05T11:12:44.7511861+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T11:12:44.7587228+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T11:12:44.7588430+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T11:12:44.7588675+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T11:12:56.2493998+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T11:12:56.2555987+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T11:12:56.2558098+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T11:12:56.2558441+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T12:21:48.2605507+07:00 0HM090QSSS5G0:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 90
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -215,34 +204,10 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T10:50:54.0696640+07:00 0HLUT092FUNGD:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: The entity type 'RestTime' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'.
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.SqlServer.Internal.SqlServerModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
-   at Microsoft.EntityFrameworkCore.Metadata.Conventions.ValidatingConvention.ProcessModelFinalized(IConventionModelBuilder modelBuilder, IConventionContext`1 context)
-   at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.ImmediateConventionScope.OnModelFinalized(IConventionModelBuilder modelBuilder)
-   at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.OnModelFinalized(IConventionModelBuilder modelBuilder)
-   at Microsoft.EntityFrameworkCore.Metadata.Internal.Model.FinalizeModel()
-   at Microsoft.EntityFrameworkCore.ModelBuilder.FinalizeModel()
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder)
-   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder)
-   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
-   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
-   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_3(IServiceProvider p)
-   at ResolveService(ILEmitResolverBuilderRuntimeContext , ServiceProviderEngineScope )
-   at ResolveService(ILEmitResolverBuilderRuntimeContext , ServiceProviderEngineScope )
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
-   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
-   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
-   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
-   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
-   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
-   at Microsoft.EntityFrameworkCore.DbContext.Set[TEntity]()
-   at OEE_API.Data.Repository.RepositorySHW_SHD`2.FindAll(Expression`1 predicate, Expression`1[] includeProperties) in D:\OEEv2\OEEv2\OEE-API\Data\Repository\RepositorySHW_SHD.cs:line 35
-   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 37
-   at OEE_API.Controllers.CommonController.GetAllBuildingActionTime(String factory) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 91
+2020-06-05T12:22:21.4872866+07:00 0HM090QSSS5G0:00000008 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 90
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -262,163 +227,10 @@ System.InvalidOperationException: The entity type 'RestTime' requires a primary 
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T10:55:53.9386866+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T10:55:53.9443266+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T10:55:53.9444514+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T10:55:53.9444826+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T12:03:52.4070670+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T12:03:52.4134579+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T12:03:52.4135868+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T12:03:52.4136281+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T12:04:29.4414870+07:00 0HLUT1IJ2KC24:00000001 [ERR] Request matched multiple actions resulting in ambiguity. Matching actions: "OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReason (OEE-API)
-OEE_API.Controllers.DowntimeReasonsController.Get (OEE-API)" (ab9a4111)
-2020-04-10T12:04:29.4955789+07:00 0HLUT1IJ2KC24:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-Microsoft.AspNetCore.Mvc.Infrastructure.AmbiguousActionException: Multiple actions matched. The following actions matched route data and had all constraints satisfied:
-
-OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReason (OEE-API)
-OEE_API.Controllers.DowntimeReasonsController.Get (OEE-API)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionSelector.SelectBestCandidate(RouteContext context, IReadOnlyList`1 candidates)
-   at Microsoft.AspNetCore.Mvc.Routing.MvcAttributeRouteHandler.RouteAsync(RouteContext context)
-   at Microsoft.AspNetCore.Routing.Tree.TreeRouter.RouteAsync(RouteContext context)
-   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
-   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T12:04:47.1383563+07:00 0HLUT1IJ2KC24:00000002 [ERR] Request matched multiple actions resulting in ambiguity. Matching actions: "OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReason (OEE-API)
-OEE_API.Controllers.DowntimeReasonsController.Get (OEE-API)" (ab9a4111)
-2020-04-10T12:04:47.1439210+07:00 0HLUT1IJ2KC24:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-Microsoft.AspNetCore.Mvc.Infrastructure.AmbiguousActionException: Multiple actions matched. The following actions matched route data and had all constraints satisfied:
-
-OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReason (OEE-API)
-OEE_API.Controllers.DowntimeReasonsController.Get (OEE-API)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionSelector.SelectBestCandidate(RouteContext context, IReadOnlyList`1 candidates)
-   at Microsoft.AspNetCore.Mvc.Routing.MvcAttributeRouteHandler.RouteAsync(RouteContext context)
-   at Microsoft.AspNetCore.Routing.Tree.TreeRouter.RouteAsync(RouteContext context)
-   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
-   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T12:06:40.0599345+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T12:06:40.0680284+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T12:06:40.0681866+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T12:06:40.0682168+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T12:07:15.9601498+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T12:07:15.9658523+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T12:07:15.9659898+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T12:07:15.9660235+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T12:14:03.5353574+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T12:14:03.5420918+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T12:14:03.5422206+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T12:14:03.5422531+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T12:24:50.7692471+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T12:24:50.7757200+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T12:24:50.7759186+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T12:24:50.7759490+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T14:32:47.9990874+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T14:32:48.0054272+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T14:32:48.0055717+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T14:32:48.0056041+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T14:33:03.9485075+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T14:33:03.9594484+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T14:33:03.9596660+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T14:33:03.9596976+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T14:33:59.4366895+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T14:33:59.4479585+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T14:33:59.4485554+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T14:33:59.4486362+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:18:41.1751897+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:18:41.1810481+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:18:41.1811737+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:18:41.1811974+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:18:52.5662927+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:18:52.5717726+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:18:52.5718946+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:18:52.5719175+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:19:08.1987499+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:19:08.2057364+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:19:08.2058673+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:19:08.2058986+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:19:18.6691584+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:19:18.6759551+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:19:18.6760828+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:19:18.6761070+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:20:03.5090300+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:20:03.5158706+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:20:03.5160054+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:20:03.5160461+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:20:50.0468307+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:20:50.0641605+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:20:50.0642749+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:20:50.0643291+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:20:57.8698187+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:20:57.8757465+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:20:57.8758712+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:20:57.8759037+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:31:18.5272995+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:31:18.5805756+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:31:18.5856004+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:37:18.5219336+07:00 80000016-0002-fe00-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
- ---> System.NullReferenceException: Object reference not set to an instance of an object.
-   at lambda_method(Closure )
-   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
-   --- End of inner exception stack trace ---
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 25
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location where exception was thrown ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location where exception was thrown ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
-   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T15:38:39.1876403+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:38:39.1940060+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:38:39.1941663+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:38:39.1941911+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:44:44.6034267+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:44:44.6094465+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:44:44.6095761+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:44:44.6096007+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:45:23.0938159+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:45:23.1049666+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:45:23.1132337+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:50:00.9734077+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:50:00.9797472+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:50:00.9799480+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:50:00.9799866+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:52:34.6895462+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:52:34.6951886+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:52:34.6953230+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:52:34.6953450+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:53:22.9593176+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T15:53:22.9669583+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T15:53:22.9671281+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T15:53:22.9671574+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T15:53:54.9663661+07:00 0HLUT5IMFHE4F:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
- ---> System.NullReferenceException: Object reference not set to an instance of an object.
-   at lambda_method(Closure )
-   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
-   --- End of inner exception stack trace ---
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 25
+2020-06-05T12:27:30.2960436+07:00 0HM090QSSS5G1:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 90
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -438,13 +250,22 @@ System.InvalidOperationException: An exception was thrown while attempting to ev
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T15:54:00.7726694+07:00 0HLUT5IMFHE4H:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
- ---> System.NullReferenceException: Object reference not set to an instance of an object.
-   at lambda_method(Closure )
-   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
-   --- End of inner exception stack trace ---
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 25
+2020-06-05T12:28:27.0951804+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T12:28:27.1025442+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T12:28:27.1026742+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T12:28:27.1027098+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T14:00:58.8255904+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T14:00:58.8329711+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T14:00:58.8332775+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T14:00:58.8333149+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T15:18:11.8573456+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T15:18:11.8653575+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T15:18:11.8655613+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T15:18:11.8656134+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T15:18:47.2270142+07:00 0HM09540M05FV:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 98
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -464,25 +285,52 @@ System.InvalidOperationException: An exception was thrown while attempting to ev
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T15:55:21.3276512+07:00 0HLUT5IMFHE4F:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
- ---> System.NullReferenceException: Object reference not set to an instance of an object.
-   at lambda_method(Closure )
-   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
-   --- End of inner exception stack trace ---
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 25
+2020-06-05T15:28:58.9148825+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T15:28:58.9231539+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T15:28:58.9233589+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T15:28:58.9233869+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T15:29:08.4083373+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T15:29:08.4170380+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T15:29:08.4176340+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T15:29:08.4176745+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T15:31:14.3667252+07:00 0HM095A239CR2:00000005 [ERR] Failed executing DbCommand ("6"ms) [Parameters=["@__building_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [m].[alias_id]
+FROM [MachineInfo] AS [m]
+WHERE [m].[building_id] = @__building_1" (627a98df)
+2020-06-05T15:31:14.4540143+07:00 0HM095A239CR2:00000005 [ERR] An exception occurred while iterating over the results of a query for context type '"OEE_API.Models.SHW_SHD.DBContextSHW_SHD"'."
+""Microsoft.Data.SqlClient.SqlException (0x80131904): 無效的物件名稱 'MachineInfo'。
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:e58dd8e4-b812-472b-8c1f-62a13c652fe9
+Error Number:208,State:1,Class:16" (f5c7ac34)
+Microsoft.Data.SqlClient.SqlException (0x80131904): 無效的物件名稱 'MachineInfo'。
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 100
+ClientConnectionId:e58dd8e4-b812-472b-8c1f-62a13c652fe9
+Error Number:208,State:1,Class:16
+2020-06-05T15:31:14.4732324+07:00 0HM095A239CR2:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Microsoft.Data.SqlClient.SqlException (0x80131904): 無效的物件名稱 'MachineInfo'。
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 100
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
    at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
@@ -490,25 +338,47 @@ System.InvalidOperationException: An exception was thrown while attempting to ev
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T16:03:51.5793250+07:00 0HLUT5IMFHE4I:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
- ---> System.NullReferenceException: Object reference not set to an instance of an object.
-   at lambda_method(Closure )
-   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
-   --- End of inner exception stack trace ---
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 25
+ClientConnectionId:e58dd8e4-b812-472b-8c1f-62a13c652fe9
+Error Number:208,State:1,Class:16
+2020-06-05T15:31:21.0626797+07:00 0HM095A239CR5:00000001 [ERR] Failed executing DbCommand ("2"ms) [Parameters=["@__building_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [m].[alias_id]
+FROM [MachineInfo] AS [m]
+WHERE [m].[building_id] = @__building_1" (627a98df)
+2020-06-05T15:31:21.0681038+07:00 0HM095A239CR5:00000001 [ERR] An exception occurred while iterating over the results of a query for context type '"OEE_API.Models.SHW_SHD.DBContextSHW_SHD"'."
+""Microsoft.Data.SqlClient.SqlException (0x80131904): 無效的物件名稱 'MachineInfo'。
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:e58dd8e4-b812-472b-8c1f-62a13c652fe9
+Error Number:208,State:1,Class:16" (f5c7ac34)
+Microsoft.Data.SqlClient.SqlException (0x80131904): 無效的物件名稱 'MachineInfo'。
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 100
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
+ClientConnectionId:e58dd8e4-b812-472b-8c1f-62a13c652fe9
+Error Number:208,State:1,Class:16
+2020-06-05T15:31:21.0736361+07:00 0HM095A239CR5:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Microsoft.Data.SqlClient.SqlException (0x80131904): 無效的物件名稱 'MachineInfo'。
+   at OEE_API.Application.Implementation.SHW_SHD.ActionTimeService.GetListMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\ActionTimeService.cs:line 100
+   at OEE_API.Controllers.CommonController.GetAllMachineType(String factory, String building) in D:\OEEv2\OEEv2\OEE-API\Controllers\CommonController.cs:line 112
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
    at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
@@ -516,34 +386,14 @@ System.InvalidOperationException: An exception was thrown while attempting to ev
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T16:04:04.1772423+07:00 0HLUT5IMFHE4I:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.InvalidOperationException: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
- ---> System.NullReferenceException: Object reference not set to an instance of an object.
-   at lambda_method(Closure )
-   at Microsoft.EntityFrameworkCore.Query.Internal.ParameterExtractingExpressionVisitor.GetValue(Expression expression, String& parameterName)
-   --- End of inner exception stack trace ---
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 25
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location where exception was thrown ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
---- End of stack trace from previous location where exception was thrown ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
-   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-04-10T16:06:45.0703434+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-04-10T16:06:45.0774622+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-04-10T16:06:45.0775627+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-04-10T16:06:45.0775773+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-04-10T16:30:33.6599874+07:00  [INF] Application is shutting down... (90f52c38)
+ClientConnectionId:e58dd8e4-b812-472b-8c1f-62a13c652fe9
+Error Number:208,State:1,Class:16
+2020-06-05T15:32:23.0962737+07:00 0HM095A239CR2:00000006 [ERR] Failed executing DbCommand ("22"ms) [Parameters=["@__building_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [m].[alias_id]
+FROM [MachineInfo] AS [m]
+WHERE [m].[building_id] = @__building_1" (627a98df)
+2020-06-05T15:33:28.9204262+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-05T15:33:28.9267713+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-05T15:33:28.9268920+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-05T15:33:28.9269185+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-05T16:30:10.1077026+07:00  [INF] Application is shutting down... (90f52c38)

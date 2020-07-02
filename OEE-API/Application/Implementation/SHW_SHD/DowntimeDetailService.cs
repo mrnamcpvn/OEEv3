@@ -26,6 +26,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         private readonly IRepositorySHW_SHD<MaintenanceTime, string> _repositoryMaintenanceTime;
         private readonly IRepositorySHW_SHD<DowntimeReason, string> _repositoryDowntimeReason;
         private readonly IRepositorySHW_SHD<DowntimeDetail, string> _repositoryDowntimeDetail;
+                private readonly IRepositorySHW_SHD<MachineInformation, string> _repositoryMachineInfo;
         private readonly MapperConfiguration _configureMapper;
         private readonly IMapper _mapper;
         public DowntimeDetailService(
@@ -35,6 +36,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
          IRepositorySHW_SHD<MaintenanceTime, string> repositoryMaintenanceTime,
          IRepositorySHW_SHD<DowntimeReason, string> repositoryDowntimeReason,
          IRepositorySHW_SHD<DowntimeDetail, string> repositoryDowntimeDetail,
+         IRepositorySHW_SHD<MachineInformation, string> repositoryMachineInfo,
          MapperConfiguration configureMapper,
          IMapper mapper
          )
@@ -45,6 +47,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             _repositoryMaintenanceTime = repositoryMaintenanceTime;
             _repositoryDowntimeReason = repositoryDowntimeReason;
             _repositoryDowntimeDetail = repositoryDowntimeDetail;
+            _repositoryMachineInfo = repositoryMachineInfo;
             _configureMapper = configureMapper;
             _mapper = mapper;
         }
@@ -52,12 +55,12 @@ namespace OEE_API.Application.Implementation.SHW_SHD
         {
             return await _repositoryDowntimeReason.FindAll().Select(x=> new ReasonAnalysis {
                 id = x.id,
-                reason_1 = x.reason_1,
-                reason_2 = x.reason_2,
+                reason_1 = x.reason_1.Trim(),
+                reason_2 = x.reason_2.Trim(),
                 duration = 0
             }).ToListAsync();
         }
-        public async Task<List<ReasonAnalysis>> GetDownTimeAnalysis(string factory, string building, string machine, string shift, string date)
+        public async Task<List<ReasonAnalysis>> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date)
         {
             Dictionary<string, int> dic = new Dictionary<string, int>();
             // DbFunctions dfunc = null;
@@ -65,8 +68,12 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             factory = factory == "SHW" ? "SHC" : "CB";
             try
             {
+                if(machine_type == null && machine_type == "ALL")
+                {
+                    var listMachines = await _repositoryMachineInfo.FindAll(x=> x.machine_type == machine_type).ToListAsync();
+                }
             //  var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date);
-            var result = await _repositoryDowntimeDetail.FindAll(x => 1 == 1
+                var result = await _repositoryDowntimeDetail.FindAll(x => 1 == 1
                                                             && (factory == "ALL" ? 1 == 1 : x.factory_id == factory)
                                                             && (building == "ALL" ? 1 == 1 : x.building_id == building)
                                                             && (machine == "ALL" ? 1 == 1 : x.machine_id == machine)
@@ -85,6 +92,8 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                     item.duration = num == null ? 0 : num;
                 }
                 return list.OrderByDescending(x=> x.duration).ToList();
+                
+                
             }
             catch(Exception ex)
             {

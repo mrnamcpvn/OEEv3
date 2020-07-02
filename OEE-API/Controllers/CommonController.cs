@@ -59,17 +59,17 @@ namespace OEE_API.Controllers
         }
 
         // Take out list machine of table Cell_OEE
-        [HttpGet("{factory}/GetMachine/{building}")]
-        public async Task<IActionResult> GetAllMachine(string factory, string building)
+        [HttpGet("GetMachine")]
+        public async Task<IActionResult> GetAllMachine(string factory, string building, string machine_type)
         {
             List<string> data = null;
             if (factory == "SHW")
             {
-                data = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                data = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building, machine_type);
             }
             if (factory == "SHD")
             {
-                data = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building);
+                data = await _Cell_OEEServiceSHW_SHD.GetListMachineByFactoryId(factory, building, machine_type);
             }
             if (factory == "SHB")
             {
@@ -103,17 +103,37 @@ namespace OEE_API.Controllers
             }
             return Ok(data);
         }
-
-        // Take out list machine of table ActionTime
-        [HttpGet("GetAllMachineActionTime")]
-        public async Task<IActionResult> GetAllMachineActionTime(string factory, string building)
+    // List of Machine Types
+      [HttpGet("GetAllMachineType")]
+      public async Task<IActionResult> GetAllMachineType(string factory, string building)
         {
             List<string> data = null;
             if (factory == "SHW")
-                data = await _actionTimeServiceSHW_SHD.GetListMachineActionTime("SHC", building);
+                data = await _actionTimeServiceSHW_SHD.GetListMachineType("SHC", building);
 
             if (factory == "SHD")
-                data = await _actionTimeServiceSHW_SHD.GetListMachineActionTime("CB", building);
+                data = await _actionTimeServiceSHW_SHD.GetListMachineType("CB", building);
+
+            if (factory == "SHB")
+            {
+
+            }
+            if (factory == "SY2")
+            {
+               // data = await _actionTimeServiceSYF.GetListMachineType("SY2");
+            }
+            return Ok(data);
+        }
+        // Take out list machine of table ActionTime
+        [HttpGet("GetAllMachineActionTime")]
+        public async Task<IActionResult> GetAllMachineActionTime(string factory, string building, string machine_type)
+        {
+            List<string> data = null;
+            if (factory == "SHW")
+                data = await _actionTimeServiceSHW_SHD.GetListMachineActionTime("SHC", building, machine_type);
+
+            if (factory == "SHD")
+                data = await _actionTimeServiceSHW_SHD.GetListMachineActionTime("CB", building, machine_type);
 
             if (factory == "SHB")
             {

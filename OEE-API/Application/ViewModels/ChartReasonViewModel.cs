@@ -18,5 +18,7 @@ namespace OEE_API.Application.ViewModels
         public string reason_2 {get;set;}
         public string reason_note {get;set;}
 
+        public bool isEdit {get;set;}
+
     }
 }
