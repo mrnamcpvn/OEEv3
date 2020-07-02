@@ -61,11 +61,11 @@ export class TrendSearchComponent implements OnInit {
     },
     {
       id: '1',
-      text: 'Shift 1'
+      text: 'Day'
     },
     {
       id: '2',
-      text: 'Shift 2'
+      text: 'Night'
     }
   ];
 
