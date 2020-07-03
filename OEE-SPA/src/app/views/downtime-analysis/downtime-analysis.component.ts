@@ -7,7 +7,7 @@ import { DowntimeAnalysisService } from '../../../app/_core/_services/downtime-a
 // import { base64 } from 'src/assets/libary/exceljs/dist/exceljs';
 import { Pagination } from '../../_core/_models/pagination';
 import { ChartReason } from '../../_core/_models/chart-reason';
-import { Week } from 'src/app/_core/_models/week';
+import { Week } from '../../_core/_models/week';
 
 @Component({
   selector: 'app-downtime-analysis',
