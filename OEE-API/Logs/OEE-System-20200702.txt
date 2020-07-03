@@ -84,3 +84,8 @@ System.FormatException: String '0' was not recognized as a valid DateTime.
 2020-07-02T10:11:42.7602799+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2020-07-02T10:11:42.7604170+07:00  [INF] Hosting environment: "Development" (c3307c92)
 2020-07-02T10:11:42.7604465+07:00  [INF] Content root path: "D:\AzureCongTy\OEEv2\SHC_OEEv2\OEE-API" (b5d60022)
+2020-07-02T14:29:56.7909670+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-07-02T14:29:56.7978031+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-07-02T14:29:56.7979350+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-07-02T14:29:56.7979730+07:00  [INF] Content root path: "D:\AzureCongTy\OEEv2\SHC_OEEv2\OEE-API" (b5d60022)
+2020-07-02T16:29:50.2768884+07:00  [INF] Application is shutting down... (90f52c38)

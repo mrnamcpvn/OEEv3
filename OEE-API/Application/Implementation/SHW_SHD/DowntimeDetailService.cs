@@ -60,7 +60,7 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                 duration = 0
             }).ToListAsync();
         }
-        public async Task<List<ReasonAnalysis>> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date)
+        public async Task<List<ReasonAnalysis>> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date, string dateTo)
         {
             Dictionary<string, int> dic = new Dictionary<string, int>();
             // DbFunctions dfunc = null;
@@ -79,6 +79,49 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                                                             && (machine == "ALL" ? 1 == 1 : x.machine_id == machine)
                                                             && (shift == "0" ? 1 == 1 : x.shift_id == shift)
                                                             && (day == null ? 1 == 1 : x.shiftdate == day))
+                                                        .Select(z =>
+                                                               new ReasonAnalysis
+                                                               {
+                                                                   id = z.reason_id,
+                                                                   duration = z.duration
+                                                               }
+                                                            ).OrderBy(x=> x.duration).ToListAsync();
+                var list = await GetListReason();
+                foreach(var item in list){
+                    var num = result.FindAll(x=> x.id  == item.id).Select(x=> x.duration).Sum();
+                    item.duration = num == null ? 0 : num;
+                }
+                return list.OrderByDescending(x=> x.duration).ToList();
+                
+                
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+          public async Task<List<ReasonAnalysis>> GetDownTimeAnalysisByRangerDate(string factory, string building, string machine_type, string machine, string shift, string date, string dateTo)
+        {
+            DateTime timeFrom = Convert.ToDateTime(date);
+            DateTime timeTo = Convert.ToDateTime(dateTo);
+            DateTime now = DateTime.Now;
+
+            factory = factory == "SHW" ? "SHC" : "CB";
+            try
+            {
+                if(machine_type == null && machine_type == "ALL")
+                {
+                    var listMachines = await _repositoryMachineInfo.FindAll(x=> x.machine_type == machine_type).ToListAsync();
+                }
+            //  var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date);
+                var result = await _repositoryDowntimeDetail.FindAll(x => 1 == 1
+                                                            && (factory == "ALL" ? 1 == 1 : x.factory_id == factory)
+                                                            && (building == "ALL" ? 1 == 1 : x.building_id == building)
+                                                            && (machine == "ALL" ? 1 == 1 : x.machine_id == machine)
+                                                            && (shift == "0" ? 1 == 1 : x.shift_id == shift)
+                                                            && (timeFrom <= x.shiftdate ) && (timeTo >= x.shiftdate)
+                                                            )
                                                         .Select(z =>
                                                                new ReasonAnalysis
                                                                {

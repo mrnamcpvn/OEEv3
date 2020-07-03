@@ -39,29 +39,39 @@ namespace OEE_API.Application.Implementation
             _configureMapper = configureMapper;
         }
 
-        public async Task<Object> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date)
+        public async Task<Object> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date, string dateTo)
         {
-          //  var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date);
-          List<ReasonAnalysis> result = new List<ReasonAnalysis>();
-            var SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysis(factory,building, machine_type, machine,shift,date);
-            if(SHW_SHD_analysis.Count > 0)
+            //  var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date);
+            List<ReasonAnalysis> result = new List<ReasonAnalysis>();
+            var SHW_SHD_analysis = new List<ReasonAnalysis>();
+            if (dateTo != null && date != null)
             {
-              var list = SHW_SHD_analysis.GroupBy( x=> x.reason_1).Select(grp => grp.ToList()).ToList();
-      
-              foreach(var item in list)
-              {
-                ReasonAnalysis rea_2 = new ReasonAnalysis();
-                var num = item.Sum(x=> x.duration);
-                rea_2.reason_1 = item[0].reason_1.Trim();
-                rea_2.duration = num.Value;
-                result.Add(rea_2);
-              }
+                SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysisByRangerDate(factory, building, machine_type, machine, shift, date, dateTo);
             }
-           return new {
-               resA = SHW_SHD_analysis.Take(10),
-               resB = result
-           };
-    
+            else
+            {
+                SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysis(factory, building, machine_type, machine, shift, date, dateTo);
+            }
+
+            if (SHW_SHD_analysis.Count > 0)
+            {
+                var list = SHW_SHD_analysis.GroupBy(x => x.reason_1).Select(grp => grp.ToList()).ToList();
+
+                foreach (var item in list)
+                {
+                    ReasonAnalysis rea_2 = new ReasonAnalysis();
+                    var num = item.Sum(x => x.duration);
+                    rea_2.reason_1 = item[0].reason_1.Trim();
+                    rea_2.duration = num.Value;
+                    result.Add(rea_2);
+                }
+            }
+            return new
+            {
+                resA = SHW_SHD_analysis.Take(10),
+                resB = result
+            };
+
         }
 
     }

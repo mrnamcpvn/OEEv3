@@ -22,7 +22,7 @@ export class AnalysisChartComponent implements OnInit, AfterViewInit {
             data: [
                 {
                     data: this.data,
-                    label: 'Minutes per Day',
+                    label: 'Total Minues',
                     backgroundColor: '#1553de',
                     borderColor: '#6d6d6d',
                     hoverBackgroundColor: '#1553de',

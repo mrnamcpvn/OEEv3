@@ -28,11 +28,36 @@
         <ng-select2 [data]="shifts" [(ngModel)]="shift" [options]="optionsSelect2" [placeholder]="'Shift'"
         (ngModelChange)="changeShift($event)"></ng-select2>
       </div>
+      <!--------->
       <div class="form-group col">
-        <h5><span class="badge badge-warning">Date</span></h5>
+        <h5><span class="badge badge-warning">Type Time</span></h5>
+        <ng-select2 [data]="times" [options]="optionsSelect2" [(ngModel)]="typeTime"
+          (ngModelChange)="changeTypeTime($event)"></ng-select2>
+      </div>
+    
+      <div *ngIf="typeTime == 'date'" class="form-group col">
+        <h5><span class="badge badge-info ">Date</span></h5>
         <input class="form-control" type="text" name="dateTime" a2e-datetimepicker [options]="optionDatetimes"
           placeholder="Date" (blur)="updateDate($event)" />
       </div>
+      <div *ngIf="typeTime == 'week'" class="form-group col">
+        <h5><span class="badge badge-info ">Week</span></h5>
+        <ng-select2 [data]="weeks" [options]="optionsSelect2" [(ngModel)]="week" (ngModelChange)="changeWeek($event)">
+        </ng-select2>
+      </div>
+      <div *ngIf="typeTime == 'month'" class="form-group col">
+        <h5><span class="badge badge-info ">Month</span></h5>
+        <ng-select2 [data]="months" [options]="optionsSelect2" [(ngModel)]="month"
+          (ngModelChange)="changeMonth($event)"></ng-select2>
+      </div>
+
+
+      <!----------->
+      <!-- <div class="form-group col">
+        <h5><span class="badge badge-warning">Date</span></h5>
+        <input class="form-control" type="text" name="dateTime" a2e-datetimepicker [options]="optionDatetimes"
+          placeholder="Date" (blur)="updateDate($event)" />
+      </div> -->
     </div>
   </div>
   <div class="card-body">

@@ -70,6 +70,10 @@ export class TrendSearchComponent implements OnInit {
   ];
 
   times: Array<Select2OptionData> = [
+    // {
+    //   id: 'date',
+    //   text: 'Date'
+    // },
     {
       id: 'week',
       text: 'Week'
@@ -185,6 +189,10 @@ export class TrendSearchComponent implements OnInit {
   }
 
   changeTypeTime(value: any) {
+    if (value === 'date') {
+      this.resetTime();
+      this.loadChart();
+    }
     if (value === 'week') {
       this.resetTime();
       this.changeWeek(this.week);
