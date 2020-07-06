@@ -106,8 +106,10 @@ namespace OEE_API.Application.Implementation.SHW_SHD
             DateTime timeFrom = Convert.ToDateTime(date);
             DateTime timeTo = Convert.ToDateTime(dateTo);
             DateTime now = DateTime.Now;
-
+            if(factory != "ALL")
+            {
             factory = factory == "SHW" ? "SHC" : "CB";
+            }
             try
             {
                 if(machine_type == null && machine_type == "ALL")
@@ -131,11 +133,11 @@ namespace OEE_API.Application.Implementation.SHW_SHD
                                                             ).OrderBy(x=> x.duration).ToListAsync();
                 var list = await GetListReason();
                 foreach(var item in list){
-                    var num = result.FindAll(x=> x.id  == item.id).Select(x=> x.duration).Sum();
+                    var num = result.FindAll(x=> x.id.ToString().Trim()  == item.id.ToString().Trim()).Select(x=> x.duration).Sum();
                     item.duration = num == null ? 0 : num;
                 }
+                var test = list.ToList();
                 return list.OrderByDescending(x=> x.duration).ToList();
-                
                 
             }
             catch(Exception ex)

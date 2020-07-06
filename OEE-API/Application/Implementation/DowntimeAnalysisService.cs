@@ -46,7 +46,8 @@ namespace OEE_API.Application.Implementation
             var SHW_SHD_analysis = new List<ReasonAnalysis>();
             if (dateTo != null && date != null)
             {
-                SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysisByRangerDate(factory, building, machine_type, machine, shift, date, dateTo);
+
+                    SHW_SHD_analysis = await _DownTimeServiceSHW_SHD.GetDownTimeAnalysisByRangerDate(factory, building, machine_type, machine, shift, date, dateTo);
             }
             else
             {

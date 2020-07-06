@@ -38,3 +38,4 @@
 2020-07-03T15:01:16.8401174+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
 2020-07-03T15:01:16.8402669+07:00  [INF] Hosting environment: "Development" (c3307c92)
 2020-07-03T15:01:16.8402918+07:00  [INF] Content root path: "D:\AzureCongTy\OEEv2\SHC_OEEv2\OEE-API" (b5d60022)
+2020-07-03T16:30:30.5135234+07:00  [INF] Application is shutting down... (90f52c38)
