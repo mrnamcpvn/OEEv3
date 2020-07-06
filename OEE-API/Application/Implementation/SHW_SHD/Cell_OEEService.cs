@@ -127,12 +127,22 @@ namespace OEE_API.Application.Implementation.SHW_SHD
 
             if (machine_type == null || machine_type.Trim() == "ALL")
             {
+                var alias = await _repositoryMachineInfo.FindAll().ToListAsync();
+
+                // var data = await _repositoryReport.FindAll(x => x.Factory == factory && (building != null ? x.Building == building : 1 == 1)
+                //                                   )
+                //       .GroupBy(x => x.Machine)
+                //       .OrderBy(g => g.Max(m => m.Machine))
+                //       .Select(x => x.Key)
+                //       .ToListAsync();
+
                 var data = await _repositoryReport.FindAll(x => x.Factory == factory && (building != null ? x.Building == building : 1 == 1)
                                                   )
                       .GroupBy(x => x.Machine)
                       .OrderBy(g => g.Max(m => m.Machine))
                       .Select(x => x.Key)
                       .ToListAsync();
+
                 return data;
 
             }

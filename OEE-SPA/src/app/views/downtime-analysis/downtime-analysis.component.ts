@@ -219,12 +219,14 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line: triple-equals
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
+      this.dateTo = new Date(event.srcElement.value);
        this.loadChart();
     }
   }
  loadChart() {
   console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
   // tslint:disable-next-line: max-line-length
+  debugger
   this.downtimeAnalysisService.getDowntimeAnalysis(this.factory,
                                                   this.building,
                                                   this.machine_type,

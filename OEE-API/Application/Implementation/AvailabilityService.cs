@@ -45,7 +45,6 @@ namespace OEE_API.Application.Implementation
             if(now.Date.CompareTo(Convert.ToDateTime(date).Date) >= 0 && now.Date.CompareTo(Convert.ToDateTime(dateTo).Date) >= 0)
             {
                 // Call STORE PROCEDURE -- GET Today_Data
-               // isToday = true;
                 var return_value =   _context.Row.FromSqlRaw("EXEC [dbo].[SP_get_Today_RealTime_OEE_data]").ToString();
 
             }
