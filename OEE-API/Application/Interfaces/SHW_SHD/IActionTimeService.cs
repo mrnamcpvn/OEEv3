@@ -12,10 +12,12 @@ namespace OEE_API.Application.Interfaces.SHW_SHD
     {
         Task<List<string>> GetDowntimeReasonDetail(string reason_1);
                 Task<List<string>> GetListBuildingActionTime(string factory);
-        Task<List<string>> GetListMachineActionTime(string factory, string building);
-        Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1);
-        Task<ActionTime> GetFirstMachineActionTime(string factory, string building, string shift, string machine);
+        Task<List<string>> GetListMachineActionTime(string factory, string building, string machine_type);
+              Task<List<string>> GetListMachineType(string factory, string building);
+        Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string machine_type, string shift, string date, int page = 1);
+        Task<ActionTime> GetFirstMachineActionTime(string factory, string building, string shift, string machine, string machine_type);
         Task<bool> AddDowntimeReason(ChartReason chartReason);
         Task<ReasonDetail> GetReasons(int item);
+
     }
 }

@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { DowntimeAnalysisComponent } from './downtime-analysis.component';
 import { DowntimeAnalysisRoutingModule } from './downtime-analysis-routing.module';
 import { AnalysisChartComponent } from './downtime-analysis-chart/analysis-chart.component';
+import { PaginationComponent, PaginationModule } from 'ngx-bootstrap/Pagination';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { AnalysisChartComponent } from './downtime-analysis-chart/analysis-chart
     BsDropdownModule,
     NgSelect2Module,
     A2Edatetimepicker,
-    FormsModule
+    FormsModule,
+    PaginationModule
   ],
   declarations: [ DowntimeAnalysisComponent, AnalysisChartComponent ]
 })

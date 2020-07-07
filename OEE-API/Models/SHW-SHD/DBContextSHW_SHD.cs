@@ -19,7 +19,10 @@ namespace OEE_API.Models.SHW_SHD
         public virtual DbSet<RestTime> RestTime { get; set; }
         public virtual DbSet<SHW_OEE_History> SHW_OEE_History { get; set; }
         public virtual DbSet<ShiftTime> ShiftTime { get; set; }
+                public virtual DbSet<MachineInformation> MachineInformation {get;set;}
         public virtual DbSet<RowsAffected> Row {get;set;}
+
+        public virtual  DbSet<M_Users> M_Users {get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -113,26 +116,15 @@ namespace OEE_API.Models.SHW_SHD
                 entity.HasKey(e => new { e.factory_id, e.shift_id, e.building_id });
             });
             modelBuilder.Entity<RowsAffected>().HasNoKey();
-            // [Store Procedure] ------ REGISTER
+              modelBuilder.Entity<MachineInformation>(entity =>
+            {
+                entity.HasKey(e => new { e.machine_id });
+            });
+                  modelBuilder.Entity<M_Users>(entity =>
+            {
+                entity.HasKey(e => new { e.account });
+            });
         }
-        // public   async Task<RowsAffected> SP_get_OEE_Realtime_Today()
-        // {
-        //     try
-        //     {
-        //         var count = new RowsAffected();
-        //         string sqlQuery = "EXEC [dbo].[SP_get_Today_RealTime_OEE_data]";
-        //         count.rows = 0;
-        //         using (this.Database.BeginTransaction())
-        //         {
-        //              count.rows = await this.Database.ExecuteSqlRawAsync(sqlQuery);
-        //         }
-        //         return count;
-        //     }
-        //     catch (System.Exception ex)
-        //     {
-        //         throw ex;
 
-        //     }
-        // }
     }
 }

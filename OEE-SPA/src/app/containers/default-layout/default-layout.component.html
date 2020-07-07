@@ -5,6 +5,23 @@
 
   <span class="ml-2">OEE SYSTEM</span>
   <div class="ml-auto"></div>
+
+  <ul class="nav navbar-nav ml-auto">
+    <!-- <li class="nav-item d-md-down-none">
+      <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+    </li> -->
+
+    <li class="nav-item dropdown mr-30" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+        <span style="text-decoration: none; cursor: pointer;">{{username}}</span>
+        <img src="../../../assets/img/avatars/user.png" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+
+        <a class="dropdown-item" href="javascript:;" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
+      </div>
+    </li>
+  </ul>
 </app-header>
 <div class="app-body">
   <app-sidebar #appSidebar [fixed]="true" [display]="'xl'" [minimized]="sidebarMinimized"
@@ -24,6 +41,6 @@
   </main>
 </div>
 <app-footer>
-  <span>OEE SYSTEM &copy; 2020</span>
-  <span class="ml-auto">Version 1.0</span>
+  <span>Copyright &copy; 2020 <a href="#">SHYANG SHIN BAO INDUSTRIAL CO., LTD.</a> All rights reserved</span>
+  <span class="ml-auto">Version 2.0</span>
 </app-footer>

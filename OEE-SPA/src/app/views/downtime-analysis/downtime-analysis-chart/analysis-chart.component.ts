@@ -22,7 +22,7 @@ export class AnalysisChartComponent implements OnInit, AfterViewInit {
             data: [
                 {
                     data: this.data,
-                    label: 'Minutes per Day',
+                    label: 'Total Minues',
                     backgroundColor: '#1553de',
                     borderColor: '#6d6d6d',
                     hoverBackgroundColor: '#1553de',
@@ -34,7 +34,10 @@ export class AnalysisChartComponent implements OnInit, AfterViewInit {
             options: {
                 title: {
                     display: true,
-                    text: this.title
+                    text: this.title,
+                    fontSize: 18,
+                    fontColor: '#000000',
+                    bold: true
                 },
                 responsive: true,
                 legend: {
@@ -47,8 +50,13 @@ export class AnalysisChartComponent implements OnInit, AfterViewInit {
                             offset: true,
                             beginAtZero: true
                         }
-                    }]
-                }
+                    }],
+                },
+                vAxis: [{
+                    ticks: {
+                        offset: true
+                    }
+                }]
             }
         };
     }

@@ -10,7 +10,7 @@ namespace OEE_API.Application.Interfaces
 {
     public interface IDowntimeReasonsService
     {
-         Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1);
+         Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string machine_type, string shift, string date, int page = 1);
 
           Task<List<string>> GetDowntimeReasonDetail(string reason_1);
           Task<bool> AddDowntimeReason(ChartReason chartReason);

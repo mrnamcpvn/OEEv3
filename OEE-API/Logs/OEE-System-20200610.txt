@@ -1,10 +1,112 @@
-2020-05-05T07:49:04.2510602+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T07:49:04.2570523+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T07:49:04.2571789+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T07:49:04.2572115+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T08:14:34.7452856+07:00 0HLVGI6JE3P2J:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T08:15:03.9772077+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T08:15:03.9847325+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T08:15:03.9848904+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T08:15:03.9849364+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T08:34:26.4743742+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T08:34:26.4801581+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T08:34:26.4803025+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T08:34:26.4803337+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T08:34:51.0079397+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T08:34:51.0138277+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T08:34:51.0139717+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T08:34:51.0140000+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T08:41:10.2278804+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T08:41:10.2358995+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T08:41:10.2360150+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T08:41:10.2360373+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T08:41:23.7661300+07:00 0HM0CRTG124FP:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'ALL' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAvailability(List`1 data, String factory, String building, String machine, String machine_type, String time, String shift, Boolean isToday) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 142
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAvailabilityByRangerDate(List`1 data, String factory, String building, String machine, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 280
+   at OEE_API.Application.Implementation.TrendService.GetTrendByWeek(String factory, String building, String machine_type, String shift, Int32 numberWeek) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\TrendService.cs:line 205
+   at OEE_API.Controllers.TrendController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String typeTime, String numberTime) in D:\OEEv2\OEEv2\OEE-API\Controllers\TrendController.cs:line 35
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-06-10T08:41:25.7405859+07:00 0HM0CRTG124FP:00000005 [ERR] An exception occurred while iterating over the results of a query for context type '"OEE_API.Models.SHW_SHD.DBContextSHW_SHD"'."
+""System.InvalidCastException: Unable to cast object of type 'System.String' to type 'System.Int32'.
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Int32()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetInt32(Int32 i)
+   at lambda_method(Closure , QueryContext , DbDataReader , ResultContext , Int32[] , ResultCoordinator )
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()" (f5c7ac34)
+System.InvalidCastException: Unable to cast object of type 'System.String' to type 'System.Int32'.
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Int32()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetInt32(Int32 i)
+   at lambda_method(Closure , QueryContext , DbDataReader , ResultContext , Int32[] , ResultCoordinator )
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAvailabilityByRangerDate(List`1 data, String factory, String building, String machine, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 210
+2020-06-10T08:41:25.7448955+07:00 0HM0CRTG124FP:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidCastException: Unable to cast object of type 'System.String' to type 'System.Int32'.
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Int32()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetInt32(Int32 i)
+   at lambda_method(Closure , QueryContext , DbDataReader , ResultContext , Int32[] , ResultCoordinator )
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at OEE_API.Application.Implementation.SHW_SHD.Cell_OEEService.GetAvailabilityByRangerDate(List`1 data, String factory, String building, String machine, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\SHW_SHD\Cell_OEEService.cs:line 210
+   at OEE_API.Application.Implementation.TrendService.GetTrendByWeek(String factory, String building, String machine_type, String shift, Int32 numberWeek) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\TrendService.cs:line 205
+   at OEE_API.Controllers.TrendController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String typeTime, String numberTime) in D:\OEEv2\OEEv2\OEE-API\Controllers\TrendController.cs:line 35
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-06-10T09:45:52.1483844+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T09:45:52.1541287+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T09:45:52.1542557+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T09:45:52.1542888+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T10:11:33.6440073+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T10:11:33.6521049+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T10:11:33.6523075+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T10:11:33.6530735+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T10:18:59.7922171+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T10:18:59.7991834+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T10:18:59.7995167+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T10:18:59.7995421+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T10:19:52.5183077+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T10:19:52.5245375+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T10:19:52.5247276+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T10:19:52.5247583+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T11:48:56.1461514+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T11:48:56.1524415+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T11:48:56.1526357+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T11:48:56.1526645+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T14:14:37.8796630+07:00 0HM0D1IAOP4DI:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -24,9 +126,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:14:36.0868094+07:00 0HLVGI6JE3P2J:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:14:39.2217409+07:00 0HM0D1IAOP4DI:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -46,9 +151,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:14:37.0735243+07:00 0HLVGI6JE3P2J:00000006 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:27:39.0255620+07:00 0HM0D1IAOP4DK:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -68,9 +176,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:15:09.1871187+07:00 0HLVGI6JE3P2J:0000000F [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:32:05.7625866+07:00 0HM0D1IAOP4DM:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -90,9 +201,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:15:21.3421420+07:00 0HLVGI6JE3P2K:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:32:12.8003726+07:00 0HM0D1IAOP4DL:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -112,9 +226,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:15:24.1031020+07:00 0HLVGI6JE3P2K:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:08.7196427+07:00 0HM0D1IAOP4DO:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -134,9 +251,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:15:25.2047683+07:00 0HLVGI6JE3P2K:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:31.1616326+07:00 0HM0D1IAOP4DO:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -156,9 +276,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:30:40.8821200+07:00 0HLVGI6JE3P2O:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:38.8134766+07:00 0HM0D1IAOP4DN:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -178,9 +301,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:30:43.5528216+07:00 0HLVGI6JE3P2Q:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:42.4049568+07:00 0HM0D1IAOP4DQ:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -200,9 +326,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:30:46.7268821+07:00 0HLVGI6JE3P2Q:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:43.7271066+07:00 0HM0D1IAOP4DP:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -222,9 +351,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:31:54.4102005+07:00 0HLVGI6JE3P2T:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:45.4215063+07:00 0HM0D1IAOP4DP:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -244,17 +376,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:33:28.7142880+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T08:33:28.7224785+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T08:33:28.7227068+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T08:33:28.7227492+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T08:33:49.4148110+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T08:33:49.4220762+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T08:33:49.4224529+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T08:33:49.4224881+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T08:33:52.9989265+07:00 0HLVGIHF01ORG:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:48.8483465+07:00 0HM0D1IAOP4DP:00000007 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -274,9 +401,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:33:53.6513033+07:00 0HLVGIHF01ORG:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:51.7843845+07:00 0HM0D1IAOP4DP:00000009 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -296,9 +426,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:33:54.5146430+07:00 0HLVGIHF01ORG:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:53.3181541+07:00 0HM0D1IAOP4DP:0000000B [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -318,9 +451,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:34:42.8027210+07:00 0HLVGIHF01ORJ:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:54:55.2485081+07:00 0HM0D1IAOP4DP:0000000C [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -340,9 +476,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:34:44.4898872+07:00 0HLVGIHF01ORJ:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:55:26.1220184+07:00 0HM0D1IAOP4DQ:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -362,9 +501,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:34:45.6018408+07:00 0HLVGIHF01ORJ:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:55:28.2038653+07:00 0HM0D1IAOP4DP:0000000F [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -384,9 +526,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:36:55.6617525+07:00 0HLVGIHF01ORR:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:55:30.0561817+07:00 0HM0D1IAOP4DP:00000011 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -406,9 +551,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:37:00.3803358+07:00 0HLVGIHF01ORR:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:57:30.6659829+07:00 0HM0D1IAOP4DS:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -428,9 +576,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:37:05.0579924+07:00 0HLVGIHF01ORR:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:57:40.0340671+07:00 0HM0D1IAOP4DU:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -450,9 +601,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:37:06.3339227+07:00 0HLVGIHF01ORR:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:59:47.1176478+07:00 0HM0D1IAOP4DV:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -472,9 +626,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T08:37:07.3403661+07:00 0HLVGIHF01ORR:00000007 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:59:48.0100364+07:00 0HM0D1IAOP4DV:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -494,17 +651,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:21:04.6160762+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T09:21:04.6224542+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T09:21:04.6226758+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T09:21:04.6227348+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T09:21:11.4206133+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T09:21:11.4265754+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T09:21:11.4266965+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T09:21:11.4267175+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T09:46:28.6319143+07:00 0HLVGJQ12L7MJ:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:59:49.8826566+07:00 0HM0D1IAOP4DV:00000006 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -524,9 +676,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:46:29.2619962+07:00 0HLVGJQ12L7MJ:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:59:51.7050138+07:00 0HM0D1IAOP4DV:00000008 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -546,9 +701,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:46:30.1552247+07:00 0HLVGJQ12L7MJ:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T14:59:54.1850857+07:00 0HM0D1IAOP4DV:0000000A [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -568,9 +726,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:47:42.7685517+07:00 0HLVGJQ12L7ML:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T15:00:16.4494969+07:00 0HM0D1IAOP4E0:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -590,13 +751,16 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:48:19.4249768+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T09:48:19.4313484+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T09:48:19.4314736+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T09:48:19.4314987+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T09:48:20.7834201+07:00 0HLVGJR2GE706:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T15:01:03.3322063+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T15:01:03.3391259+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T15:01:03.3392735+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T15:01:03.3393064+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T15:01:04.5403780+07:00 0HM0D2HLUBVGD:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -616,9 +780,16 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:48:21.7864071+07:00 0HLVGJR2GE707:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T15:02:22.7775040+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T15:02:22.7840600+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T15:02:22.7841991+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T15:02:22.7842366+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T15:02:23.1555234+07:00 0HM0D2IDLGBIP:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -638,9 +809,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T09:48:22.9386341+07:00 0HLVGJR2GE707:00000005 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T15:02:26.0855832+07:00 0HM0D2IDLGBIO:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -660,17 +834,12 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T10:24:08.3613137+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T10:24:08.3675895+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T10:24:08.3677024+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T10:24:08.3677339+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T10:24:22.8242784+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T10:24:22.8299866+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T10:24:22.8301163+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T10:24:22.8301396+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T10:54:38.7731128+07:00 0HLVGL043JRC4:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at OEE_API.Controllers.DowntimeReasonsController.GetDowntimeReasons(String factory, String building, String machine, String shift, String date, Int32 page) in D:\OEEv2\OEEv2\OEE-API\Controllers\DowntimeReasonsController.cs:line 27
+2020-06-10T15:02:27.0944938+07:00 0HM0D2IDLGBIO:00000006 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
@@ -690,8 +859,144 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-2020-05-05T11:49:51.7893863+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
-2020-05-05T11:49:51.7953616+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2020-05-05T11:49:51.7955123+07:00  [INF] Hosting environment: "Development" (c3307c92)
-2020-05-05T11:49:51.7955420+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
-2020-05-05T15:30:03.0790511+07:00  [INF] Application is shutting down... (90f52c38)
+2020-06-10T15:02:29.1826266+07:00 0HM0D2IDLGBIR:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-06-10T15:07:52.4042407+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T15:07:52.4108491+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T15:07:52.4110909+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T15:07:52.4111224+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T15:07:53.4169078+07:00 0HM0D2LFRN63E:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-06-10T15:07:56.1885451+07:00 0HM0D2LFRN63E:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-06-10T15:08:17.6688911+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T15:08:17.6750927+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T15:08:17.6752085+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T15:08:17.6752312+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T15:08:17.9046818+07:00 0HM0D2LNCIN3G:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.FormatException: The string 'undefined' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at OEE_API.Application.Implementation.AvailabilityService.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Application\Implementation\AvailabilityService.cs:line 45
+   at OEE_API.Controllers.AvailabilityController.GetListAvailabilityAsync(String factory, String building, String machine_type, String shift, String date, String dateTo) in D:\OEEv2\OEEv2\OEE-API\Controllers\AvailabilityController.cs:line 20
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-06-10T15:50:29.1497637+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T15:50:29.1558910+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T15:50:29.1560964+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T15:50:29.1561315+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:12:47.0774116+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:12:47.0841596+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:12:47.0843201+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:12:47.0843462+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:16:18.5672607+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:16:18.5742359+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:16:18.5819375+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:16:18.5819768+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:17:00.9368517+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:17:00.9440392+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:17:00.9441803+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:17:00.9442113+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:18:38.4842436+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:18:38.4917295+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:18:38.4918726+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:18:38.4919086+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:24:54.5448941+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:24:54.5511366+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:24:54.5512812+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:24:54.5513192+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:26:03.6062523+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:26:03.6123470+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:26:03.6124627+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:26:03.6124955+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:30:08.0547025+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-06-10T16:30:08.0609346+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-06-10T16:30:08.0610592+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-06-10T16:30:08.0610795+07:00  [INF] Content root path: "D:\OEEv2\OEEv2\OEE-API" (b5d60022)
+2020-06-10T16:30:29.5955049+07:00  [INF] Application is shutting down... (90f52c38)

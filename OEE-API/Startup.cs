@@ -90,9 +90,11 @@ namespace OEE_API
             //Serrvices general
             services.AddTransient<IAvailabilityService, AvailabilityService>();
             services.AddTransient<ITrendService, TrendService>();
+                    services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IDowntimeReasonsService, DowntimeReasonsService>();
             services.AddTransient<IDowntimeAnalysisService, DowntimeAnalysisService>();
             services.AddTransient<IDownTimeDetailService, DowntimeDetailService>();
+
 
             services.AddMvc(option => option.EnableEndpointRouting = false)
             .AddSessionStateTempDataProvider()

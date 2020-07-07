@@ -27,6 +27,8 @@
               "node_modules/select2/dist/css/select2.min.css",
               "node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css",
               "node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
+              "node_modules/alertifyjs/build/css/alertify.min.css",
+              "node_modules/alertifyjs/build/css/themes/bootstrap.min.css",
               "src/scss/style.scss"
             ],
             "stylePreprocessorOptions": {
@@ -43,7 +45,8 @@
               "node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
               "src/assets/libary/sevSeg/jquery-ui.min.js",
               "src/assets/libary/sevSeg/knockout-2.2.1.js",
-              "src/assets/libary/sevSeg/seventSeg.js"
+              "src/assets/libary/sevSeg/seventSeg.js",
+              "node_modules/alertifyjs/build/alertify.min.js"
             ]
           },
           "configurations": {

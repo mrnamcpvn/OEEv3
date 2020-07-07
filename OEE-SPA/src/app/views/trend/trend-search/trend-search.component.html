@@ -10,9 +10,9 @@
     <ng-select2 [data]="buildings" [(ngModel)]="building" [options]="optionsSelect2" [placeholder]="'Building'"
       (ngModelChange)="changeBuilding($event)"></ng-select2>
   </div>
-  <div class="form-group col">
+  <div class="form-group col" [hidden]="factory != 'SHW' && factory != 'SHD'">
     <h5><span class="badge badge-warning">Machine Type</span></h5>
-    <ng-select2 [data]="machine_types" [(ngModel)]="machine_type" [options]="optionsSelect2" [placeholder]="'Machien Type'"
+    <ng-select2 [data]="machine_types" [(ngModel)]="machine_type" [options]="optionsSelect2" [placeholder]="'Machine Type'"
       (ngModelChange)="changeMachine_Type($event)"></ng-select2>
   </div>
   <div class="form-group col">

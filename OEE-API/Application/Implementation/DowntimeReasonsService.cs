@@ -37,11 +37,11 @@ namespace OEE_API.Application.Implementation
             _configureMapper = configureMapper;
         }
 
-        public async Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1)
+        public async Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string machine_type, string shift, string date, int page = 1)
         {
             if(factory == "SHD" || factory == "SHW")
             {
-            var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, shift, date, page);
+            var data = await _ActionTimeServiceSHW_SHD.GetDuration(factory, building, machine, machine_type, shift, date, page);
              return data;
             }
             else return null;

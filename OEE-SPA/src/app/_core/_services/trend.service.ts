@@ -18,9 +18,9 @@ export class TrendService {
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line: max-line-length
-  getAvailability(factory: string, building: string, shift: string, typeTime: string, numberTime: string): Observable<{ dataChart, listTime: string[] }> {
+  getAvailability(factory: string, building: string, machine_type: string, shift: string, typeTime: string, numberTime: string): Observable<{ dataChart, listTime: string[] }> {
     // tslint:disable-next-line: max-line-length
-    return this.http.get<{ dataChart, listTime: string[] }>(this.baseUrl + 'Trend/GetAvailabilityOfTrend?factory=' + factory + '&building=' + building + '&shift=' + shift + '&typeTime=' + typeTime + '&numberTime=' + numberTime);
+    return this.http.get<{ dataChart, listTime: string[] }>(this.baseUrl + 'Trend/GetAvailabilityOfTrend?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type + '&shift=' + shift + '&typeTime=' + typeTime + '&numberTime=' + numberTime);
   }
 
   exportExcel(dataExport: Array<Array<string>>, labels: Array<string>, factory: string, building: string) {

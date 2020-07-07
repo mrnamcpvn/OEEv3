@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export interface DataSearch {
   factory: string;
   building: string;
+  machine_type: string;
   shift: string;
   typeTime: string;
   numberTime: string;
@@ -42,7 +43,8 @@ export class TrendComponent implements OnInit, OnDestroy {
     this.autoloadRemove();
     this.spinner.show();
     this.isShowTable = false;
-    this.trendService.getAvailability(this.data.factory, this.data.building, this.data.shift, this.data.typeTime, this.data.numberTime)
+    // tslint:disable-next-line: max-line-length
+    this.trendService.getAvailability(this.data.factory, this.data.building, this.data.machine_type, this.data.shift, this.data.typeTime, this.data.numberTime)
       .subscribe(res => {
         this.arrayNull.pop();
         this.arrayNull.push('demo');

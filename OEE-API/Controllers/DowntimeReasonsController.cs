@@ -15,11 +15,11 @@ namespace OEE_API.Controllers
         }
 
         [HttpGet("getDowntimeReasons")]
-        public async Task<IActionResult> GetDowntimeReasons(string factory, string building, string machine, string shift, string date, int page)
+        public async Task<IActionResult> GetDowntimeReasons(string factory, string building, string machine, string machine_type, string shift, string date, int page)
         {
             try
             {
-                var data = await _downtimeReasonsService.GetDuration(factory, building, machine, shift, date, page);
+                var data = await _downtimeReasonsService.GetDuration(factory, building, machine, machine_type, shift, date, page);
                 return Ok(data);
             
             }

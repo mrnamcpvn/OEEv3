@@ -19,6 +19,7 @@ export class DashboardSearchComponent implements OnInit {
   typeTime = 'date';
   factory: string = 'ALL';
   building: string = 'ALL';
+  machine_type: string = 'ALL';
   shift: string = '0';
   week: string = '1';
   month: string = (new Date().getMonth() + 1).toString();
@@ -54,7 +55,7 @@ export class DashboardSearchComponent implements OnInit {
   ];
 
   buildings: Array<Select2OptionData>;
-
+machine_types: Array<Select2OptionData>;
   shifts: Array<Select2OptionData> = [
     {
       id: '0',
@@ -223,10 +224,12 @@ export class DashboardSearchComponent implements OnInit {
     }
   }
 
-  changeBuilding(event: any) {
+  changeBuilding(value: any) {
+      this.loadMachine_Type();
+  }
+  changeMachine_Type(event: any) {
     this.loadChart();
   }
-
   changeShift(event: any) {
     this.loadChart();
   }
@@ -307,7 +310,17 @@ export class DashboardSearchComponent implements OnInit {
       console.log(error);
     });
   }
-
+// Machine_Types
+loadMachine_Type() {
+  this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
+    this.machine_types = res.map(item => {
+      return { id: item, text:  item };
+    });
+    this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
+  }, error => {
+    console.log(error);
+  });
+}
   // Get list weeek of year
   loadWeeks() {
     this.commonService.getWeeks().subscribe(res => {
@@ -355,6 +368,7 @@ export class DashboardSearchComponent implements OnInit {
     const data = {
       factory: this.factory,
       building: this.building,
+      machine_type: this.machine_type,
       shift: this.shift,
       fromTime: formatDate(this.date, 'yyyy-MM-dd', 'en-US'),
       toTime: formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US')

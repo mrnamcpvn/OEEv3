@@ -11,7 +11,7 @@ namespace OEE_API.Application.Interfaces
     public interface IDowntimeAnalysisService
     {
         //    Task<PageListUtility<ChartReason>> GetDuration(string factory, string building, string machine, string shift, string date, int page = 1);
-        Task<Object> GetDownTimeAnalysis(string factory, string building, string machine, string shift, string date);
+        Task<Object> GetDownTimeAnalysis(string factory, string building, string machine_type, string machine, string shift, string date, string dateTo);
 
 
     }
