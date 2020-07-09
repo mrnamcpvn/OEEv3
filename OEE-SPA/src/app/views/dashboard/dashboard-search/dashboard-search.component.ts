@@ -31,45 +31,11 @@ export class DashboardSearchComponent implements OnInit {
   autoload: any;
   dataExport: Array<Array<string>> = [];
 
-  factories: Array<Select2OptionData> = [
-    {
-      id: 'ALL',
-      text: 'All Factories'
-    },
-    {
-      id: 'SHW',
-      text: 'SHW'
-    },
-    {
-      id: 'SHD',
-      text: 'SHD'
-    },
-    {
-      id: 'SHB',
-      text: 'SHB'
-    },
-    {
-      id: 'SY2',
-      text: 'SY2'
-    }
-  ];
+  factories: Array<Select2OptionData> = [];
 
   buildings: Array<Select2OptionData>;
-machine_types: Array<Select2OptionData>;
-  shifts: Array<Select2OptionData> = [
-    {
-      id: '0',
-      text: 'All Shifts'
-    },
-    {
-      id: '1',
-      text: 'Shift 1'
-    },
-    {
-      id: '2',
-      text: 'Shift 2'
-    }
-  ];
+  machine_types: Array<Select2OptionData>;
+  shifts: Array<Select2OptionData> = [];
 
   times: Array<Select2OptionData> = [
     {
@@ -150,6 +116,8 @@ machine_types: Array<Select2OptionData>;
     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.getListFactory();
+    this.getListShift();
     this.loadWeeks();
     this.loadChart();
   }
@@ -180,31 +148,21 @@ machine_types: Array<Select2OptionData>;
       if (this.typeTime === 'ranger') {
         timeExport = 'Range (' + formatDate(this.date, 'yyyy-MM-dd', 'en-US') + formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US') + ')';
       }
-
       const array: Array<string> = [JSON.parse(JSON.stringify(item.value + '%'))];
-
-      // tslint:disable-next-line: triple-equals
       if (this.factory != 'ALL' && this.building == 'ALL') {
-        // tslint:disable-next-line: triple-equals
         array.unshift(this.factory, item.name, this.shift == '0' ? 'ALL' : this.shift, timeExport);
-        // tslint:disable-next-line: triple-equals
       } else if (this.factory != 'ALL' && this.building != 'ALL') {
-        // tslint:disable-next-line: triple-equals
         array.unshift(this.factory, this.building, item.name, this.shift == '0' ? 'ALL' : this.shift, timeExport);
       } else {
-        // tslint:disable-next-line: triple-equals
         array.unshift(item.name, this.shift == '0' ? 'ALL' : this.shift, timeExport);
       }
-
       this.dataExport.push(array);
     });
 
     const label: Array<string> = ['Shift', 'Time', 'Average'];
 
-    // tslint:disable-next-line: triple-equals
     if (this.factory != 'ALL' && this.building == 'ALL') {
       label.unshift('Factory', 'Building');
-      // tslint:disable-next-line: triple-equals
     } else if (this.factory != 'ALL' && this.building != 'ALL') {
       label.unshift('Factory', 'Building', 'Machine');
     } else {
@@ -216,14 +174,28 @@ machine_types: Array<Select2OptionData>;
 
   changeFactory(value: any) {
     this.building = 'ALL';
-    // tslint:disable-next-line: triple-equals
     if (value != 'ALL') {
       this.loadBuilding();
     } else {
       this.loadChart();
     }
   }
-
+  getListFactory() {
+    this.commonService.getListFactory().subscribe(res => {
+      this.factories = res.map(item => {
+        return { id: item.factory_id, text: item.customer_name}
+      });
+      this.factories.unshift({id: 'ALL',text: 'All Factories'});
+    });
+  }
+  getListShift() {
+    this.commonService.getListShift().subscribe(res => {
+      this.shifts = res.map(item => {
+        return {id: item.shift_id.toString(),text: item.shift_name}
+      });
+      this.shifts.unshift({id: '0',text: 'All Shifts'});
+    });
+  }
   changeBuilding(value: any) {
       this.loadMachine_Type();
   }
@@ -280,7 +252,6 @@ machine_types: Array<Select2OptionData>;
 
   // event chose date
   updateDate(event: any) {
-    // tslint:disable-next-line: triple-equals
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.dateTo = new Date(event.srcElement.value);
@@ -290,7 +261,6 @@ machine_types: Array<Select2OptionData>;
 
   // event chose date to
   updateDateTo(event: any) {
-    // tslint:disable-next-line: triple-equals
     if (formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.dateTo = new Date(event.srcElement.value);
       this.loadChart();
@@ -300,7 +270,7 @@ machine_types: Array<Select2OptionData>;
   // Get all building of factory selected
   loadBuilding() {
     this.commonService.getBuilding(this.factory).subscribe(res => {
-
+      console.log(res);
       this.buildings = res.map(item => {
         return { id: item, text: 'Building ' + item };
       });

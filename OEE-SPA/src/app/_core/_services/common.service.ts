@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Week } from '../_models/week';
+import { Factory } from '../_models/factory';
+import { Shift } from '../_models/shift';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,14 @@ export class CommonService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
+  getListFactory(): Observable<Factory[]> {
+    return this.http.get<Factory[]>(this.baseUrl + 'Common/getListFactory/', {});
+  }
+  getListShift(): Observable<Shift[]> {
+    return this.http.get<Shift[]>(this.baseUrl + 'Common/getListShift/', {});
+  }
   getBuilding(factory: string): Observable<string[]> {
-    return this.http.get<string[]>(this.baseUrl + 'Common/' + factory);
+    return this.http.get<string[]>(this.baseUrl + 'Common/getListBuilding/' + factory, {});
   }
 
   getMachine(factory: string, building: string, machine_type: string): Observable<string[]> {
@@ -67,7 +75,7 @@ export class CommonService {
 
     return {firstDate: firstDate, lastDate: lastDate};
   }
-  getMachine_Type(factory: string, building: string): Observable<string[]> {
-    return this.http.get<string[]>(this.baseUrl + 'Common/getAllMachineType?factory=' + factory + '&building=' + building);
+  getMachine_Type(factory: string, building: string) {
+    return this.http.get<any>(this.baseUrl + 'Common/getAllMachineType/' + factory +'/' + building, {});
   }
 }

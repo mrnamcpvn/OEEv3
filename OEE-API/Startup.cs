@@ -21,6 +21,8 @@ using OEE_API.Helpers.AutoMapper;
 using OEE_API._Repositories.Repositories;
 using OEE_API._Repositories.Interfaces;
 using OEE_API.Data;
+using OEE_API._Services.Interfaces;
+using OEE_API._Services.Services;
 
 namespace OEE_API
 {
@@ -77,6 +79,9 @@ namespace OEE_API
             services.AddScoped<IShiftRepository, ShiftRepository>();
             services.AddScoped<IShiftTimeConfigRepository, ShiftTimeConfigRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+
+            // Service
+            services.AddScoped<ICommonService, CommonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

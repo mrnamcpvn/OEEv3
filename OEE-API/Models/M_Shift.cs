@@ -5,7 +5,6 @@ namespace OEE_API.Models
     public class M_Shift
     {
         [Key]
-        // [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int shift_id { get; set; }
         public string shift_name { get; set; }
         public string shift_notes { get; set; }
