@@ -10,29 +10,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using OEE_API.Models.SHB;
-using OEE_API.Models.SHW_SHD;
-using OEE_API.Models.SYF;
 using AutoMapper;
-using OEE_API.Data.Repository;
-using OEE_API.Data.Interfaces;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using OEE_API.Application.Interfaces;
-using OEE_API.Application.Implementation;
-using SHW_SHD_IService = OEE_API.Application.Interfaces.SHW_SHD;
-using SHW_SHD_Service = OEE_API.Application.Implementation.SHW_SHD;
-using SHB_IService = OEE_API.Application.Interfaces.SHB;
-using SHB_Service = OEE_API.Application.Implementation.SHB;
-using SYF_IService = OEE_API.Application.Interfaces.SYF;
-using SYF_Service = OEE_API.Application.Implementation.SYF;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using OEE_API.Application.AutoMapper;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using OEE_API.Application.Implementation.SHW_SHD;
-using OEE_API.Application.Interfaces.SHW_SHD;
+using OEE_API.Helpers.AutoMapper;
+using OEE_API._Repositories.Repositories;
+using OEE_API._Repositories.Interfaces;
+using OEE_API.Data;
 
 namespace OEE_API
 {
@@ -49,67 +37,46 @@ namespace OEE_API
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DBContextSHW_SHD>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("SHW_SHDConnection"))
-              .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))
-              );
-            services.AddDbContext<DBContextSHB>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("SHBConnection"))
-               .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))
-                );
-            services.AddDbContext<DBContextSYF>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("SYFConnection"))
-              .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))
-              );
-
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
-            // config Mapper
-            services.AddAutoMapper(typeof(Startup));
-            services.AddSingleton(AutoMapperConfig.RegisterMappings());
+
+             // config Mapper
+             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IMapper>(sp =>
             {
                 return new Mapper(AutoMapperConfig.RegisterMappings());
             });
-
+            services.AddSingleton(AutoMapperConfig.RegisterMappings ());
             services.AddCors();
             // Add the temp data provider
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.AddSession();
 
-            services.AddTransient(typeof(IRepositorySHW_SHD<,>), typeof(RepositorySHW_SHD<,>));
-            services.AddTransient(typeof(IRepositorySHB<,>), typeof(RepositorySHB<,>));
-            services.AddTransient(typeof(IRepositorySYF<,>), typeof(RepositorySYF<,>));
-            // Service SHW_SHD
-            services.AddTransient<SHW_SHD_IService.ICell_OEEService, SHW_SHD_Service.Cell_OEEService>();
-            services.AddTransient<SHW_SHD_IService.IActionTimeService, SHW_SHD_Service.ActionTimeService>();
-            //Service SHB
-            services.AddTransient<SHB_IService.ICell_OEEService, SHB_Service.Cell_OEEService>();
-            // Service SYF
-            services.AddTransient<SYF_IService.ICell_OEEService, SYF_Service.Cell_OEEService>();
-            services.AddTransient<SYF_IService.IActionTimeService, SYF_Service.ActionTimeService>();
-            //Serrvices general
-            services.AddTransient<IAvailabilityService, AvailabilityService>();
-            services.AddTransient<ITrendService, TrendService>();
-                    services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<IDowntimeReasonsService, DowntimeReasonsService>();
-            services.AddTransient<IDowntimeAnalysisService, DowntimeAnalysisService>();
-            services.AddTransient<IDownTimeDetailService, DowntimeDetailService>();
-
-
             services.AddMvc(option => option.EnableEndpointRouting = false)
             .AddSessionStateTempDataProvider()
-              .AddNewtonsoftJson(opt =>
-              {
-                  opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-              });
-            // services.AddMvc()
-            //   .SetCompatibilityVersion(CompatibilityVersion.Latest)
-            // .AddSessionStateTempDataProvider()
-            //   .AddNewtonsoftJson(opt =>
-            //   {
-            //       opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            //   });
+            .AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
+            // Repository
+            services.AddScoped<IActionTimeForOEERepository, ActionTimeForOEERepository>();
+            services.AddScoped<IDowntimeReasonRepository, DowntimeReasonRepository>();
+            services.AddScoped<IDowntimeRecordRepository, DowntimeRecordRepository>();
+            services.AddScoped<IFactoryRepository, FactoryRepository>();
+            services.AddScoped<IMachineInformationRepository, MachineInformationRepository>();
+            services.AddScoped<IMachineStatusRepository, MachineStatusRepository>();
+            services.AddScoped<IMachineTypeRepository, MachineTypeRepository>();
+            services.AddScoped<IMaintenanceTimeRepository, MaintenanceTimeRepository>();
+            services.AddScoped<IOEE_IDRepository, OEE_IDRepository>();
+            services.AddScoped<IOEE_MMRepository, OEE_MMRepository>();
+            services.AddScoped<IOEE_VNRepository, OEE_VNRepository>();
+            services.AddScoped<IRolesRepository, RolesRepository>();
+            services.AddScoped<IRoleUserRepository, RoleUserRepository>();
+            services.AddScoped<IRowIndexRepository, RowIndexRepository>();
+            services.AddScoped<IShiftRepository, ShiftRepository>();
+            services.AddScoped<IShiftTimeConfigRepository, ShiftTimeConfigRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -154,12 +121,7 @@ namespace OEE_API
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "spa-fallback",
-                    pattern: "{controller=FallBack}/{action=Index}/{id?}"
-                );
-
-                endpoints.MapFallbackToController("Index", "FallBack");
+                endpoints.MapControllers();
             });
         }
     }
