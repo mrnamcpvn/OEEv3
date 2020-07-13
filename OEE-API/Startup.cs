@@ -82,6 +82,7 @@ namespace OEE_API
 
             // Service
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IAvailabilityService,AvailabilityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
