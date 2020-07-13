@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OEE_API._Services.Interfaces;
+using OEE_API.Helpers;
 
 namespace OEE_API.Controllers
 {
@@ -35,6 +36,14 @@ namespace OEE_API.Controllers
         public async Task<IActionResult> GetListMachineType(string factory, string building) {
             var data = await _serviceCommon.GetListMachineType(factory, building);
             return Ok(data);
+        }
+
+         // Call class utility to take out all week of year 
+        [HttpGet("WeekInYear")]
+        public IActionResult GetWeekInYear()
+        {
+            var weeks = Util.ListWeekOfYear();
+            return Ok(weeks);
         }
     }
 }
