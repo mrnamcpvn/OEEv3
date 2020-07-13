@@ -123,7 +123,7 @@ namespace OEE_API._Services.Services
             else if (building != "ALL" && factory != "ALL")
             {
                 var MachineTypes = await _commonService.GetListMachineType(factory, building);
-                if (machine_type != "ALL")
+                if (machine_type == "ALL")
                 {
                     foreach (var item in MachineTypes)
                     {
@@ -152,7 +152,7 @@ namespace OEE_API._Services.Services
                                 data.Where(x => x.factory_id.Trim() == factory.Trim()
                                 && x.building_id.Trim() == building.Trim()).Count();
                             }
-                            model.Add(item.machine_type_name, (int)value);
+                            model.Add(item.machine_id, (int)value);
                         }
                     }
 
