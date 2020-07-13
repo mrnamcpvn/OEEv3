@@ -173,6 +173,7 @@ export class DashboardSearchComponent implements OnInit {
   }
 
   changeFactory(value: any) {
+    console.log(this.factory);
     this.building = 'ALL';
     if (value != 'ALL') {
       this.loadBuilding();
@@ -270,12 +271,12 @@ export class DashboardSearchComponent implements OnInit {
   // Get all building of factory selected
   loadBuilding() {
     this.commonService.getBuilding(this.factory).subscribe(res => {
-      console.log(res);
       this.buildings = res.map(item => {
         return { id: item, text: 'Building ' + item };
       });
 
       this.buildings.unshift({ id: 'ALL', text: 'All Building' });
+      console.log(this.buildings);
     }, error => {
       console.log(error);
     });
@@ -284,7 +285,7 @@ export class DashboardSearchComponent implements OnInit {
 loadMachine_Type() {
   this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
     this.machine_types = res.map(item => {
-      return { id: item, text:  item };
+      return { id: item.machine_id, text:  item.machine_type_name };
     });
     this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
   }, error => {
@@ -343,7 +344,7 @@ loadMachine_Type() {
       fromTime: formatDate(this.date, 'yyyy-MM-dd', 'en-US'),
       toTime: formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US')
     };
-
+    console.log(data);
     this.dataDashboard.emit(data);
   }
 }

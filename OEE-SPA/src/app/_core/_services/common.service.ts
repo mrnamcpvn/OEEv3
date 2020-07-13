@@ -76,6 +76,6 @@ export class CommonService {
     return {firstDate: firstDate, lastDate: lastDate};
   }
   getMachine_Type(factory: string, building: string) {
-    return this.http.get<any>(this.baseUrl + 'Common/getAllMachineType/' + factory +'/' + building, {});
+    return this.http.get<any>(this.baseUrl + 'Common/getListMachine/' + factory +'/' + building, {});
   }
 }

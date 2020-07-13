@@ -63,10 +63,10 @@ namespace OEE_API._Services.Services
             var data =  (from a in machines 
                         join b in machineType
                         on a.machine_type equals b.id
-                        select new MachineViewModel {
-                            // machine_id = a.machine_id,
-                            // machine_name = a.machine_name,
-                            // machine_model = a.machine_model,
+                        select new MachineViewModel() {
+                            machine_id = a.machine_id,
+                            machine_name = a.machine_name,
+                            machine_model = a.machine_model,
                             machine_type = a.machine_type, 
                             machine_type_name = b.machine_type_name
                         }).GroupBy(x => x.machine_type).Select(x => x.First()).ToList();
