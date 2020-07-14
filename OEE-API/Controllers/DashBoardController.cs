@@ -16,7 +16,7 @@ namespace OEE_API.Controllers
         
         [HttpPost("loadDataChart")]
         public async Task<IActionResult> LoadDataChart([FromBody]DashBoardParamModel param) {
-            var data = await _serviceAvailability.LoadDataChart(param);
+            var data = await _serviceAvailability.DataChartDashBoard(param);
             return Ok(data);
         }
     }

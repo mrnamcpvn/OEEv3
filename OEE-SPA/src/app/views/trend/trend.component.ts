@@ -43,8 +43,7 @@ export class TrendComponent implements OnInit, OnDestroy {
     this.autoloadRemove();
     this.spinner.show();
     this.isShowTable = false;
-    // tslint:disable-next-line: max-line-length
-    this.trendService.getAvailability(this.data.factory, this.data.building, this.data.machine_type, this.data.shift, this.data.typeTime, this.data.numberTime)
+    this.trendService.getAvailability(this.data)
       .subscribe(res => {
         this.arrayNull.pop();
         this.arrayNull.push('demo');

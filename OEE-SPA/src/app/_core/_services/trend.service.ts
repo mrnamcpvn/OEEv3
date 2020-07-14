@@ -8,6 +8,7 @@ import { Chart_trend } from '../_models/chart_trend';
 import { Row, Workbook, Worksheet } from '../../../assets/libary/exceljs';
 import * as fs from 'file-saver';
 import { formatDate } from '@angular/common';
+import { TrendParam } from '../_models/trend-param';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,8 @@ export class TrendService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  // tslint:disable-next-line: max-line-length
-  getAvailability(factory: string, building: string, machine_type: string, shift: string, typeTime: string, numberTime: string): Observable<{ dataChart, listTime: string[] }> {
-    // tslint:disable-next-line: max-line-length
-    return this.http.get<{ dataChart, listTime: string[] }>(this.baseUrl + 'Trend/GetAvailabilityOfTrend?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type + '&shift=' + shift + '&typeTime=' + typeTime + '&numberTime=' + numberTime);
+  getAvailability(param: TrendParam): Observable<{ dataChart, listTime: string[] }> {
+    return this.http.post<{ dataChart, listTime: string[] }>(this.baseUrl + 'Trend/GetAvailabilityOfTrend?factory=', param);
   }
 
   exportExcel(dataExport: Array<Array<string>>, labels: Array<string>, factory: string, building: string) {

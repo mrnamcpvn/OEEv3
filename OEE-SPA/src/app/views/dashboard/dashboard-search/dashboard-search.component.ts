@@ -287,7 +287,6 @@ export class DashboardSearchComponent implements OnInit {
   }
 // Machine_Types
 loadMachine_Type() {
-  debugger
   this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
     this.machine_types = res.map(item => {
       return { id: item.id, text:  item.machine_type_name };

@@ -33,20 +33,7 @@ export class TrendSearchComponent implements OnInit {
   buildings: Array<Select2OptionData>;
   machine_types: Array<Select2OptionData>;
 
-  shifts: Array<Select2OptionData> = [
-    {
-      id: '0',
-      text: 'All Shifts'
-    },
-    {
-      id: '1',
-      text: 'Day'
-    },
-    {
-      id: '2',
-      text: 'Night'
-    }
-  ];
+  shifts: Array<Select2OptionData> = [];
 
   times: Array<Select2OptionData> = [
     // {
@@ -101,6 +88,7 @@ export class TrendSearchComponent implements OnInit {
 
   ngOnInit() {
     this.getListFactory();
+    this.getListShift();
     this.loadWeeks();
   }
 
@@ -146,9 +134,16 @@ export class TrendSearchComponent implements OnInit {
       this.factories.unshift({id: 'ALL',text: 'All Factories'});
     });
   }
+  getListShift() {
+    this.commonService.getListShift().subscribe(res => {
+      this.shifts = res.map(item => {
+        return {id: item.shift_id.toString(),text: item.shift_name}
+      });
+      this.shifts.unshift({id: '0',text: 'All Shifts'});
+    });
+  }
   changeFactory(value: any) {
     this.building = 'ALL';
-    // tslint:disable-next-line: triple-equals
     if (value != 'ALL') {
       this.loadBuilding();
     } else {
@@ -157,9 +152,13 @@ export class TrendSearchComponent implements OnInit {
   }
 
   changeBuilding(value: any) {
+    this.machine_type = "ALL";
+    if(value !== "ALL") {
       this.loadMachine_Type();
-      // this.loadChart();
-  }
+    } else {
+      this.loadChart();
+    }
+}
   changeMachine_Type(event: any) {
     this.loadChart();
   }
@@ -208,7 +207,7 @@ export class TrendSearchComponent implements OnInit {
   loadMachine_Type() {
     this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
       this.machine_types = res.map(item => {
-        return { id: item, text:  item };
+        return { id: item.id, text:  item.machine_type_name };
       });
       this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
     }, error => {
@@ -266,7 +265,7 @@ export class TrendSearchComponent implements OnInit {
       typeTime: this.typeTime,
       numberTime: this.numberTime
     };
-
+    console.log('---data-----', data);
     this.dataTrend.emit(data);
   }
 }

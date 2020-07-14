@@ -7,6 +7,7 @@ namespace OEE_API._Services.Interfaces
 {
     public interface IAvailabilityService
     {
-        Task<List<ChartDashBoardViewModel>> LoadDataChart(DashBoardParamModel param);
+        Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param);
+        Task<object> DataCharTrend (TrendParamModel param);  
     }
 }

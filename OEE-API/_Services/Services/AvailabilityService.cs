@@ -41,7 +41,7 @@ namespace OEE_API._Services.Services
             _configMapper = configMapper;
         }
 
-        public async Task<List<ChartDashBoardViewModel>> LoadDataChart(DashBoardParamModel param)
+        public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
         {
             var dataAll = new List<M_OEE_Dto>();
             var data = new List<ChartDashBoardViewModel>();
@@ -71,7 +71,7 @@ namespace OEE_API._Services.Services
             if (param.month.ToString() != null) {
                 dataAll = dataAll.Where(x => x.month.ToString() == param.month).ToList();
             }
-            
+
             if(param.factory.Trim() == "ALL") {
                 data = dataAll.GroupBy(x => new {x.factory_id}).Select(x => new ChartDashBoardViewModel() {
                         key = x.First().factory_id,
@@ -95,7 +95,6 @@ namespace OEE_API._Services.Services
                     }).ToList();
             }
 
-           
 
             if(param.factory != "ALL") {
                 data = dataAll.Where(x => x.factory_id.Trim() == param.factory.Trim())
@@ -137,6 +136,11 @@ namespace OEE_API._Services.Services
                                     }).ToList();
             }
             return data;
+        }
+
+        public async Task<object> DataCharTrend(TrendParamModel param)
+        {
+            throw new NotImplementedException();
         }
     }
 }
