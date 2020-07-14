@@ -44,26 +44,15 @@ namespace OEE_API._Services.Services
                 SY2data = SY2data.Where(x => x.shift_id == 2);
             }
 
-            data = data.Where(x => x.shift_day >= Convert.ToDateTime(date).Day
-                                && x.shift_month >= Convert.ToDateTime(date).Month
-                                && x.shift_year >= Convert.ToDateTime(date).Year
-                                && x.shift_day <= Convert.ToDateTime(dateTo).Day
-                                && x.shift_month <= Convert.ToDateTime(dateTo).Month
-                                && x.shift_year <= Convert.ToDateTime(dateTo).Year);
+            data = data.Where(x => x.shift_date >= Convert.ToDateTime(date)
+                                && x.shift_date <= Convert.ToDateTime(dateTo));
+                                
+            SHBdata = SHBdata.Where(x => x.shift_date >= Convert.ToDateTime(date)
+                                 && x.shift_date <= Convert.ToDateTime(dateTo));
 
-            SHBdata = SHBdata.Where(x => x.shift_day >= Convert.ToDateTime(date).Day
-                                 && x.shift_month >= Convert.ToDateTime(date).Month
-                                 && x.shift_year >= Convert.ToDateTime(date).Year
-                                 && x.shift_day <= Convert.ToDateTime(dateTo).Day
-                                 && x.shift_month <= Convert.ToDateTime(dateTo).Month
-                                 && x.shift_year <= Convert.ToDateTime(dateTo).Year);
-            SY2data = SY2data.Where(x => x.shift_day >= Convert.ToDateTime(date).Day
-                                 && x.shift_month >= Convert.ToDateTime(date).Month
-                                 && x.shift_year >= Convert.ToDateTime(date).Year
-                                 && x.shift_day <= Convert.ToDateTime(dateTo).Day
-                                 && x.shift_month <= Convert.ToDateTime(dateTo).Month
-                                 && x.shift_year <= Convert.ToDateTime(dateTo).Year);
-
+            SY2data = SY2data.Where(x => x.shift_date >= Convert.ToDateTime(date)
+                                 && x.shift_date <= Convert.ToDateTime(dateTo));
+            //khi chọn tất cả Factory
             if (factory == "ALL")
             {
 
@@ -86,6 +75,7 @@ namespace OEE_API._Services.Services
                 model.Add("SHB", (int)INdata);
                 model.Add("SY2", (int)MMdata);
             }
+            //khi chọn 1 factory và tất cả tòa nhà
             else if (factory != "ALL" && building == "ALL")
             {
                 var Buildings = await _commonService.GetListBuilding(factory);
@@ -120,43 +110,55 @@ namespace OEE_API._Services.Services
                     }
                 }
             }
+           
             else if (building != "ALL" && factory != "ALL")
             {
                 var MachineTypes = await _commonService.GetListMachineType(factory, building);
+            // khi chọn 1 tòa nhà và tất cả máy
                 if (machine_type == "ALL")
                 {
                     foreach (var item in MachineTypes)
                     {
-                        if (item.machine_type_name != null)
+                        if (item.machine_id != null)
                         {
                             decimal value = 0;
                             if (factory == "SHB")
                             {
-                                value = SHBdata.Where(x => x.building_id.Trim() == building.Trim()).Count() == 0 ? 0 :
-                                       SHBdata.Where(x => x.building_id.Trim() == building.Trim()).Sum(z => z.oee_rate) /
-                                        SHBdata.Where(x => x.building_id.Trim() == building.Trim()).Count();
+                                value = SHBdata.Where(x => x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Count() == 0 ? 0 :
+                                       SHBdata.Where(x => x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Sum(z => z.oee_rate) /
+                                        SHBdata.Where(x => x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Count();
                             }
                             else if (factory == "SY2")
                             {
-                                value = SY2data.Where(x => x.building_id.Trim() == building.Trim()).Count() == 0 ? 0 :
-                                                SY2data.Where(x => x.building_id.Trim() == building.Trim()).Sum(z => z.oee_rate) /
-                                                 SY2data.Where(x => x.building_id.Trim() == building.Trim()).Count();
+                                value = SY2data.Where(x => x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Count() == 0 ? 0 :
+                                                SY2data.Where(x => x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Sum(z => z.oee_rate) /
+                                                 SY2data.Where(x => x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Count();
                             }
                             else
                             {
                                 value = data.Where(x => x.factory_id.Trim() == factory.Trim()
-                               && x.building_id.Trim() == building.Trim()).Count() == 0 ? 0 :
+                               && x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Count() == 0 ? 0 :
                                   data.Where(x => x.factory_id.Trim() == factory.Trim()
-                                 && x.building_id.Trim() == building.Trim())
+                                 && x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim())
                                 .Sum(z => z.oee_rate) /
                                 data.Where(x => x.factory_id.Trim() == factory.Trim()
-                                && x.building_id.Trim() == building.Trim()).Count();
+                                && x.building_id.Trim() == building.Trim() &&
+                                x.machine_id.Trim() == item.machine_id.Trim()).Count();
                             }
                             model.Add(item.machine_id, (int)value);
                         }
                     }
 
                 }
+            //khi chọn 1 máy
                 else
                 {
                       decimal value = 0;
