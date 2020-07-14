@@ -19,7 +19,7 @@ export class TrendService {
   constructor(private http: HttpClient) { }
 
   getAvailability(param: TrendParam): Observable<{ dataChart, listTime: string[] }> {
-    return this.http.post<{ dataChart, listTime: string[] }>(this.baseUrl + 'Trend/GetAvailabilityOfTrend?factory=', param);
+    return this.http.post<{ dataChart, listTime: string[] }>(this.baseUrl + 'Trend/loadDataChart/', param);
   }
 
   exportExcel(dataExport: Array<Array<string>>, labels: Array<string>, factory: string, building: string) {
