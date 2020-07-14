@@ -18,7 +18,7 @@ namespace OEE_API.Models
         [Column(Order = 2)]
         public string machine_id { get; set; }
 
-        [Column(TypeName = "date")]
+        // [Column(TypeName = "date")]
         public DateTime? shift_date { get; set; }
 
         [Key]

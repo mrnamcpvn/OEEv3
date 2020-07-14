@@ -6,6 +6,7 @@ import { Chart_availability } from '../_models/chart_availability';
 import { Row, Workbook, Worksheet } from '../../../assets/libary/exceljs';
 import * as fs from 'file-saver';
 import { formatDate } from '@angular/common';
+import { DashBoardParam } from '../_models/dashboard-param';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,8 @@ export class AvailabilityService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  // tslint:disable-next-line: max-line-length
-  getAvailability(factory: string, building: string, machine_type: string, shift: string, date: string, dateTo: string): Observable<Chart_availability[]> {
-    // tslint:disable-next-line: max-line-length
-    return this.http.get<Chart_availability[]>(this.baseUrl + 'Availability/GetAvailability?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type + '&shift=' + shift + '&date=' + date + '&dateTo=' + dateTo);
+  getAvailability(param: DashBoardParam): Observable<Chart_availability[]> {
+    return this.http.post<Chart_availability[]>(this.baseUrl + 'DashBoard/loadDataChart/',param);
   }
 
   exportExcel(dataExport: Array<Array<string>>, labels: Array<string>, factory: string, building: string) {

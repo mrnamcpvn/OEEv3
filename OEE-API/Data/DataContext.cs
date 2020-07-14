@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OEE_API.Models;
+using OEE_API.ViewModels;
 
 namespace OEE_API.Data
 {
@@ -23,6 +24,7 @@ namespace OEE_API.Data
         public DbSet<M_RowIndex> M_RowIndex {get;set;}
         public DbSet<M_Shift> M_Shift {get;set;}
         public DbSet<M_ShiftTimeConfig> M_ShiftTimeConfig {get;set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<M_ActionTimeForOEE>().HasKey(x => new {x.id, x.date});

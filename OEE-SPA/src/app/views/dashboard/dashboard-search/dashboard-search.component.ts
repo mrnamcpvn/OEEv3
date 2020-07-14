@@ -7,6 +7,8 @@ import { CommonService } from '../../../_core/_services/common.service';
 import { AvailabilityService } from '../../../_core/_services/availability.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
+import { FunctionUtility } from '../../../_core/_utility/function-utility';
+
 
 @Component({
   selector: 'app-dashboard-search',
@@ -14,7 +16,7 @@ import { formatDate } from '@angular/common';
 })
 export class DashboardSearchComponent implements OnInit {
   @Input()  dataChart: Array<{ name: string, value: number, colorOn: string, colorOff: string }>;
-  @Output() dataDashboard = new EventEmitter<{ factory: string, building: string, shift: string, fromTime: string, toTime: string }>();
+  @Output() dataDashboard = new EventEmitter<{ factory: string, building: string, shift: string, month: string, date: string, dateTo: string}>();
 
   typeTime = 'date';
   factory: string = 'ALL';
@@ -113,13 +115,14 @@ export class DashboardSearchComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
   constructor(private commonService: CommonService,
     private availabilityService: AvailabilityService,
+    private utilityService: FunctionUtility,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getListFactory();
     this.getListShift();
     this.loadWeeks();
-    this.loadChart();
+    //this.loadChart();
   }
 
   exportExcel() {
@@ -173,7 +176,7 @@ export class DashboardSearchComponent implements OnInit {
   }
 
   changeFactory(value: any) {
-    console.log(this.factory);
+    debugger
     this.building = 'ALL';
     if (value != 'ALL') {
       this.loadBuilding();
@@ -198,7 +201,12 @@ export class DashboardSearchComponent implements OnInit {
     });
   }
   changeBuilding(value: any) {
-      this.loadMachine_Type();
+      this.machine_type = "ALL";
+      if(value !== "ALL") {
+        this.loadMachine_Type();
+      } else {
+        this.loadChart();
+      }
   }
   changeMachine_Type(event: any) {
     this.loadChart();
@@ -238,9 +246,6 @@ export class DashboardSearchComponent implements OnInit {
   }
 
   changeMonth(event: any) {
-    const time = this.commonService.getFistLastDayOfMonth(event);
-    this.date = time.firstDate;
-    this.dateTo = time.lastDate;
     this.loadChart();
   }
 
@@ -253,9 +258,11 @@ export class DashboardSearchComponent implements OnInit {
 
   // event chose date
   updateDate(event: any) {
+    debugger
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.dateTo = new Date(event.srcElement.value);
+      // let dateConvert = this.utilityService.getDateFormat(new Date(this.date));
       this.loadChart();
     }
   }
@@ -274,18 +281,17 @@ export class DashboardSearchComponent implements OnInit {
       this.buildings = res.map(item => {
         return { id: item, text: 'Building ' + item };
       });
-
       this.buildings.unshift({ id: 'ALL', text: 'All Building' });
-      console.log(this.buildings);
     }, error => {
       console.log(error);
     });
   }
 // Machine_Types
 loadMachine_Type() {
+  debugger
   this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
     this.machine_types = res.map(item => {
-      return { id: item.machine_id, text:  item.machine_type_name };
+      return { id: item.id, text:  item.machine_type_name };
     });
     this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
   }, error => {
@@ -336,15 +342,18 @@ loadMachine_Type() {
   }
 
   loadChart() {
+    debugger
     const data = {
       factory: this.factory,
       building: this.building,
       machine_type: this.machine_type,
       shift: this.shift,
-      fromTime: formatDate(this.date, 'yyyy-MM-dd', 'en-US'),
-      toTime: formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US')
+      month: this.month,
+      date: formatDate(this.date, 'yyyy-MM-dd', 'en-US'),
+      dateTo: formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US'),
+      // toTime: formatDate(this.dateTo, 'yyyy-MM-dd', 'en-US')
     };
-    console.log(data);
+    console.log('-----data param----',data);
     this.dataDashboard.emit(data);
   }
 }
