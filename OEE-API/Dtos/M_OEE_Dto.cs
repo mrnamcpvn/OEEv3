@@ -2,7 +2,7 @@ using System;
 
 namespace OEE_API.Dtos
 {
-    public class M_OEE_ID_Dto
+    public class M_OEE_Dto
     {
         public string factory_id { get; set; }
         public string building_id { get; set; }

@@ -16,9 +16,9 @@ namespace OEE_API.Helpers.AutoMapper
             CreateMap<M_MachineStatus_Dto, M_MachineStatus>();
             CreateMap<M_MachineType_Dto, M_MachineType>();
             CreateMap<M_MaintenanceTime_Dto, M_MaintenanceTime>();
-            CreateMap<M_OEE_ID_Dto, M_OEE_ID>();
-            CreateMap<M_OEE_MM_Dto, M_OEE_MM>();
-            CreateMap<M_OEE_VN_Dto, M_OEE_VN>();
+            CreateMap<M_OEE_Dto, M_OEE_ID>();
+            CreateMap<M_OEE_Dto, M_OEE_MM>();
+            CreateMap<M_OEE_Dto, M_OEE_VN>();
             CreateMap<M_Roles_Dto, M_Roles>();
             CreateMap<M_RoleUser_Dto, M_RoleUser>();
             CreateMap<M_RowIndex_Dto, M_RowIndex>();
