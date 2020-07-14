@@ -115,7 +115,6 @@ export class DashboardSearchComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
   constructor(private commonService: CommonService,
     private availabilityService: AvailabilityService,
-    private utilityService: FunctionUtility,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
@@ -186,7 +185,6 @@ export class DashboardSearchComponent implements OnInit {
   }
   getListFactory() {
     this.commonService.getListFactory().subscribe(res => {
-      console.log(res);
       this.factories = res.map(item => {
         return { id: item.factory_id, text: item.customer_name}
       });

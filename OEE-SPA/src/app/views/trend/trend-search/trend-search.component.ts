@@ -28,28 +28,7 @@ export class TrendSearchComponent implements OnInit {
   dataExport: Array<Array<string>> = [];
   arrayWeek: Week[];
 
-  factories: Array<Select2OptionData> = [
-    {
-      id: 'ALL',
-      text: 'All Factories'
-    },
-    {
-      id: 'SHW',
-      text: 'SHW'
-    },
-    {
-      id: 'SHD',
-      text: 'SHD'
-    },
-    {
-      id: 'SHB',
-      text: 'SHB'
-    },
-    {
-      id: 'SY2',
-      text: 'SY2'
-    }
-  ];
+  factories: Array<Select2OptionData> = [];
 
   buildings: Array<Select2OptionData>;
   machine_types: Array<Select2OptionData>;
@@ -116,9 +95,12 @@ export class TrendSearchComponent implements OnInit {
     theme: 'bootstrap4',
   };
 
-  constructor(private commonService: CommonService, private trendService: TrendService, private spinner: NgxSpinnerService) { }
+  constructor(private commonService: CommonService, 
+              private trendService: TrendService, 
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.getListFactory();
     this.loadWeeks();
   }
 
@@ -156,7 +138,14 @@ export class TrendSearchComponent implements OnInit {
 
     this.trendService.exportExcel(this.dataExport, label, this.factory, this.building);
   }
-
+  getListFactory() {
+    this.commonService.getListFactory().subscribe(res => {
+      this.factories = res.map(item => {
+        return { id: item.factory_id, text: item.customer_name}
+      });
+      this.factories.unshift({id: 'ALL',text: 'All Factories'});
+    });
+  }
   changeFactory(value: any) {
     this.building = 'ALL';
     // tslint:disable-next-line: triple-equals

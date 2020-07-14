@@ -59,7 +59,19 @@ namespace OEE_API._Services.Services
                 dataAll.AddRange(data_SPC);
                 dataAll.AddRange(data_SYF);
             }
-
+            
+            if(param.date != null && param.dateTo != null) {
+                dataAll = dataAll
+                    .Where(x => x.shift_date >= Convert.ToDateTime(param.date) &&
+                    x.shift_date <= Convert.ToDateTime(param.dateTo)).ToList();
+            }
+            if (param.shift_id.ToString() != "0") {
+                dataAll = dataAll.Where(x => x.shift_id.ToString() == param.shift_id).ToList();
+            }
+            if (param.month.ToString() != null) {
+                dataAll = dataAll.Where(x => x.month.ToString() == param.month).ToList();
+            }
+            
             if(param.factory.Trim() == "ALL") {
                 data = dataAll.GroupBy(x => new {x.factory_id}).Select(x => new ChartDashBoardViewModel() {
                         key = x.First().factory_id,
@@ -83,17 +95,7 @@ namespace OEE_API._Services.Services
                     }).ToList();
             }
 
-            if(param.date != null && param.dateTo != null) {
-                dataAll = dataAll
-                    .Where(x => x.shift_date >= Convert.ToDateTime(param.date) &&
-                    x.shift_date <= Convert.ToDateTime(param.dateTo)).ToList();
-            }
-            if (param.shift_id.ToString() != "0") {
-                dataAll = dataAll.Where(x => x.shift_id.ToString() == param.shift_id).ToList();
-            }
-            if (param.month.ToString() != null) {
-                dataAll = dataAll.Where(x => x.month.ToString() == param.month).ToList();
-            }
+           
 
             if(param.factory != "ALL") {
                 data = dataAll.Where(x => x.factory_id.Trim() == param.factory.Trim())

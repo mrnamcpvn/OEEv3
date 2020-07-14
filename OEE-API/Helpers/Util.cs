@@ -7,7 +7,7 @@ namespace OEE_API.Helpers
 {
     public static class Util
     {
-         public static List<WeekViewModel> ListWeekOfYear()
+        public static List<WeekViewModel> ListWeekOfYear()
         {
             var jan = new DateTime(DateTime.Today.Year, 1, 1);
 
