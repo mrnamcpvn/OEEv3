@@ -186,6 +186,7 @@ export class DashboardSearchComponent implements OnInit {
   }
   getListFactory() {
     this.commonService.getListFactory().subscribe(res => {
+      console.log(res);
       this.factories = res.map(item => {
         return { id: item.factory_id, text: item.customer_name}
       });

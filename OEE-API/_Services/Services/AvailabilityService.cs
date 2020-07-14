@@ -15,12 +15,15 @@ namespace OEE_API._Services.Services
         private readonly IOEE_VNRepository _repoOee_VN;
         private readonly ICommonService _serverCommon;
         private readonly IMachineInformationRepository _repoMachineInfomation;
+        private readonly IFactoryRepository _repofactory;
         public AvailabilityService( IOEE_VNRepository repoOee_VN,
                                     ICommonService serverCommon,
-                                    IMachineInformationRepository repoMachineInfomation) {
+                                    IMachineInformationRepository repoMachineInfomation,
+                                    IFactoryRepository repofactory) {
             _repoOee_VN = repoOee_VN;
             _serverCommon = serverCommon;
             _repoMachineInfomation = repoMachineInfomation;
+            _repofactory = repofactory;
         }
 
         public async Task<List<ChartDashBoardViewModel>> LoadDataChart(DashBoardParamModel param)
@@ -55,6 +58,13 @@ namespace OEE_API._Services.Services
                         data.Add(item1);
                     }
                 }
+                var listfactory = await _repofactory.FindAll().ToListAsync();
+                data = (from a in data join b in listfactory
+                    on a.key.Trim() equals b.factory_id.Trim()
+                    select new ChartDashBoardViewModel() {
+                        key = b.customer_name,
+                        value = a.value
+                    }).ToList();
             }
             if(param.factory != "ALL") {
                 data = dataAll.Where(x => x.factory_id.Trim() == param.factory.Trim())
