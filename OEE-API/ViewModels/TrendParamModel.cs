@@ -8,5 +8,6 @@ namespace OEE_API.ViewModels
         public string shift {get;set;}
         public string typeTime {get;set;}
         public string numberTime {get;set;}
+        public int count {get;set;}
     }
 }

@@ -669,3 +669,8 @@ System.NotImplementedException: The method or operation is not implemented.
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-07-14T16:01:04.7627212+07:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2020-07-14T16:01:04.7677594+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-07-14T16:01:04.7679686+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-07-14T16:01:04.7679977+07:00  [INF] Content root path: "G:\Project\Github\OEEv3\OEEv3-Change\OEEv3\OEE-API" (b5d60022)
+2020-07-14T16:30:38.0886161+07:00  [INF] Application is shutting down... (90f52c38)

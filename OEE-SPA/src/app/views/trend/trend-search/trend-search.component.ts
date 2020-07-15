@@ -14,7 +14,7 @@ import { Week } from '../../../_core/_models/week';
 export class TrendSearchComponent implements OnInit {
   @Input() dataChart: Array<{ label: string, data: Array<number> }>;
   @Input() labels: Array<string>;
-  @Output() dataTrend = new EventEmitter<{ factory: string, building: string, shift: string, typeTime: string, numberTime: string }>();
+  @Output() dataTrend = new EventEmitter<{ factory: string, building: string, shift: string, typeTime: string, numberTime: string, count: number }>();
 
   typeTime = 'week';
   numberTime: string = '1';
@@ -81,7 +81,7 @@ export class TrendSearchComponent implements OnInit {
   optionsSelect2: Options = {
     theme: 'bootstrap4',
   };
-
+  count = 0;
   constructor(private commonService: CommonService, 
               private trendService: TrendService, 
               private spinner: NgxSpinnerService) { }
@@ -257,15 +257,16 @@ export class TrendSearchComponent implements OnInit {
   }
 
   loadChart() {
+    this.count = this.count + 1;
     const data = {
       factory: this.factory,
       building: this.building,
       machine_type: this.machine_type,
       shift: this.shift,
       typeTime: this.typeTime,
-      numberTime: this.numberTime
+      numberTime: this.numberTime,
+      count: this.count
     };
-    console.log('---data-----', data);
     this.dataTrend.emit(data);
   }
 }

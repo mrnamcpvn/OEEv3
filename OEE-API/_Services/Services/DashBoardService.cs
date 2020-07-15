@@ -8,12 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using OEE_API._Repositories.Interfaces;
 using OEE_API._Services.Interfaces;
 using OEE_API.Dtos;
-using OEE_API.Models;
 using OEE_API.ViewModels;
 
 namespace OEE_API._Services.Services
 {
-    public class AvailabilityService : IAvailabilityService
+    public class DashBoardService : IDashBoardService
     {
         private readonly IOEE_VNRepository _repoOee_VN;
         private readonly IOEE_MMRepository _repoOee_MM;
@@ -23,7 +22,7 @@ namespace OEE_API._Services.Services
         private readonly IFactoryRepository _repofactory;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _configMapper;
-        public AvailabilityService( IOEE_VNRepository repoOee_VN,
+        public DashBoardService( IOEE_VNRepository repoOee_VN,
                                     IOEE_MMRepository repoOee_MM,
                                     IOEE_IDRepository repoOee_ID,
                                     ICommonService serverCommon,
@@ -40,8 +39,7 @@ namespace OEE_API._Services.Services
             _mapper = mapper;
             _configMapper = configMapper;
         }
-
-        public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
+         public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
         {
             var dataAll = new List<M_OEE_Dto>();
             var data = new List<ChartDashBoardViewModel>();
@@ -136,11 +134,6 @@ namespace OEE_API._Services.Services
                                     }).ToList();
             }
             return data;
-        }
-
-        public async Task<object> DataCharTrend(TrendParamModel param)
-        {
-            throw new NotImplementedException();
         }
     }
 }

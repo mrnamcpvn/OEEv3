@@ -10,8 +10,8 @@ namespace OEE_API.Controllers
     [Route("api/[controller]")]
     public class TrendController : ControllerBase
     {
-        private readonly IAvailabilityService _server;
-        public TrendController(IAvailabilityService server) {
+        private readonly ITrendService _server;
+        public TrendController(ITrendService server) {
             _server = server;
         }
 

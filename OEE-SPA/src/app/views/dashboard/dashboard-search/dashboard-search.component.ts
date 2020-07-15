@@ -257,7 +257,6 @@ export class DashboardSearchComponent implements OnInit {
 
   // event chose date
   updateDate(event: any) {
-    debugger
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.dateTo = new Date(event.srcElement.value);

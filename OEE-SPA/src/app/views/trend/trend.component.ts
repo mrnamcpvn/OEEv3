@@ -9,6 +9,7 @@ export interface DataSearch {
   shift: string;
   typeTime: string;
   numberTime: string;
+  count: number;
 }
 
 @Component({
@@ -45,19 +46,21 @@ export class TrendComponent implements OnInit, OnDestroy {
     this.isShowTable = false;
     this.trendService.getAvailability(this.data)
       .subscribe(res => {
-        this.arrayNull.pop();
-        this.arrayNull.push('demo');
-        this.dataChart = res.dataChart.map(item => {
-          return { label: item.name, data: item.data };
-        });
-        this.labels = res.listTime;
-        this.spinner.hide();
-        this.isShowTable = true;
-        this.autoloadStart();
-      }, error => {
-        this.spinner.hide();
-        this.isShowTable = true;
-        console.log(error);
+        if(res != null) {
+          console.log(res);
+          //   this.arrayNull.pop();
+          //   this.arrayNull.push('demo');
+          //   this.dataChart = res.dataChart.map(item => {
+          //     return { label: item.name, data: item.data };
+          //   });
+          //   this.labels = res.listTime;
+          this.spinner.hide();
+          //   this.isShowTable = true;
+          //   this.autoloadStart();
+          // }, error => {
+          //   this.isShowTable = true;
+          //   console.log(error);
+        }
       });
   }
 

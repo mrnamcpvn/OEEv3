@@ -9,14 +9,14 @@ namespace OEE_API.Controllers
     [Route("api/[controller]")]
     public class DashBoardController : ControllerBase
     {
-        private readonly IAvailabilityService _serviceAvailability;
-        public DashBoardController(IAvailabilityService serviceAvailability) {
-            _serviceAvailability = serviceAvailability;
+        private readonly IDashBoardService _service;
+        public DashBoardController(IDashBoardService service) {
+            _service = service;
         }
         
         [HttpPost("loadDataChart")]
         public async Task<IActionResult> LoadDataChart([FromBody]DashBoardParamModel param) {
-            var data = await _serviceAvailability.DataChartDashBoard(param);
+            var data = await _service.DataChartDashBoard(param);
             return Ok(data);
         }
     }
