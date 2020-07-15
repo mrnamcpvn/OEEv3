@@ -19,6 +19,9 @@ namespace OEE_API._Services.Services
         private readonly IActionTimeForOEERepository _repoActionTime;
         private readonly IMachineInformationRepository _repoMachineInfomation;
         private readonly IMachineTypeRepository _repoMachineType;
+        private readonly IOEE_VNRepository _repoOee_VN;
+        private readonly IOEE_MMRepository _repoOee_MM;
+        private readonly IOEE_IDRepository _repoOee_ID;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _configMapper;
         public CommonService(   IMapper mapper, 
@@ -27,7 +30,10 @@ namespace OEE_API._Services.Services
                                 IShiftRepository repoShift,
                                 IActionTimeForOEERepository repoActionTime,
                                 IMachineInformationRepository repoMachineInfomation,
-                                IMachineTypeRepository repoMachineType
+                                IMachineTypeRepository repoMachineType,
+                                IOEE_VNRepository repoOee_VN,
+                                IOEE_MMRepository repoOee_MM,
+                                IOEE_IDRepository repoOee_ID
                                 ) {
             _repoFactory = repoFactory;
             _repoShift = repoShift;
@@ -36,6 +42,9 @@ namespace OEE_API._Services.Services
             _repoActionTime = repoActionTime;
             _repoMachineInfomation = repoMachineInfomation;
             _repoMachineType = repoMachineType;
+            _repoOee_VN = repoOee_VN;
+            _repoOee_MM = repoOee_MM;
+            _repoOee_ID = repoOee_ID;
         }
 
         public async Task<List<string>> GetListBuilding(string factory)
@@ -70,10 +79,48 @@ namespace OEE_API._Services.Services
             return data;
         }
 
+        public async Task<List<M_OEE_Dto>> GetListOEE(string factory)
+        {
+            var data = new List<M_OEE_Dto>();
+            if (factory.Trim() == "CB" || factory.Trim() == "SHC") {
+                data = await _repoOee_VN.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();;
+            } else if(factory.Trim() == "SPC") {
+                data = await _repoOee_MM.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();;
+            } else if(factory.Trim() == "SYF") {
+                data = await _repoOee_ID.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();;
+            } else if(factory.Trim() == "ALL") {
+                var data_CB_SHC = await _repoOee_VN.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();
+                var data_SPC = await _repoOee_MM.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();
+                var data_SYF = await _repoOee_ID.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();
+                data.AddRange(data_CB_SHC);
+                data.AddRange(data_SPC);
+                data.AddRange(data_SYF);
+            }
+            return data;
+        }
+
         public async Task<List<M_Shift>> GetListShift()
         {
             var data = await _repoShift.FindAll().ToListAsync();
             return data;
+        }
+
+        public async Task<List<string>> ListMachineID(string factory, string building)
+        {
+            var machines = await _repoMachineInfomation.FindAll()
+                    .Where(x => x.factory_id.Trim() == factory.Trim() &&
+                    x.building_id.Trim() == building.Trim()).Select(x => x.machine_id).Distinct().ToListAsync();
+            return machines;
+        }
+
+        public async Task<List<string>> ListMachineID(string factory, string building, string machine_type)
+        {
+            var listMachine = await _repoMachineInfomation.FindAll()
+                                    .Where( x => x.factory_id.Trim() == factory.Trim() &&
+                                            x.building_id.Trim() == building.Trim() &&
+                                            x.machine_type.ToString().Trim() == machine_type.Trim())
+                                    .Select(x => x.machine_id.Trim()).ToListAsync();
+            return listMachine;
         }
     }
 }

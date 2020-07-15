@@ -17,7 +17,12 @@ namespace OEE_API.Controllers
 
         [HttpPost("loadDataChart")]
         public async Task<IActionResult> LoadDataChart(TrendParamModel param) {
-            var data = await _server.DataCharTrend(param);
+            var data = new object();
+            if (param.typeTime == "week") {
+                data = await _server.DataCharTrendWeek(param);
+            } else if(param.typeTime == "month") {
+                data = await _server.DataCharTrendMonth(param);
+            }
             return Ok(data);
         }
     }

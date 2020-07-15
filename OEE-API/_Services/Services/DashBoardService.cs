@@ -18,6 +18,7 @@ namespace OEE_API._Services.Services
         private readonly IOEE_MMRepository _repoOee_MM;
         private readonly IOEE_IDRepository _repoOee_ID;
         private readonly ICommonService _serverCommon;
+
         private readonly IMachineInformationRepository _repoMachineInfomation;
         private readonly IFactoryRepository _repofactory;
         private readonly IMapper _mapper;
@@ -39,25 +40,10 @@ namespace OEE_API._Services.Services
             _mapper = mapper;
             _configMapper = configMapper;
         }
-         public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
+        public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
         {
-            var dataAll = new List<M_OEE_Dto>();
+            var dataAll = await _serverCommon.GetListOEE(param.factory);
             var data = new List<ChartDashBoardViewModel>();
-            if (param.factory.Trim() == "CB" || param.factory.Trim() == "SHC") {
-                dataAll = await _repoOee_VN.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();;
-            } else if(param.factory.Trim() == "SPC") {
-                dataAll = await _repoOee_MM.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();;
-            } else if(param.factory.Trim() == "SYF") {
-                dataAll = await _repoOee_ID.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();;
-            } else if(param.factory.Trim() == "ALL") {
-                var data_CB_SHC = await _repoOee_VN.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();
-                var data_SPC = await _repoOee_MM.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();
-                var data_SYF = await _repoOee_ID.GetAll().ProjectTo<M_OEE_Dto>(_configMapper).ToListAsync();
-                dataAll.AddRange(data_CB_SHC);
-                dataAll.AddRange(data_SPC);
-                dataAll.AddRange(data_SYF);
-            }
-            
             if(param.date != null && param.dateTo != null) {
                 dataAll = dataAll
                     .Where(x => x.shift_date >= Convert.ToDateTime(param.date) &&
@@ -92,8 +78,6 @@ namespace OEE_API._Services.Services
                             value = a.value
                     }).ToList();
             }
-
-
             if(param.factory != "ALL") {
                 data = dataAll.Where(x => x.factory_id.Trim() == param.factory.Trim())
                 .GroupBy(x => new {x.factory_id, x.building_id})
@@ -121,9 +105,7 @@ namespace OEE_API._Services.Services
                 }).ToList();
             }
             if (param.machine_id != "ALL") {
-                var listMachine = await _repoMachineInfomation.FindAll()
-                                    .Where(x => x.machine_type.ToString().Trim() == param.machine_id.Trim())
-                                    .Select(x => x.machine_id.Trim()).ToListAsync();
+                var listMachine = await _serverCommon.ListMachineID(param.factory, param.building, param.machine_id);
                 data = dataAll.Where(x => x.factory_id.Trim() == param.factory.Trim() &&
                                     x.building_id.Trim() == param.building.Trim() &&
                                     listMachine.Contains(x.machine_id))

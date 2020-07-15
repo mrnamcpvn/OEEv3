@@ -71,5 +71,17 @@ namespace OEE_API.Helpers
 
             return listMonth;
         }
+
+        public static List<string> ListDate(List<string> dateList) {
+            var data = new List<string>();
+            var year = DateTime.Now.Year.ToString();
+            foreach (var dateItem in dateList)
+            {
+                var dateArray = dateItem.Split("/");
+                var dateString = year + "-" + dateArray[0] + "-" + dateArray[1];
+                data.Add(dateString);
+            }
+            return data;
+        }
     }
 }

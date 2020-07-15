@@ -9,7 +9,6 @@ export interface DataSearch {
   shift: string;
   typeTime: string;
   numberTime: string;
-  count: number;
 }
 
 @Component({
@@ -21,7 +20,7 @@ export class TrendComponent implements OnInit, OnDestroy {
   dataChart: Array<{ label: string, data: Array<number> }>;
   labels: Array<string>;
   autoload: any;
-  isShowTable: boolean = false;
+  // isShowTable = false;
   arrayNull: Array<string> = [];
   data: DataSearch;
 
@@ -41,26 +40,28 @@ export class TrendComponent implements OnInit, OnDestroy {
   }
 
   loadChart() {
+    debugger
     this.autoloadRemove();
     this.spinner.show();
-    this.isShowTable = false;
+    // this.isShowTable = false;
     this.trendService.getAvailability(this.data)
       .subscribe(res => {
+        console.log(res);
         if(res != null) {
-          console.log(res);
-          //   this.arrayNull.pop();
-          //   this.arrayNull.push('demo');
-          //   this.dataChart = res.dataChart.map(item => {
-          //     return { label: item.name, data: item.data };
-          //   });
-          //   this.labels = res.listTime;
+          this.arrayNull.pop();
+          this.arrayNull.push('demo');
+          this.dataChart = res.dataChart.map(item => {
+            return { label: item.name, data: item.data };
+          });
+          this.labels = res.listTime;
           this.spinner.hide();
-          //   this.isShowTable = true;
-          //   this.autoloadStart();
-          // }, error => {
-          //   this.isShowTable = true;
-          //   console.log(error);
+          // this.isShowTable = true;
+          this.autoloadStart();
         }
+      }, error => {
+        this.spinner.hide();
+        // this.isShowTable = false;
+        console.log(error);
       });
   }
 

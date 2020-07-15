@@ -3,6 +3,5 @@ export interface TrendParam {
     building: string; 
     machine_type: string  
     shift: string 
-    typeTime: string;  
-    numberTime: string;
+    typeTime: string;
 }

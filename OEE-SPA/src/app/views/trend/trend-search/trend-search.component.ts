@@ -14,7 +14,7 @@ import { Week } from '../../../_core/_models/week';
 export class TrendSearchComponent implements OnInit {
   @Input() dataChart: Array<{ label: string, data: Array<number> }>;
   @Input() labels: Array<string>;
-  @Output() dataTrend = new EventEmitter<{ factory: string, building: string, shift: string, typeTime: string, numberTime: string, count: number }>();
+  @Output() dataTrend = new EventEmitter<{ factory: string, building: string, shift: string, typeTime: string, numberTime: string}>();
 
   typeTime = 'week';
   numberTime: string = '1';
@@ -48,10 +48,10 @@ export class TrendSearchComponent implements OnInit {
       id: 'month',
       text: 'Month'
     },
-    {
-      id: 'year',
-      text: 'Year'
-    }
+    // {
+    //   id: 'year',
+    //   text: 'Year'
+    // }
   ];
 
   months: Array<Select2OptionData> = [
@@ -265,8 +265,9 @@ export class TrendSearchComponent implements OnInit {
       shift: this.shift,
       typeTime: this.typeTime,
       numberTime: this.numberTime,
-      count: this.count
     };
-    this.dataTrend.emit(data);
+    if(this.count >=4) {
+      this.dataTrend.emit(data);
+    }
   }
 }
