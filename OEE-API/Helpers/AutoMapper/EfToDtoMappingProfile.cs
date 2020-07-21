@@ -25,6 +25,7 @@ namespace OEE_API.Helpers.AutoMapper
             CreateMap< M_Shift,M_Shift_Dto>();
             CreateMap< M_ShiftTimeConfig,M_ShiftTimeConfig_Dto>();
             CreateMap< M_Users,M_Users_Dto>();
+            CreateMap< M_Users,UserForDetailDto>();
         }
     }
 }
