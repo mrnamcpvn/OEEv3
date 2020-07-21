@@ -53,7 +53,12 @@ namespace OEE_API._Services.Services
                                                 x.building_id.Trim() == building.Trim() &&
                                                 machines.Contains(x.machine_id.Trim())).FirstOrDefault();
                     }
-
+                    if(machine != "ALL") {
+                        dataAll = dataAll.Where(x => x.factory_id.Trim() == factory.Trim() &&
+                                                x.building_id.Trim() == building.Trim() &&
+                                                x.machine_id.Trim() == machine.Trim()).ToList();
+                        machineFirst = dataAll.FirstOrDefault();
+                    }
                     DbFunctions dfunc = null;
                     DateTime day = Convert.ToDateTime(date);
                     var machineName = machineFirst.machine_id;
