@@ -46,12 +46,12 @@
           (ngModelChange)="changeFactory($event)">
         </ng-select2>
       </div>
-      <div class="form-group col" [hidden]="factory != 'SHW' && factory != 'SHD'">
+      <div class="form-group col">
         <h5><span class="badge badge-warning">Building</span></h5>
         <ng-select2 [data]="buildings" [(ngModel)]="building" [options]="optionsSelect2" [placeholder]="'Building'"
           (valueChanged)="changeBuilding($event)"></ng-select2>
       </div>
-      <div class="form-group col" [hidden]="factory != 'SHW' && factory != 'SHD'">
+      <div class="form-group col" >
         <h5><span class="badge badge-warning">Machine Type</span></h5>
         <ng-select2 [data]="machine_types" [(ngModel)]="machine_type" [options]="optionsSelect2" [placeholder]="'Machine Type'"
           (ngModelChange)="changeMachine_Type($event)"></ng-select2>
@@ -75,9 +75,9 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="chart-reasons" [ngClass]="{'show': isShow, 'hidden': !isShow}">
+    <div id="chartActionTime" class="chart-reasons">
       <h5><span class="badge badge-warning">{{machineName}}</span></h5>
-        <div #trendChart (window:resize)="onResize($event)"  ></div>
+        <div #trendChart (window:resize)="onResize($event)"></div>
     </div>
     <!-- <div [ngClass]="{'show': !isShow ,'hidden': isShow}" class="alert alert-warning text-uppercase font-weight-bold text-center m-0" role="alert">
       No data found !

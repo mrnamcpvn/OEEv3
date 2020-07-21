@@ -38,6 +38,11 @@ namespace OEE_API.Controllers
             return Ok(data);
         }
 
+        [HttpGet("GetListMachineID")]
+        public async Task<IActionResult> GetListMachineID(string factory, string building, string machine_type) {
+            var machines = await _serviceCommon.GetListMachineID(factory,building, machine_type);
+            return Ok(machines);
+        }
          // Call class utility to take out all week of year 
         [HttpGet("WeekInYear")]
         public IActionResult GetWeekInYear()

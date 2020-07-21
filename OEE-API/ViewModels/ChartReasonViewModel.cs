@@ -4,7 +4,7 @@ namespace OEE_API.ViewModels
 {
     public class ChartReason
     {
-        // public int? id {get;set;}
+        public decimal? id {get;set;}
         public string title {get;set;}
         public DateTime? start_time { get; set; }
         public DateTime? end_time { get; set; }

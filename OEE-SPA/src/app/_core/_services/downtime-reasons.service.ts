@@ -18,24 +18,16 @@ export class DowntimeReasonsService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  // // tslint:disable-next-line: max-line-length
-  // getDowntimeReasons(factory: string, machine: string, shift: string, date: string): Observable<{ dataChart, listTime: string[] }> {
-  //   // tslint:disable-next-line: max-line-length
-  //   return this.http.get<{ dataChart, listTime: string[] }>(this.baseUrl + '
-  // 'DowntimeReasons?factory=' + factory + '&machine=' + machine + '&shift=' + shift + '&date=' + date);
-  // }
   getDowntimeReasonDetail(reason_1: string): Observable<string[]> {
     return this.http.get<string[]>(this.baseUrl + 'DowntimeReasons/getDowntimeReasonDetail?reason_1=' + reason_1);
   }
   addDowntimeReason(chartreason: ChartReason): Observable<any> {
     return this.http.post<ChartReason>(this.baseUrl + 'DowntimeReasons/addDowntimeReason', chartreason);
   }
-    // tslint:disable-next-line: max-line-length
-    getDowntimeReasons(factory: string, building: string, machine: string, shift: string, date: string, page: number): Observable<PaginationResult<ChartReason[]>> {
-      // tslint:disable-next-line: max-line-length
-      return this.http.get<PaginationResult<ChartReason[]>>(this.baseUrl + 'DowntimeReasons/getDowntimeReasons?factory=' + factory + '&building=' + building + '&machine=' + machine + '&shift=' + shift + '&date=' + date + '&page=' + page);
-    }
-    getReasons(item: number): Observable<Downtimereason> {
-      return this.http.get<Downtimereason>(this.baseUrl + 'DowntimeReasons/getReasons?item=' + item);
-    }
+  getDowntimeReasons(factory: string, building: string, machine: string, machine_type: string, shift: string, date: string, page: number): Observable<PaginationResult<ChartReason[]>> {
+    return this.http.get<PaginationResult<ChartReason[]>>(this.baseUrl + 'DowntimeReason/getDataChart?factory=' + factory + '&building=' + building + '&machine=' + machine + '&machine_type=' + machine_type + '&shift=' + shift + '&date=' + date + '&page=' + page);
+  }
+  getReasons(item: number): Observable<Downtimereason> {
+    return this.http.get<Downtimereason>(this.baseUrl + 'DowntimeReasons/getReasons?item=' + item);
+  }
 }
