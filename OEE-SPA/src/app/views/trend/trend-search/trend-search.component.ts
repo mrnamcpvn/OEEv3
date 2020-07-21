@@ -83,8 +83,7 @@ export class TrendSearchComponent implements OnInit {
   };
   count = 0;
   constructor(private commonService: CommonService, 
-              private trendService: TrendService, 
-              private spinner: NgxSpinnerService) { }
+              private trendService: TrendService) { }
 
   ngOnInit() {
     this.getListFactory();
@@ -147,6 +146,8 @@ export class TrendSearchComponent implements OnInit {
     if (value != 'ALL') {
       this.loadBuilding();
     } else {
+      this.buildings = [];
+      this.machine_types = [];
       this.loadChart();
     }
   }

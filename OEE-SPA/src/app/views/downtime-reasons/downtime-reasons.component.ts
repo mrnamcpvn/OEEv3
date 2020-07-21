@@ -6,7 +6,6 @@ import { Options } from 'select2';
 import { CommonService } from '../../_core/_services/common.service';
 import { formatDate } from '@angular/common';
 import { DowntimeReasonsService } from '../../../app/_core/_services/downtime-reasons.service';
-import { ActionTime } from '../../../app/_core/_models/action-time';
 import { map } from 'highcharts';
 import Swal from 'sweetalert2';
 
@@ -34,14 +33,14 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
   reason_1: string = '0';
   reason_2: string  = '0';
   reason_note: string = '';
-pagination: Pagination = {
-  currentPage: 1,
-  pageSize: 10,
-  totalCount: 0,
-  totalPage: 0,
-};
+  pagination: Pagination = {
+    currentPage: 1,
+    pageSize: 10,
+    totalCount: 0,
+    totalPage: 0,
+  };
 
-modalRef: BsModalRef;
+  modalRef: BsModalRef;
   date: Date = new Date();
   dataActionTime: Array<ChartReason> = [];
 
@@ -75,10 +74,10 @@ modalRef: BsModalRef;
     dayViewHeaderFormat: 'DD-MM-YYYY',
     sideBySide: true
   };
-  constructor( private modalService: BsModalService,
-    private fb: FormBuilder,
-    private commonService: CommonService,
-              private downtimeReasonsService: DowntimeReasonsService ) { }
+  constructor(  private modalService: BsModalService,
+                private fb: FormBuilder,
+                private commonService: CommonService,
+                private downtimeReasonsService: DowntimeReasonsService ) { }
 
   ngOnInit() {
     this.getListFactory();
@@ -143,7 +142,9 @@ modalRef: BsModalRef;
     if (value != 'ALL') {
       this.loadBuilding();
     } else {
-      this.loadChart();
+      this.buildings = [];
+      this.machines = [];
+      this.machine_types = [];
     }
   }
   changeMachine_Type(event: any) {
@@ -229,7 +230,7 @@ loadMachine_Type() {
         }
         if (res.resultC.length > 0) {
           document.getElementById("chartActionTime").style.display = "block";
-            google.charts.setOnLoadCallback(this.drawChart(res.resultC));
+          google.charts.setOnLoadCallback(this.drawChart(res.resultC));
         }
       } else {
         document.getElementById("chartActionTime").style.display = "none";

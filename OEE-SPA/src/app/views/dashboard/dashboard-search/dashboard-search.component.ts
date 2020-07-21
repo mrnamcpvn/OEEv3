@@ -180,6 +180,8 @@ export class DashboardSearchComponent implements OnInit {
     if (value != 'ALL') {
       this.loadBuilding();
     } else {
+      this.buildings = [];
+      this.machine_types = [];
       this.loadChart();
     }
   }
