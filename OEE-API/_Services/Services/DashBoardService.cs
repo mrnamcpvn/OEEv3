@@ -42,6 +42,7 @@ namespace OEE_API._Services.Services
         }
         public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
         {
+            
             var dataAll = await _serverCommon.GetListOEE(param.factory);
             var data = new List<ChartDashBoardViewModel>();
             if(param.date != null && param.dateTo != null) {
@@ -49,13 +50,15 @@ namespace OEE_API._Services.Services
                     .Where(x => x.shift_date >= Convert.ToDateTime(param.date) &&
                     x.shift_date <= Convert.ToDateTime(param.dateTo)).ToList();
             }
+
+
+
             if (param.shift_id.ToString() != "0") {
                 dataAll = dataAll.Where(x => x.shift_id.ToString() == param.shift_id).ToList();
             }
             if (param.month.ToString() != null) {
                 dataAll = dataAll.Where(x => x.month.ToString() == param.month).ToList();
             }
-
             if(param.factory.Trim() == "ALL") {
                 data = dataAll.GroupBy(x => new {x.factory_id}).Select(x => new ChartDashBoardViewModel() {
                         key = x.First().factory_id,

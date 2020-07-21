@@ -43,7 +43,7 @@ namespace OEE_API
             services.AddControllers();
 
              // config Mapper
-             services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IMapper>(sp =>
             {
                 return new Mapper(AutoMapperConfig.RegisterMappings());
@@ -84,6 +84,7 @@ namespace OEE_API
             services.AddScoped<ICommonService, CommonService>();
             services.AddScoped<IDashBoardService, DashBoardService>();
             services.AddScoped<ITrendService, TrendService>();
+            services.AddScoped<IDownTimeReasonService, DownTimeReasonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
