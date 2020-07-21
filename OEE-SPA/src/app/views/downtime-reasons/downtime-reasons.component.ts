@@ -44,7 +44,6 @@ pagination: Pagination = {
 modalRef: BsModalRef;
   date: Date = new Date();
   dataActionTime: Array<ChartReason> = [];
-  isShow: boolean;
 
   dataReason: Array<string[]> = [];
   modal:  ChartReason;
@@ -85,8 +84,6 @@ modalRef: BsModalRef;
     this.getListFactory();
     this.getListShift();
     google.charts.load('current', { packages: ['timeline'] });
- //   this.loadChart();
-  this.isShow = false;
     this.loadReason1(this.reason_1, false);
     this.addForm = this.fb.group({
       reason_1: [],
@@ -223,20 +220,19 @@ loadMachine_Type() {
     this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building, this.machine, this.machine_type, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
     .subscribe(res => {
       console.log(res);
-      if (res != null) {
+      if (res !== null) {
+        debugger
         if (res.result.length > 0) {
           this.dataActionTime = res.result;
           this.pagination = res.pagination;
           this.machineName = res.machineName;
         }
         if (res.resultC.length > 0) {
-            this.isShow = true;
-          google.charts.setOnLoadCallback(this.drawChart(res.resultC));
-          } else {
-            this.isShow = false;
-          }
+          document.getElementById("chartActionTime").style.display = "block";
+            google.charts.setOnLoadCallback(this.drawChart(res.resultC));
+        }
       } else {
-        this.isShow = false;
+        document.getElementById("chartActionTime").style.display = "none";
         this.dataActionTime = [];
       }
       }, (error: any) => {
@@ -245,18 +241,17 @@ loadMachine_Type() {
   }
 
   reasonSave() {
-
     this.modal.reason_1 = this.addForm.value.reason_1;
     this.modal.reason_2 = this.addForm.value.reason_2;
     this.modal.reason_note = this.addForm.value.reason_note;
   //  this.modal.building_id = this.addForm.value.building_id;
     this.downtimeReasonsService.addDowntimeReason(this.modal)
     .subscribe(res => {
-       if (res === true) {
-         this.modalRef.hide();
-         Swal.fire('Saved!', 'Your change has been saved.', 'success');
-         this.loadChart();
-       }
+        if (res === true) {
+          this.modalRef.hide();
+          Swal.fire('Saved!', 'Your change has been saved.', 'success');
+          this.loadChart();
+        }
       }, (error: any) => {
         Swal.fire('Oops...', 'Something went wrong!', 'error');
         console.log(error);
