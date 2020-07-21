@@ -62,6 +62,20 @@ namespace OEE_API._Services.Services
             return data;
         }
 
+        public async Task<List<MachineInformationModel>> GetListMachineID(string factory, string building, string machine_type)
+        {
+            var machines = await _repoMachineInfomation.FindAll()
+                .Where(x => x.factory_id.Trim() == factory.Trim() &&
+                            x.building_id.Trim() == building.Trim() &&
+                            x.machine_type.ToString() == machine_type.Trim())
+                .Select(x => new MachineInformationModel() {
+                    machine_type = x.machine_type,
+                    machine_id = x.machine_id,
+                    machine_name = x.machine_name
+                }).Distinct().ToListAsync();
+            return machines;
+        }
+
         public async Task<List<MachineViewModel>> GetListMachineType(string factory, string building)
         {
             var machines = await _repoMachineInfomation.GetAll()

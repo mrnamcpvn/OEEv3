@@ -7,6 +7,6 @@ namespace OEE_API._Services.Interfaces
 {
     public interface IDownTimeReasonService
     {
-        Task<PageListUtility<ChartReason>> GetDataChart(DownTimeReasonParamModel param);
+        Task<PageListUtility<ChartReason>> GetDataChart(string factory, string building, string machine, string machine_type, string shift, string date, int page = 1);
     }
 }

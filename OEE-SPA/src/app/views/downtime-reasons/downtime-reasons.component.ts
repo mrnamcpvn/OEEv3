@@ -48,46 +48,10 @@ modalRef: BsModalRef;
 
   dataReason: Array<string[]> = [];
   modal:  ChartReason;
-  factories: Array<Select2OptionData> = [
-    {
-      id: 'ALL',
-      text: 'All Factories'
-    },
-    {
-      id: 'SHW',
-      text: 'SHW'
-    },
-    {
-      id: 'SHD',
-      text: 'SHD'
-    },
-    {
-      id: 'SHB',
-      text: 'SHB'
-    },
-    {
-      id: 'SY2',
-      text: 'SY2'
-    }
-  ];
-
+  factories: Array<Select2OptionData> = [];
   buildings: Array<Select2OptionData>;
   machine_types: Array<Select2OptionData>;
-  public shifts: Array<Select2OptionData> = [
-    {
-      id: '0',
-      text: 'All Shifts'
-    },
-    {
-      id: '1',
-      text: 'Shift 1'
-    },
-    {
-      id: '2',
-      text: 'Shift 2'
-    }
-  ];
-
+  public shifts: Array<Select2OptionData> = [];
   public machines: Array<Select2OptionData>;
   public reason1s: Array<Select2OptionData>;
   public reason2s:  Array<Select2OptionData>;
@@ -118,24 +82,53 @@ modalRef: BsModalRef;
               private downtimeReasonsService: DowntimeReasonsService ) { }
 
   ngOnInit() {
+    this.getListFactory();
+    this.getListShift();
     google.charts.load('current', { packages: ['timeline'] });
  //   this.loadChart();
- this.isShow = false;
-   this.loadReason1(this.reason_1, false);
-   this.addForm = this.fb.group({
-     reason_1: [],
-     reason_2: [],
-     reason_note: []
-   });
+  this.isShow = false;
+    this.loadReason1(this.reason_1, false);
+    this.addForm = this.fb.group({
+      reason_1: [],
+      reason_2: [],
+      reason_note: []
+    });
+  }
+  getListFactory() {
+    this.commonService.getListFactory().subscribe(res => {
+      this.factories = res.map(item => {
+        return { id: item.factory_id, text: item.customer_name}
+      });
+      this.factories.unshift({id: 'ALL',text: 'All Factories'});
+    });
+  }
+  getListShift() {
+    this.commonService.getListShift().subscribe(res => {
+      this.shifts = res.map(item => {
+        return {id: item.shift_id.toString(),text: item.shift_name}
+      });
+      this.shifts.unshift({id: '0',text: 'All Shifts'});
+    });
+  }
+   // Get all building of factory selected
+  loadBuilding() {
+    this.commonService.getBuilding(this.factory).subscribe(res => {
+      this.buildings = res.map(item => {
+        return { id: item, text: 'Building ' + item };
+      });
+      this.buildings.unshift({ id: 'ALL', text: 'All Building' });
+    }, error => {
+      console.log(error);
+    });
   }
   openModal(template: TemplateRef<any>, item: ChartReason) {
     this.downtimeReasonsService.getReasons(item.id)
     .subscribe(res => {
     if(res != null)
     {
-     this.reason_1 = res.reason_1;
-     this.reason_2 = res.reason_2;
-     this.reason_note = res.reason_note;
+      this.reason_1 = res.reason_1;
+      this.reason_2 = res.reason_2;
+      this.reason_note = res.reason_note;
     }
       else
       {
@@ -145,40 +138,15 @@ modalRef: BsModalRef;
       }
     });
     this.modalRef = this.modalService.show(template);
-   this.modal = item;
+    this.modal = item;
   }
   changeFactory(value: any) {
+    debugger
     this.building = 'ALL';
-    // tslint:disable-next-line: triple-equals
     if (value != 'ALL') {
-      // tslint:disable-next-line: triple-equals
-      if (value == 'SHW' || value == 'SHD') {
-        this.loadBuilding();
-        this.loadChart();
-      } else {
-        // vì database : SHB không có bảng ActionTime, SY2: không có building
-        // tslint:disable-next-line: triple-equals
-        if (value == 'SY2') {
-          this.loadMachine();
-        } else {
-          this.buildings = [];
-        }
-        this.loadChart();
-      }
+      this.loadBuilding();
     } else {
       this.loadChart();
-    }
-  }
-
-  changeBuilding(value: any) {
-    this.building = value;
-    this.machine = 'ALL';
-    this.loadMachine_Type();
-    // tslint:disable-next-line: triple-equals
-    if (value != 'ALL') {
-      this.loadMachine();
-    } else {
-      this.machines = null;
     }
   }
   changeMachine_Type(event: any) {
@@ -187,7 +155,6 @@ modalRef: BsModalRef;
   }
   changeMachine(value: any): any {
     this.machine = value;
-
     this.loadChart();
   }
 
@@ -202,31 +169,24 @@ modalRef: BsModalRef;
     this.loadChart();
   }
   updateDate(event: any) {
-    // tslint:disable-next-line: triple-equals
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.loadChart();
     }
   }
-  loadBuilding() {
-    this.commonService.getBuildingsActionTime(this.factory).subscribe(res => {
-      this.buildings = res.map((item, index, array) => {
-        return {
-          id: array[array.length - 1 - index] == null ? 'other' : array[array.length - 1 - index],
-          text: array[array.length - 1 - index] == null ? 'Other' : ('Building ' + array[array.length - 1 - index])
-        };
-      });
-      this.buildings.unshift({ id: 'ALL', text: 'All Building' });
-
-    }, error => {
-      console.log(error);
-    });
+  changeBuilding(value: any) {
+    this.machine_type = "ALL";
+    if(value !== "ALL") {
+      this.loadMachine_Type();
+    } else {
+      this.loadChart();
+    }
   }
-  // Machine_Types
+// Machine_Types
 loadMachine_Type() {
   this.commonService.getMachine_Type(this.factory, this.building).subscribe(res => {
     this.machine_types = res.map(item => {
-      return { id: item, text:  item };
+      return { id: item.id, text:  item.machine_type_name };
     });
     this.machine_types.unshift({ id: 'ALL', text: 'All Machine Types' });
   }, error => {
@@ -236,11 +196,9 @@ loadMachine_Type() {
   loadMachine() {
     this.commonService.getMachinesActionTime(this.factory, this.building, this.machine_type).subscribe(res => {
       this.machines = res.map(item => {
-        return { id: item, text: item };
+        return { id: item.machine_id, text: item.machine_id };
       });
-
       this.machines.unshift({ id: 'ALL', text: 'All Machine' });
-
     }, error => {
       console.log(error);
     });
@@ -262,22 +220,21 @@ loadMachine_Type() {
   }
 
   loadChart() {
-    // tslint:disable-next-line: max-line-length
-    console.log('f: ' + this.factory + ' m: ' + this.machine + ' s: ' + this.shift + ' d: ' + formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'));
-    this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building,  this.machine, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
+    this.downtimeReasonsService.getDowntimeReasons(this.factory, this.building, this.machine, this.machine_type, this.shift, formatDate(new Date(this.date), 'yyyy-MM-dd', 'en-US'), this.pagination.currentPage)
     .subscribe(res => {
+      console.log(res);
       if (res != null) {
-      if (res.result.length > 0) {
-        this.dataActionTime = res.result;
-        this.pagination = res.pagination;
-        this.machineName = res.machineName;
-      }
-      if (res.resultC.length > 0) {
-          this.isShow = true;
-        google.charts.setOnLoadCallback(this.drawChart(res.resultC));
-        } else {
-          this.isShow = false;
+        if (res.result.length > 0) {
+          this.dataActionTime = res.result;
+          this.pagination = res.pagination;
+          this.machineName = res.machineName;
         }
+        if (res.resultC.length > 0) {
+            this.isShow = true;
+          google.charts.setOnLoadCallback(this.drawChart(res.resultC));
+          } else {
+            this.isShow = false;
+          }
       } else {
         this.isShow = false;
         this.dataActionTime = [];

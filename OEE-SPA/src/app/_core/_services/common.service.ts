@@ -25,11 +25,11 @@ export class CommonService {
   }
 
   getMachine(factory: string, building: string, machine_type: string): Observable<string[]> {
-    debugger
-    // tslint:disable-next-line: max-line-length
     return this.http.get<string[]>(this.baseUrl + 'Common/GetMachine?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type);
   }
-
+  getListMachineID(machine_type: string) {
+    return this.http.get<any>(this.baseUrl + 'Common/GetListMachineID/' + machine_type, {});
+  }
   getWeeks(): Observable<Week[]> {
     return this.http.get<Week[]>(this.baseUrl + 'Common/WeekInYear');
   }
@@ -38,8 +38,8 @@ export class CommonService {
     return this.http.get<string[]>(this.baseUrl + 'Common/GetAllBuildingActionTime/' + factory);
   }
 
-  getMachinesActionTime(factory: string, building: string, machine_type: string): Observable<string[]> {
-    return this.http.get<string[]>(this.baseUrl + 'Common/GetAllMachineActionTime?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type);
+  getMachinesActionTime(factory: string, building: string, machine_type: string) {
+    return this.http.get<any>(this.baseUrl + 'Common/GetListMachineID?factory=' + factory + '&building=' + building + '&machine_type=' + machine_type);
   }
 
   getFistLastDayOfMonth(month: number) {

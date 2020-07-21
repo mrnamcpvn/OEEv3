@@ -14,9 +14,9 @@ namespace OEE_API.Controllers
             _server = server;
         }
 
-        [HttpPost("getDataChart")]
-        public async Task<IActionResult> GetDataChart([FromBody]DownTimeReasonParamModel param) {
-            var data = await _server.GetDataChart(param);
+        [HttpGet("getDataChart")]
+        public async Task<IActionResult> GetDataChart(string factory, string building, string machine, string machine_type, string shift, string date, int page = 1) {
+            var data = await _server.GetDataChart(factory, building, machine,machine_type,shift,date, page);
             return Ok(data);
         }
     }
