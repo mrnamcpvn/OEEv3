@@ -10,7 +10,5 @@ namespace OEE_API.Models
         public int downtime_reason_id { get; set; }
 
         public string remark { get; set; }
-
-        public string note { get; set; }
     }
 }
