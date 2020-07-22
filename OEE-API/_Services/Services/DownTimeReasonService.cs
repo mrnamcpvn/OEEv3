@@ -107,25 +107,29 @@ namespace OEE_API._Services.Services
                                             x.machine_id.Trim() == machine.Trim()).ToList();
                     machineFirst = dataAll.FirstOrDefault();
                 }
-                DbFunctions dfunc = null;
-                DateTime day = Convert.ToDateTime(date);
-                var machineName = machineFirst.machine_id;
-                var data = dataAll.Where(x => x.machine_id.Trim() == machineFirst.machine_id.Trim()).Select(x => new ChartReason()
-                {
-                    id = x.id,
-                    title = x.is_work_time == true ? "RUN" : "IDLE",
-                    start_time = x.start_time,
-                    end_time = x.end_time,
-                    diffTime = SqlServerDbFunctionsExtensions.DateDiffMinute(dfunc, x.start_time, x.end_time),
-                    factory_id = x.factory_id,
-                    machine_id = x.machine_id,
-                    building_id = x.building_id,
-                    shift_id = x.shift_id.ToString(),
-                    shift_date = x.shift_date,
-                    isEdit = false,
-                }).OrderByDescending(x => x.title).ToList();
-                var dataTable = data.Where(x => x.title == "IDLE").ToList();
-                return await PageListUtility<ChartReason>.PageListAsyncChartReason(data, dataTable, machineName, page);
+                if (dataAll.Count() != 0) {
+                     DbFunctions dfunc = null;
+                    DateTime day = Convert.ToDateTime(date);
+                    var machineName = machineFirst.machine_id;
+                    var data = dataAll.Where(x => x.machine_id.Trim() == machineFirst.machine_id.Trim()).Select(x => new ChartReason()
+                    {
+                        id = x.id,
+                        title = x.is_work_time == true ? "RUN" : "IDLE",
+                        start_time = x.start_time,
+                        end_time = x.end_time,
+                        diffTime = SqlServerDbFunctionsExtensions.DateDiffMinute(dfunc, x.start_time, x.end_time),
+                        factory_id = x.factory_id,
+                        machine_id = x.machine_id,
+                        building_id = x.building_id,
+                        shift_id = x.shift_id.ToString(),
+                        shift_date = x.shift_date,
+                        isEdit = false,
+                    }).OrderByDescending(x => x.title).ToList();
+                    var dataTable = data.Where(x => x.title == "IDLE").ToList();
+                    return await PageListUtility<ChartReason>.PageListAsyncChartReason(data, dataTable, machineName, page);
+                } else {
+                    return null;
+                }
             }
         }
 

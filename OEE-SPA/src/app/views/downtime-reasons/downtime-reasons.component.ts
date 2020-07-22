@@ -93,8 +93,6 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
     this.getListFactory();
     this.getListShift();
     google.charts.load("current", { packages: ["timeline"] });
-    //   this.loadChart();
-    this.isShow = false;
     this.loadReason();
     this.addForm = this.fb.group({
       reason_1: [],
@@ -264,7 +262,7 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
       )
       .subscribe(
         res => {
-          console.log(res);
+          console.log('----dataAll---',res);
           if (res != null) {
             if (res.result.length > 0) {
               this.dataActionTime = res.result;
@@ -272,13 +270,13 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
               this.machineName = res.machineName;
             }
             if (res.resultC.length > 0) {
-              this.isShow = true;
+              document.getElementById('chartActionTime').style.display = "block";
               google.charts.setOnLoadCallback(this.drawChart(res.resultC));
             } else {
-              this.isShow = false;
+              document.getElementById('chartActionTime').style.display = "none";
             }
           } else {
-            this.isShow = false;
+            document.getElementById('chartActionTime').style.display = "none";
             this.dataActionTime = [];
           }
         },
