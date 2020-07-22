@@ -86,6 +86,7 @@ namespace OEE_API
             services.AddScoped<ITrendService, TrendService>();
             services.AddScoped<IDownTimeReasonService, DownTimeReasonService>();
             services.AddScoped<IAuthRepository,AuthRepository>();
+            services.AddScoped<IDowntimeAnalysisService,DowntimeAnalysisService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
