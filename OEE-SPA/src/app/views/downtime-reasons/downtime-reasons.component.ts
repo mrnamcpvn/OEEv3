@@ -292,6 +292,7 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
       this.addForm.value.reason_2 == ""
     ) {
       Swal.fire("Oops!", "Please Option Reason!", "error");
+      return;
     }
     this.modal.reason_1 = this.addForm.value.reason_1;
     this.modal.reason_2 = this.addForm.value.reason_2;
