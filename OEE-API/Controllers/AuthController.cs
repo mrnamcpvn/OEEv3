@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using OEE_API._Services.Interfaces;
 
 namespace OEE_API.Controllers
 {
@@ -16,19 +17,19 @@ namespace OEE_API.Controllers
     [ApiController]
     public class AuthController: ControllerBase
     {
-          private readonly IAuthRepository _repo;
+        private readonly IAuthService _service;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-         public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(IAuthService service, IConfiguration config, IMapper mapper)
         {
             _mapper = mapper;
             _config = config;
-            _repo = repo;
+            _service = service;
         }
         [HttpPost]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLoginDto.Username, userForLoginDto.Password);
+            var userFromRepo = await _service.Login(userForLoginDto.Username, userForLoginDto.Password);
             if (userFromRepo == null)
                 return Unauthorized();
             var claims = new[]

@@ -85,7 +85,7 @@ namespace OEE_API
             services.AddScoped<IDashBoardService, DashBoardService>();
             services.AddScoped<ITrendService, TrendService>();
             services.AddScoped<IDownTimeReasonService, DownTimeReasonService>();
-            services.AddScoped<IAuthRepository,AuthRepository>();
+            services.AddScoped<IAuthService,AuthService>();
             services.AddScoped<IDowntimeAnalysisService,DowntimeAnalysisService>();
         }
 
