@@ -36,10 +36,6 @@ export class TrendSearchComponent implements OnInit {
   shifts: Array<Select2OptionData> = [];
 
   times: Array<Select2OptionData> = [
-    // {
-    //   id: 'date',
-    //   text: 'Date'
-    // },
     {
       id: 'week',
       text: 'Week'
@@ -48,10 +44,6 @@ export class TrendSearchComponent implements OnInit {
       id: 'month',
       text: 'Month'
     },
-    // {
-    //   id: 'year',
-    //   text: 'Year'
-    // }
   ];
 
   months: Array<Select2OptionData> = [
@@ -83,8 +75,7 @@ export class TrendSearchComponent implements OnInit {
   };
   count = 0;
   constructor(private commonService: CommonService, 
-              private trendService: TrendService, 
-              private spinner: NgxSpinnerService) { }
+              private trendService: TrendService, ) { }
 
   ngOnInit() {
     this.getListFactory();
@@ -97,16 +88,11 @@ export class TrendSearchComponent implements OnInit {
     this.dataChart.forEach(item => {
       let array = JSON.parse(JSON.stringify(item.data));
       array = array.map(function (x: string) { return (x + '%'); });
-      // tslint:disable-next-line: triple-equals
       if (this.factory != 'ALL' && this.building == 'ALL') {
-        // tslint:disable-next-line: triple-equals
         array.unshift(this.factory, item.label, this.shift == '0' ? 'ALL' : this.shift);
-        // tslint:disable-next-line: triple-equals
       } else if (this.factory != 'ALL' && this.building != 'ALL') {
-        // tslint:disable-next-line: triple-equals
         array.unshift(this.factory, this.building, item.label, this.shift == '0' ? 'ALL' : this.shift);
       } else {
-        // tslint:disable-next-line: triple-equals
         array.unshift(item.label, this.shift == '0' ? 'ALL' : this.shift);
       }
       this.dataExport.push(array);
@@ -114,10 +100,8 @@ export class TrendSearchComponent implements OnInit {
 
     let label = JSON.parse(JSON.stringify(this.labels));
     label = label.map(function (x: string) { return ('Time: ' + x); });
-    // tslint:disable-next-line: triple-equals
     if (this.factory != 'ALL' && this.building == 'ALL') {
       label.unshift('Factory', 'Building', 'Shift');
-      // tslint:disable-next-line: triple-equals
     } else if (this.factory != 'ALL' && this.building != 'ALL') {
       label.unshift('Factory', 'Building', 'Machine', 'Shift');
     } else {
@@ -152,6 +136,7 @@ export class TrendSearchComponent implements OnInit {
   }
 
   changeBuilding(value: any) {
+    this.building = value;
     this.machine_type = "ALL";
     if(value !== "ALL") {
       this.loadMachine_Type();
@@ -160,6 +145,7 @@ export class TrendSearchComponent implements OnInit {
     }
 }
   changeMachine_Type(event: any) {
+    this.machine_type = event.toString();
     this.loadChart();
   }
   changeShift(event: any) {

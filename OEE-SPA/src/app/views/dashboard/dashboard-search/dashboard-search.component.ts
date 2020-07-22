@@ -175,7 +175,6 @@ export class DashboardSearchComponent implements OnInit {
   }
 
   changeFactory(value: any) {
-    debugger
     this.building = 'ALL';
     if (value != 'ALL') {
       this.loadBuilding();
@@ -200,6 +199,7 @@ export class DashboardSearchComponent implements OnInit {
     });
   }
   changeBuilding(value: any) {
+    this.building = value;
       this.machine_type = "ALL";
       if(value !== "ALL") {
         this.loadMachine_Type();
@@ -208,9 +208,11 @@ export class DashboardSearchComponent implements OnInit {
       }
   }
   changeMachine_Type(event: any) {
+    this.machine_type = event.toString();
     this.loadChart();
   }
   changeShift(event: any) {
+    this.shift = event.toString();
     this.loadChart();
   }
 

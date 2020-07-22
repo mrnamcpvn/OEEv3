@@ -155,7 +155,17 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
       this.loadChart();
     }
   }
+  changeBuilding(value: any) {
+    this.building = value.toString();
+    this.machine_type = "ALL";
+    if (value !== "ALL") {
+      this.loadMachine_Type();
+    } else {
+      this.loadChart();
+    }
+  }
   changeMachine_Type(event: any) {
+    this.machine_type = event.toString();
     this.loadMachine();
     this.loadChart();
   }
@@ -183,14 +193,7 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
       this.loadChart();
     }
   }
-  changeBuilding(value: any) {
-    this.machine_type = "ALL";
-    if (value !== "ALL") {
-      this.loadMachine_Type();
-    } else {
-      this.loadChart();
-    }
-  }
+  
   // Machine_Types
   loadMachine_Type() {
     this.commonService.getMachine_Type(this.factory, this.building).subscribe(
