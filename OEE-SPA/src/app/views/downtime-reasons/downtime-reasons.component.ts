@@ -240,7 +240,7 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
     this.downtimeReasonsService.getDowntimeReasonType().subscribe(
       res => {
         if (res != null) {
-          debugger
+          debugger;
           this.reason1s = res.map(item => {
             return { id: item, text: item };
           });
@@ -289,8 +289,10 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
   }
 
   reasonSave() {
-    if(this.addForm.value.reason_1=="" || this.addForm.value.reason_2=="")
-    {
+    if (
+      this.addForm.value.reason_1 == "" ||
+      this.addForm.value.reason_2 == ""
+    ) {
       Swal.fire("Oops!", "Please Option Reason!", "error");
     }
     this.modal.reason_1 = this.addForm.value.reason_1;
@@ -298,12 +300,11 @@ export class DowntimeReasonsComponent implements OnInit, AfterViewInit {
     this.modal.reason_note = this.addForm.value.reason_note;
     //  this.modal.building_id = this.addForm.value.building_id;
     this.downtimeReasonsService.addDowntimeReason(this.modal).subscribe(
-      ()=>
-         {
-          this.modalRef.hide();
-          Swal.fire("Saved!", "Your change has been saved.", "success");
-          this.loadChart();
-        },
+      () => {
+        this.modalRef.hide();
+        Swal.fire("Saved!", "Your change has been saved.", "success");
+        this.loadChart();
+      },
       (error: any) => {
         Swal.fire("Oops...", "Something went wrong!", "error");
         console.log(error);

@@ -75,9 +75,9 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="chart-reasons" [ngClass]="{'show': isShow, 'hidden': !isShow}">
+    <div id="chartActionTime" class="chart-reasons">
       <h5><span class="badge badge-warning">{{machineName}}</span></h5>
-        <div #trendChart (window:resize)="onResize($event)"  ></div>
+        <div #trendChart (window:resize)="onResize($event)"></div>
     </div>
     <!-- <div [ngClass]="{'show': !isShow ,'hidden': isShow}" class="alert alert-warning text-uppercase font-weight-bold text-center m-0" role="alert">
       No data found !
