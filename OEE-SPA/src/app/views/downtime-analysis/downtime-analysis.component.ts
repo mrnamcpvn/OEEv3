@@ -102,10 +102,12 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
     private downtimeAnalysisService: DowntimeAnalysisService) { }
 
   ngOnInit() {
+    console.log(this.uniqueInOrder('AAAABBBCCDAABBB'));
     this.loadFactory();
     this.loadShift();
     this.loadWeeks();
     this.loadChart();
+
   }
   ngAfterViewInit() {
   }
@@ -136,7 +138,6 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   updateDate(event: any) {
-    // tslint:disable-next-line: triple-equals
     if (formatDate(this.date, 'yyyy-MM-dd', 'en-US') != formatDate(new Date(event.srcElement.value), 'yyyy-MM-dd', 'en-US')) {
       this.date = new Date(event.srcElement.value);
       this.dateTo = new Date(event.srcElement.value);
@@ -144,7 +145,6 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
     }
   }
   loadChart() {
-    // tslint:disable-next-line: max-line-length
     this.downtimeAnalysisService.getDowntimeAnalysis(this.factory,
       this.building,
       this.machine_type,
@@ -294,5 +294,18 @@ export class DowntimeAnalysisComponent implements OnInit, AfterViewInit {
     });
     return currentWeek.length === 0 ? '1' : currentWeek[0].weekNum;
   }
-
+  uniqueInOrder(iterable) {
+    // iterable is array
+    if(Array.isArray(iterable)) {
+      let arrSet = Array.from(new Set(iterable));
+      return arrSet;
+    }
+    // iterable is not array
+    else {
+      let arrSet = iterable.toString().split('');
+      arrSet = Array.from(new Set(arrSet));
+      let stringConvert = arrSet.join('');
+      return arrSet;
+    }
+  }
 }

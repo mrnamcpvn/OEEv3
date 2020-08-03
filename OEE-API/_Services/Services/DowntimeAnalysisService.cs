@@ -12,25 +12,28 @@ namespace OEE_API._Services.Services
 {
     public class DowntimeAnalysisService : IDowntimeAnalysisService
     {
-        private readonly IActionTimeForOEERepository _actionTimeForOEERepository;
-        private readonly IDowntimeReasonRepository _downtimeReasonRepository;
-        private readonly IDowntimeRecordRepository _downtimeRecordRepository;
-        private readonly IMachineInformationRepository _machineInformationRepository;
+        private readonly IActionTimeForOEERepository _repoActionTime;
+        private readonly IDowntimeReasonRepository _repoDownTimeReason;
+        private readonly IDowntimeRecordRepository _repoDownTimeRecord;
+        private readonly IMachineInformationRepository _repoMachineInformation;
 
-        public DowntimeAnalysisService(IActionTimeForOEERepository actionTimeForOEERepository, IDowntimeReasonRepository downtimeReasonRepository, IDowntimeRecordRepository downtimeRecordRepository, IMachineInformationRepository machineInformationRepository)
+        public DowntimeAnalysisService( IActionTimeForOEERepository repoActionTime,
+                                        IDowntimeReasonRepository repoDownTimeReason, 
+                                        IDowntimeRecordRepository repoDownTimeRecord, 
+                                        IMachineInformationRepository repoMachineInformation)
         {
-            _actionTimeForOEERepository = actionTimeForOEERepository;
-            _downtimeReasonRepository = downtimeReasonRepository;
-            _downtimeRecordRepository = downtimeRecordRepository;
-            _machineInformationRepository = machineInformationRepository;
+            _repoActionTime = repoActionTime;
+            _repoDownTimeReason = repoDownTimeReason;
+            _repoDownTimeRecord = repoDownTimeRecord;
+            _repoMachineInformation = repoMachineInformation;
         }
 
         public async Task<object> GetDownTimeAnalysis(string factory, string building, int? machine_type, string machine, int? shift, string date, string dateTo)
         {
             DateTime timeFrom = Convert.ToDateTime(date);
             DateTime timeTo = Convert.ToDateTime(dateTo);
-            var queryActionTime = _actionTimeForOEERepository.FindAll().Where(x => timeFrom <= x.shift_date && timeTo >= x.shift_date);
-            var queryDowtimeRecord = _downtimeRecordRepository.FindAll();
+            var queryActionTime = _repoActionTime.FindAll().Where(x => timeFrom <= x.shift_date && timeTo >= x.shift_date);
+            var queryDowtimeRecord = _repoDownTimeRecord.FindAll();
 
 
             if (factory != null && factory != "ALL")
@@ -45,10 +48,9 @@ namespace OEE_API._Services.Services
 
             if (machine_type != 0)
             {
-                var listMachines = await _machineInformationRepository.FindAll().Where(x => x.machine_type == machine_type).Select(x => x.machine_id).ToListAsync();
+                var listMachines = await _repoMachineInformation.FindAll().Where(x => x.machine_type == machine_type).Select(x => x.machine_id).ToListAsync();
                 if (machine != "ALL" && machine != null)
                     listMachines = listMachines.Where(x => x.Trim() == machine.Trim()).ToList();
-
                 queryActionTime = queryActionTime.Where(x => listMachines.Contains(x.machine_id));
             }
 
@@ -93,7 +95,7 @@ namespace OEE_API._Services.Services
         //Get All Reason
         private async Task<List<ReasonAnalysis_Dto>> GetListReason()
         {
-            return await _downtimeReasonRepository.FindAll().Select(x => new ReasonAnalysis_Dto
+            return await _repoDownTimeReason.FindAll().Select(x => new ReasonAnalysis_Dto
             {
                 id = x.id,
                 reason_1 = x.reason_type.Trim(),

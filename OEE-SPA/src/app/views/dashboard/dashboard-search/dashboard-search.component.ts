@@ -111,8 +111,6 @@ export class DashboardSearchComponent implements OnInit {
     // showClear: true,
     // showClose: true,
   };
-
-  // tslint:disable-next-line: max-line-length
   constructor(private commonService: CommonService,
     private availabilityService: AvailabilityService,
     private spinner: NgxSpinnerService) { }

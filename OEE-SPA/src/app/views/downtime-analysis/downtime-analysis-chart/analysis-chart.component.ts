@@ -6,11 +6,8 @@ import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, HostListener, 
 })
 
 export class AnalysisChartComponent implements OnInit, AfterViewInit {
-    // tslint:disable-next-line: no-input-rename
     @Input('title') title: string;
-    // tslint:disable-next-line:no-input-rename
     @Input('data') data: Array<number>;
-    // tslint:disable-next-line: no-input-rename
     @Input('labels') labels: Array<number>;
 
     public barChart: any;

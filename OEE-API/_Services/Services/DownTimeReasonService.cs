@@ -108,7 +108,7 @@ namespace OEE_API._Services.Services
                     machineFirst = dataAll.FirstOrDefault();
                 }
                 if (dataAll.Count() != 0) {
-                     DbFunctions dfunc = null;
+                    DbFunctions dfunc = null;
                     DateTime day = Convert.ToDateTime(date);
                     var machineName = machineFirst.machine_id;
                     var data = dataAll.Where(x => x.machine_id.Trim() == machineFirst.machine_id.Trim()).Select(x => new ChartReason()

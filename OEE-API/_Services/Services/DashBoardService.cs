@@ -21,24 +21,18 @@ namespace OEE_API._Services.Services
 
         private readonly IMachineInformationRepository _repoMachineInfomation;
         private readonly IFactoryRepository _repofactory;
-        private readonly IMapper _mapper;
-        private readonly MapperConfiguration _configMapper;
         public DashBoardService( IOEE_VNRepository repoOee_VN,
                                     IOEE_MMRepository repoOee_MM,
                                     IOEE_IDRepository repoOee_ID,
                                     ICommonService serverCommon,
                                     IMachineInformationRepository repoMachineInfomation,
-                                    IFactoryRepository repofactory,
-                                    IMapper mapper,
-                                    MapperConfiguration configMapper) {
+                                    IFactoryRepository repofactory) {
             _repoOee_VN = repoOee_VN;
             _repoOee_MM = repoOee_MM;
             _repoOee_ID = repoOee_ID;
             _serverCommon = serverCommon;
             _repoMachineInfomation = repoMachineInfomation;
             _repofactory = repofactory;
-            _mapper = mapper;
-            _configMapper = configMapper;
         }
         public async Task<List<ChartDashBoardViewModel>> DataChartDashBoard(DashBoardParamModel param)
         {
@@ -50,8 +44,6 @@ namespace OEE_API._Services.Services
                     .Where(x => x.shift_date >= Convert.ToDateTime(param.date) &&
                     x.shift_date <= Convert.ToDateTime(param.dateTo)).ToList();
             }
-
-
 
             if (param.shift_id.ToString() != "0") {
                 dataAll = dataAll.Where(x => x.shift_id.ToString() == param.shift_id).ToList();
