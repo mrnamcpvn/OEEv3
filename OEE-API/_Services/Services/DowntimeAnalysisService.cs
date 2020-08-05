@@ -87,11 +87,11 @@ namespace OEE_API._Services.Services
 
             List<ReasonAnalysis_Dto> result1 = new List<ReasonAnalysis_Dto>();
             var countResult = result.Count();
-            for (int i = countResult - 2; i < countResult; i++)
+            for (int i = countResult - 3; i < countResult; i++)
             {
                 result1.Add(result[i]);
             }
-            for (int i = 0; i < countResult-2; i++)
+            for (int i = 0; i < countResult-3; i++)
             {
                 result1.Add(result[i]);
             }
