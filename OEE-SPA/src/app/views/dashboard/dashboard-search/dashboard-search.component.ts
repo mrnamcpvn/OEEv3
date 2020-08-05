@@ -190,6 +190,10 @@ export class DashboardSearchComponent implements OnInit {
   }
   getListShift() {
     this.commonService.getListShift().subscribe(res => {
+      // Delete No Shift in Shift List
+      let x = res.findIndex(x => x.shift_name.trim() == "No Shift");
+      res.splice(x, 1);
+      
       this.shifts = res.map(item => {
         return {id: item.shift_id.toString(),text: item.shift_name}
       });

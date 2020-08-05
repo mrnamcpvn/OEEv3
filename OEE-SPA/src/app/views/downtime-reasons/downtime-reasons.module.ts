@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 import { DowntimeReasonsComponent } from './downtime-reasons.component';
 import { DowntimeReasonsRoutingModule } from './downtime-reasons-routing.module';
-import { PaginationModule } from 'ngx-bootstrap/Pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   imports: [

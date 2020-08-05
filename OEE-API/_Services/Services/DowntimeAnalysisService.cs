@@ -84,10 +84,21 @@ namespace OEE_API._Services.Services
                 rea_2.duration = num.Value;
                 result.Add(rea_2);
             }
+
+            List<ReasonAnalysis_Dto> result1 = new List<ReasonAnalysis_Dto>();
+            var countResult = result.Count();
+            for (int i = countResult - 2; i < countResult; i++)
+            {
+                result1.Add(result[i]);
+            }
+            for (int i = 0; i < countResult-2; i++)
+            {
+                result1.Add(result[i]);
+            }
             return new
             {
                 resA = data.OrderByDescending(x => x.duration).Take(10),
-                resB = result
+                resB = result1
             };
         }
 
